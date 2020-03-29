@@ -21,6 +21,7 @@
 	<tr><td>	Entrer la taille: </td><td><form:input path="taille"/></td></tr>
 	<tr><td>	Entrer la difficulte: </td><td>
 	<select name="difficulte">
+	<option value=""></option>
 	<option value="1">facile</option>
 	<option value="2">moyen</option>
 	<option value="3">difficile</option>

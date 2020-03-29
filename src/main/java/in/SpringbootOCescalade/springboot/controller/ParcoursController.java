@@ -83,61 +83,93 @@ public class ParcoursController {
 
 	//@RequestMapping("/resultatparcours")
 	@RequestMapping(value="/resultatparcours", method=RequestMethod.POST)
-	public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcours parcoursObj,@RequestParam("localisation") String localisation,@RequestParam("nom") String nom) {
+	public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcours parcoursObj,@RequestParam("localisation") String localisation,@RequestParam("difficulte") String difficulte,@RequestParam("taille") String taille,@RequestParam("nom") String nom) {
 	//public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcours parcoursObj) {
 			ModelAndView mav = new ModelAndView("resultatparcours");
-			System.out.println("localisation rentree vaut  "+localisation);
 
 			List<Parcours> list = parcoursService.getparcours();
-            System.out.println("taille  "+list.size());
+            //System.out.println("taille  "+list.size());
            
             List<Parcours> ret=new ArrayList();
-            //recherche par localisation et nom
-            //localisation et nom rempli
-			if( !  (localisation.equals("") && (nom.equals("") ))) {
-            for(int i=0;i<list.size();i++) {
-				if( (list.get(i).getlocalisation().equals(localisation))  &&  (list.get(i).getnom().equals(nom))  ) {
-					System.out.println("you are not in "+localisation+list.get(i).getlocalisation()+"  "+list.get(i).getparcours_id());
-					ret.add(list.get(i));
-				}
-				else
-				{
-					System.out.println("you are  in   "+localisation+list.get(i).getlocalisation()+"  "+list.get(i).getparcours_id());
-				}
-
-			}
-			}
-			
-			
-			//recherche par localisation
-			//nom vide et localisaton rempli
-			if( (!(localisation.equals("")) && (nom.equals("") ))) {
-	            for(int i=0;i<list.size();i++) {
-					if( (list.get(i).getlocalisation().equals(localisation))  ) {
-						System.out.println("you are not in "+localisation+list.get(i).getlocalisation()+"  "+list.get(i).getparcours_id());
-						ret.add(list.get(i));
-					}
-					else
-					{
-						System.out.println("you are  in   "+localisation+list.get(i).getlocalisation()+"  "+list.get(i).getparcours_id());
-					}
-
-				}
-				}
-			//recherche par nom
-			//localisation vide et nom rempli
-			if( (!(nom.equals("")) && (localisation.equals("") ))) {
+            
+			//recherche par nom uniquement les autres champs vides
+			if( (!(nom.equals("")) && (localisation.equals("") ))) { System.out.println("AAAAAAA");
 	            for(int i=0;i<list.size();i++) {
 					if( (list.get(i).getnom().equals(nom))  ) {
 						ret.add(list.get(i));
 					}
-					else
-					{
-	
+				}
+			}
+			//recherche par taille uniquement (tous les autres champs vides)
+			if( (!(taille.equals(""))&& (difficulte.equals(""))&& (localisation.equals("")) && (nom.equals("") ))) {System.out.println("BBBBBBBB");
+	            for(int i=0;i<list.size();i++) {
+					if( (list.get(i).gettaille().equals(Integer.parseInt(taille)))  ) {
+						ret.add(list.get(i));
 					}
+				}
+			}
+			//recherche par difficulte uniquement (tous les autres champs vides)
+			if( (!(difficulte.equals("")) && (localisation.equals(""))&& (taille.equals(""))  && (nom.equals("") ))) {System.out.println("CCCCCC");
+	            for(int i=0;i<list.size();i++) {
+					if( (list.get(i).getdifficulte().equals(Integer.parseInt(difficulte)))  ) {
+						ret.add(list.get(i));
+					}
+				}
+			}
+			//recherche par localisation uniquement (tous les autres champs vides=
+			if( (!(localisation.equals(""))&& (difficulte.equals(""))&& (taille.equals("")) && (nom.equals("") ))) {System.out.println("DDDDDD");
+	            for(int i=0;i<list.size();i++) {
+					if( (list.get(i).getlocalisation().equals(localisation))  ) {
+						ret.add(list.get(i));
+					}
+				}
+			}
+			
+			
+         
+            //recherche par nom et  taille 
+			if( (!(nom.equals("")) && (!(taille.equals("")))&& (difficulte.equals(""))  && (localisation.equals("") ))) {System.out.println("EEEEEE");
+				System.out.println("toto taille "+taille+" nom   "+nom);
+            for(int i=0;i<list.size();i++) {
+            	
+            	
+				if( (list.get(i).gettaille().equals(Integer.parseInt(taille)))  &&  (list.get(i).getnom().equals(nom))  ) {
+					System.out.println("test de la taille "+list.get(i).gettaille().equals(Integer.parseInt(taille))+" test du nom "+list.get(i).getnom().equals(nom));
+					ret.add(list.get(i));
+				}
+			
 
+			}
+			}
+
+			
+            //recherche par difficulte et localisation OKKKKKKKKKKK
+			if(   (!(localisation.equals("")) && (!(difficulte.equals("") )))&& (taille.equals("")) && (nom.equals(""))) {System.out.println("FFFFFFF");
+				
+            for(int i=0;i<list.size();i++) {
+				if( list.get(i).getlocalisation().equals(localisation) ) {
+					
+					if( list.get(i).getdifficulte().equals(Integer.parseInt(difficulte)) ) {
+					
+					ret.add(list.get(i));
 				}
+			}
+			}
+			}
+			
+            //recherche par nom et localisation 
+            //localisation et nom rempli
+			if( !  (localisation.equals("") && (nom.equals("") ))) {
+            for(int i=0;i<list.size();i++) {
+				if( (list.get(i).getlocalisation().equals(localisation))  &&  (list.get(i).getnom().equals(nom))  ) {
+					ret.add(list.get(i));
 				}
+			}
+			}
+			
+
+			
+
 			
 			
 			mav.addObject("list", ret);
