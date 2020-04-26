@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import in.SpringbootOCescalade.springboot.model.*;
+import in.SpringbootOCescalade.springboot.model.*; 
 
 @Repository
 public class ParcoursDAOImpl implements ParcoursDAO {
@@ -18,22 +18,22 @@ public class ParcoursDAOImpl implements ParcoursDAO {
 	private EntityManager entityManager;
 	
 	@Override
-	public List<Parcours> get() {
+	public List<Parcourss> get() {
 		Session currentSession = entityManager.unwrap(Session.class);
-		Query<Parcours> query = currentSession.createQuery("from Parcours", Parcours.class);
-		List<Parcours> list = query.getResultList();
+		Query<Parcourss> query = currentSession.createQuery("from Parcourss", Parcourss.class);
+		List<Parcourss> list = query.getResultList();
 		return list;
 	}
 
 	@Override
-	public Parcours get(int id) {
+	public Parcourss get(int id) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		Parcours parcoursObj = currentSession.get(Parcours.class, id);
+		Parcourss parcoursObj = currentSession.get(Parcourss.class, id);
 		return parcoursObj;
 	}
 
 	@Override
-	public void save(Parcours parcours) {
+	public void save(Parcourss parcours) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		currentSession.saveOrUpdate(parcours);
 	}
@@ -41,7 +41,7 @@ public class ParcoursDAOImpl implements ParcoursDAO {
 	@Override
 	public void delete(int id) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		Parcours parcoursObj = currentSession.get(Parcours.class, id);
+		Parcourss parcoursObj = currentSession.get(Parcourss.class, id);
 		currentSession.delete(parcoursObj);
 	}
 

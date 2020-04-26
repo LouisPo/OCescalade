@@ -3,14 +3,19 @@ package in.SpringbootOCescalade.springboot.dao;
 import java.util.List;
 
 import in.SpringbootOCescalade.springboot.model.*;
+import in.SpringbootOCescalade.springboot.model.ParcoursRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ParcoursDAO {
+
+@Repository
+public interface ParcoursDAO  {
 	
-	List<Parcours> get();
+	List<Parcourss> get();
 	
-	Parcours get(int id);
+	Parcourss get(int id);
 	
-	void save(Parcours parcours);
+	void save(Parcourss parcours);
 	
 	void delete(int id);
 	
