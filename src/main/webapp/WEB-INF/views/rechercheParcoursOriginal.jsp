@@ -12,28 +12,13 @@
 <head>
       <script>
          function check(){
-        	 var name=document.frm.nom.value;
-        	 var difficulte=document.frm.difficulte.value;
-        	 var localisation=document.frm.localisation.value;
              var nbr=document.frm.taille.value;
-             
              if (isNaN(nbr)){
-            	 alert("Veuillez rentrez une valeur numérique pour la taille");
-            	 alert(name);
-            	 
-            	 //probleme arrive pas a garder le champ nom en memoire si il y a une erreur sur la taille
-            	 document.frm.nom.value=name;
-            	 document.frm.getElementById('nom').value=name;
-            	 
-            	 
-            	 
-                 //document.getElementById("taille").innerHTML="Entrez uniquement une valeur numérique";
-                 document.frm.action="${pageContext.request.contextPath}/openParcoursRechercheView";
-                // document.getElementById("taille").focus();
-                 //document.frm.submit();
+                 document.getElementById("msg").innerHTML="Entrez uniquement une valeur numérique";
+                 document.frm.action="${pageContext.request.contextPath}/rechercheParcours";
+                 document.myForm.submit();
                  return false;
              }else{
-            	 document.frm.action="${pageContext.request.contextPath}/resultatparcours";
                  return true;
              }
          }
@@ -43,7 +28,7 @@
 </head>
 <body>
 	<h1>Recherchez votre parcours</h1>
-	<form:form  modelAttribute="parcours"  name="frm">
+	<form:form action = "${pageContext.request.contextPath}/resultatparcours" modelAttribute="parcours" onsubmit="return javascript:check()" name="frm">
 	<table>
 	<tr><td>	Entrer le nom:    </td><td><form:input path="nom"/></td></tr>
 	<tr><td>	Entrer la taille: </td><td><form:input path="taille"/></td></tr>
@@ -57,6 +42,6 @@
 	<tr><td>	Entrer la localisation: </td><td><form:input path="localisation"/></td></tr>
 		</table>
 		<form:hidden path = "parcours_id"/>
-		<button type = "submit" onclick="javascript:check()">Recherchez</button></form:form>
+		<button type = "submit">Recherchez</button></form:form>
 </body>
 </html>

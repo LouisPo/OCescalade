@@ -74,67 +74,73 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		  try {
 			  
 				//recherche par taille uniquement (tous les autres champs vides)
-				if( (!(taille==0)&& (difficulte==0)&& (localisation.equals("")) && (nom.equals("") ))) {
+				if( (!(taille==0)&& (localisation.equals("")) && (nom.equals("") ))) {
 			              result = this.connect.createStatement(
 					      ResultSet.TYPE_SCROLL_INSENSITIVE,
-					      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE taille = '"+taille+"'");
+					      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE taille = '"+taille+"' and difficulte = '"+difficulte+"'");
 				}
 				//recherche par difficulte uniquement (tous les autres champs vides)
-				if( (!(difficulte==0) && (localisation.equals(""))&& (taille==0)  && (nom.equals("") ))) {
+				if( ((localisation.equals(""))&& (taille==0)  && (nom.equals("") ))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
 			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE difficulte = '"+difficulte+"'");
 				}
 				//recherche par localisation uniquement (tous les autres champs vides=
-				if( (!(localisation.equals(""))&& (difficulte==0)&& (taille==0) && (nom.equals("") ))) {
+				if( (!(localisation.equals(""))&& (taille==0) && (nom.equals("") ))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
-			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"'");
+			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"' and difficulte = '"+difficulte+"'");
 				}
 				//recherche par nom uniquement (tous les autres champs vides=
-				if( (!(nom.equals(""))&& (difficulte==0)&& (taille==0) && (localisation.equals("") ))) {
+				if( (!(nom.equals(""))&& (taille==0) && (localisation.equals("") ))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
-			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"'");
+			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and difficulte = '"+difficulte+"'");
 				}
 				//recherche par nom et localisation (tous les autres champs vides=
-				if( (!(nom.equals(""))&& (difficulte==0)&& (taille==0) && (!(localisation.equals(""))))) {
+				if( (!(nom.equals(""))&& (taille==0) && (!(localisation.equals(""))))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
-			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and localisation = '"+localisation+"'");
+			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and localisation = '"+localisation+"' and difficulte = '"+difficulte+"'");
 				}
 				//recherche par nom et difficulte (tous les autres champs vides=
-				if( (!(nom.equals(""))&& (!(difficulte==0))&& (taille==0) && (localisation.equals("")))) {
+				if( (!(nom.equals(""))&& (taille==0) && (localisation.equals("")))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
 			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and difficulte = '"+difficulte+"'");
 				}
 				//recherche par nom et taille (tous les autres champs vides=
-				if( (!(nom.equals(""))&& (!(taille==0))&& (difficulte==0) && (localisation.equals("")))) {
+				if( (!(nom.equals(""))&& (!(taille==0))&& (localisation.equals("")))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
-			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and taille = '"+taille+"'");
+			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and taille = '"+taille+"' and difficulte = '"+difficulte+"'");
 				}
 				//recherche par difficulte et taille (tous les autres champs vides=
-				if( (nom.equals("")&& (!(taille==0))&& (!(difficulte==0)) && (localisation.equals("")))) {
+				if( (nom.equals("")&& (!(taille==0))&& (localisation.equals("")))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
 			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE difficulte = '"+difficulte+"' and taille = '"+taille+"'");
 				}
 				//recherche par localisation et taille (tous les autres champs vides=
-				if( (nom.equals("")&& (!(taille==0))&& (difficulte==0) && (!(localisation.equals(""))))) {
+				if( (nom.equals("")&& (!(taille==0))&& (!(localisation.equals(""))))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
-			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"' and taille = '"+taille+"'");
+			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"' and taille = '"+taille+"' and difficulte = '"+difficulte+"'");
 				}
 				//recherche par localisation et difficulte (tous les autres champs vides=
-				if( (nom.equals(""))&& (!(difficulte==0))&& (taille==0) && (!(localisation.equals("")))) {
+				if( (nom.equals(""))&& (taille==0) && (!(localisation.equals("")))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
 			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"' and difficulte = '"+difficulte+"'");
 				}
 				//recherche par nom et taille et difficulte (tous les autres champs vides=
-				if( (localisation.equals(""))&& (!(difficulte==0))&& (!(taille==0)) && (!(nom.equals("")))) {
+				if( (localisation.equals(""))&& (!(taille==0)) && (!(nom.equals("")))) {
+	              result = this.connect.createStatement(
+			      ResultSet.TYPE_SCROLL_INSENSITIVE,
+			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE taille = '"+taille+"' and nom = '"+nom+"' and difficulte = '"+difficulte+"'");
+				}
+				//recherche par nom et taille et difficulte localisation 
+				if(  (!(localisation.equals("")))&& (!(taille==0)) && (!(nom.equals("")))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
 			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE taille = '"+taille+"' and nom = '"+nom+"' and difficulte = '"+difficulte+"'");
