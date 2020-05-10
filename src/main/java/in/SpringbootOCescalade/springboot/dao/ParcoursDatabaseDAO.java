@@ -1,5 +1,6 @@
 package in.SpringbootOCescalade.springboot.dao;
 
+import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.ParcoursDatabase;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
 import in.SpringbootOCescalade.springboot.controller.*;
@@ -166,5 +167,11 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 			}
 		  return ret;
 		}
+
+	@Override
+	public List<Employee> findconnexion(String nom, String localisation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	}	

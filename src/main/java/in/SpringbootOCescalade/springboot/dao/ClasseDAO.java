@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 import in.SpringbootOCescalade.springboot.dao.SdzConnection;
+import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
 
 //CTRL + SHIFT + O pour générer les imports
@@ -86,4 +87,10 @@ public Classe find(int id) {
     }
     return classe;
   }
+
+@Override
+public List<Employee> findconnexion(String nom, String localisation) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

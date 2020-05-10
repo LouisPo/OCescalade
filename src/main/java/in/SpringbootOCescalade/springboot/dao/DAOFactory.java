@@ -21,6 +21,9 @@ public static DAO getParcoursDAO(){
   return new ParcoursDatabaseDAO(conn);
 }
 
+public static DAO getEmployeeDAO(){
+	  return new EmployeeDatabaseDAO(conn);
+	}
 
 /**
 * Retourne un objet Eleve interagissant avec la BDD

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
 import in.SpringbootOCescalade.springboot.dao.SdzConnection;
+import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
 
 public class EleveDAO extends DAO<Eleve> {
@@ -62,4 +63,10 @@ public List<Parcourss> findmultipleNoid(String nom,String localisation,int taill
 			}
 		  return ret;
 	}
+
+@Override
+public List<Employee> findconnexion(String nom, String localisation) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import in.SpringbootOCescalade.springboot.dao.SdzConnection;
+import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
 
 public abstract class DAO<T> {
@@ -58,5 +59,12 @@ public abstract class DAO<T> {
 * @return T
 */
 public abstract List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,int difficulte);
-}
 
+
+/**
+* Méthode de recherche des informations
+* @param id
+* @return T
+*/
+public abstract List<Employee> findconnexion(String nom,String localisation);
+}
