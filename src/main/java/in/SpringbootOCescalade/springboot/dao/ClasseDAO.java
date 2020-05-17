@@ -53,7 +53,9 @@ public List<Parcourss> findmultipleNoid(String nom,String localisation,int taill
 	}
   
 
-
+void insertcommentaire(String  textarea,Integer user) {
+	
+}
 
 public Classe find(int id) {
     Classe classe = new Classe();            
@@ -92,5 +94,11 @@ public Classe find(int id) {
 public List<Employee> findconnexion(String nom, String localisation) {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+@Override
+public void save(String textarea, int user) {
+	// TODO Auto-generated method stub
+	
 }
 }

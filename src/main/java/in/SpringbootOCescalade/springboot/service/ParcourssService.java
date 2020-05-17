@@ -12,6 +12,8 @@ public interface ParcourssService {
 	
 	void saveparcours(Parcourss parcours);
 	
+	//void savecomment(Comment comment);
+	
 	void deleteparcours(int id);
 
 

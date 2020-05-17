@@ -21,7 +21,7 @@
 		</tr>
 		<c:forEach items="${list}" var="e">
 			<tr>
-				<td>${e.nom}</td>
+				<td><a href = "${pageContext.request.contextPath}/parcoursdetail/${e.parcours_id}">${e.nom}</a></td>
 				<td>${e.taille}</td>
 				<td>${e.difficulte}</td>
 				<td>${e.localisation}</td>				

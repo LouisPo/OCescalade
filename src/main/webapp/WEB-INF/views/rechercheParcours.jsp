@@ -43,6 +43,7 @@
 </head>
 <body>
 	<h1>Recherchez votre parcours</h1>
+	
 	<form:form  modelAttribute="parcours"  name="frm">
 	<table>
 	<tr><td>	Entrer le nom:    </td><td><form:input path="nom"/></td></tr>

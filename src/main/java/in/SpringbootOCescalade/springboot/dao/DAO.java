@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 import in.SpringbootOCescalade.springboot.model.Employee;
+import in.SpringbootOCescalade.springboot.model.Comment;
+import in.SpringbootOCescalade.springboot.model.CommentDatabase;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
 
 public abstract class DAO<T> {
@@ -60,11 +62,33 @@ public abstract class DAO<T> {
 */
 public abstract List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,int difficulte);
 
-
+public abstract void save(String textarea,int user);
 /**
 * Méthode de recherche des informations
 * @param id
 * @return T
 */
 public abstract List<Employee> findconnexion(String nom,String localisation);
+
+public void insertcommentaire(String textarea, int user) {
+	System.out.println("LOUIIIISSSSSSSS");
+	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
+	java.sql.Statement stmt;
+	
+	
+	//en cours
+	
+	  CommentDatabase commentaire = new CommentDatabase();   
+	 
+	  System.out.println("texarea vaut "+textarea+"    user vaut "+user);
+	  try {
+		  stmt = connection.createStatement();
+		    stmt.executeUpdate("insert into commentaire(textarea,user) values ('"+textarea+"','"+user+"')");
+
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+	
 }

@@ -2,7 +2,9 @@ package in.SpringbootOCescalade.springboot.dao;
 
 import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.ParcoursDatabase;
+import in.SpringbootOCescalade.springboot.model.CommentDatabase;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
+import in.SpringbootOCescalade.springboot.model.Comment;
 import in.SpringbootOCescalade.springboot.controller.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,11 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.sql.*;
+//import com.mysql.jdbc.Statement;
 
 import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 
-	public class ParcoursDatabaseDAO extends DAO<ParcoursDatabase> {
-	public ParcoursDatabaseDAO(Connection conn) {
+	public class CommentDatabaseDAO extends DAO<ParcoursDatabase> {
+	public CommentDatabaseDAO(Connection conn) {
 	  super(conn);
 	}
 
@@ -29,7 +33,9 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 	public boolean update(ParcoursDatabase obj) {
 	  return false;
 	}
-	 
+	void insertcommentaire(String  textarea,Integer user) {
+		
+	}
 	public ParcoursDatabase find(int id) {
 	  ParcoursDatabase parcours = new ParcoursDatabase();      
 	  
@@ -45,6 +51,27 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 				  }
 	      return parcours;
 	}
+	
+	public void insertcommentaire(int id,String textarea) {
+		Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
+		java.sql.Statement stmt;
+		
+		System.out.println("LOUIIIIS");
+		  CommentDatabase commentaire = new CommentDatabase();   
+		  Integer comment_id=12;textarea="toto le hero";Integer user=78;
+		  System.out.println("texarea vaut "+textarea+"    user vaut "+user);
+		  try {
+			  stmt = connection.createStatement();
+			    stmt.executeUpdate("insert into commentaire values ('"+textarea+"','"+user+"')");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	
 	public ParcoursDatabase findmultiple(int id,String nom,String localisation) {
 		  ParcoursDatabase parcours = new ParcoursDatabase();      
 

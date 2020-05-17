@@ -69,4 +69,10 @@ public List<Employee> findconnexion(String nom, String localisation) {
 	// TODO Auto-generated method stub
 	return null;
 }
+
+@Override
+public void save(String textarea, int user) {
+	// TODO Auto-generated method stub
+	
+}
 }

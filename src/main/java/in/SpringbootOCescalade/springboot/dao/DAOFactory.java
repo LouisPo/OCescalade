@@ -20,6 +20,9 @@ public static DAO getClasseDAO(){
 public static DAO getParcoursDAO(){
   return new ParcoursDatabaseDAO(conn);
 }
+public static DAO getCommentDAO(){
+	  return new ParcoursDatabaseDAO(conn);
+	}
 
 public static DAO getEmployeeDAO(){
 	  return new EmployeeDatabaseDAO(conn);

@@ -23,7 +23,9 @@ import java.util.List;
 import java.util.Optional;
 import in.SpringbootOCescalade.springboot.dao.DAO;
 import in.SpringbootOCescalade.springboot.dao.DAOFactory;
+import in.SpringbootOCescalade.springboot.model.*;
 import in.SpringbootOCescalade.springboot.dao.Eleve;
+import in.SpringbootOCescalade.springboot.service.*;
 import in.SpringbootOCescalade.springboot.model.ParcoursDatabase;
 import in.SpringbootOCescalade.springboot.model.ParcoursRepository;
 
@@ -34,6 +36,7 @@ public class ParcourssController {
 	
 	@Autowired
 	private ParcourssService parcoursService;
+	private CommentService commentService;
 		
 	@RequestMapping(value = {"////", "/home2", "/index2"})
 	public ModelAndView getparcours() {
@@ -49,7 +52,40 @@ public class ParcourssController {
 		mav.addObject("parcours", new Parcourss());
 		return mav;
 	}
+	/*@RequestMapping("/parcoursdetail")
+	public ModelAndView parcoursdetail(@ModelAttribute("parcours") Parcourss parcoursObj) {
+		ModelAndView mav = new ModelAndView("parcoursdetail");
+		mav.addObject("parcours", new Parcourss());
+		return mav;
+	}*/
+	@RequestMapping("/parcoursdetail/{id}")
+	public ModelAndView getdetail(@PathVariable("id") int id) {
+     ModelAndView mav = new ModelAndView("parcoursdetail");
+		Parcourss parcoursObj = parcoursService.getparcours(id);
+		if(parcoursObj == null) {
+			throw new RuntimeException("Parcours not found"+id);
+		}
+		mav.addObject("parcours", parcoursObj);
+		return mav;
+	}
 	
+	//EN COURS
+	@RequestMapping(value="/ajoutCommentView", method=RequestMethod.POST)
+	public ModelAndView savecomment(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("textarea") String textarea,@RequestParam("user") String user) {
+
+		//page affichée
+		ModelAndView mav = new ModelAndView("rechercheParcours");
+		System.out.println("OKKKKKKKKKKKKK");
+		//connexion a la BD
+		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
+		//appel de la requete d insertion d un commentaire
+		commentaireDao.insertcommentaire( textarea, Integer.parseInt(user));
+		
+		//parcoursService.saveparcours(parcoursObj);
+		List<Parcourss> list = parcoursService.getparcours();
+		mav.addObject("list", list);
+		return mav;
+	}
 	@RequestMapping("/saveparcours")
 	public ModelAndView saveparcours(@ModelAttribute("parcours") Parcourss parcoursObj) {
 		ModelAndView mav = new ModelAndView("parcoursList");
@@ -76,9 +112,7 @@ public class ParcourssController {
 		parcoursService.deleteparcours(id);
 		List<Parcourss> list = parcoursService.getparcours();
 		mav.addObject("list", list);
-		return mav;
-		
-		
+		return mav;	
 	}
 	
 	@RequestMapping("/openParcoursRechercheView")
@@ -87,14 +121,11 @@ public class ParcourssController {
 		mav.addObject("parcours", new Parcourss());
 		return mav;
 	}
-
-
+  
 	//@RequestMapping("/resultatparcours")
 	@RequestMapping(value="/resultatparcours", method=RequestMethod.POST)
 	public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("localisation") String localisation,@RequestParam("difficulte") String difficulte,@RequestParam("taille") String taille,@RequestParam("nom") String nom) {
-	
-	
-        
+	       
 		try {
             Class.forName("org.hibernate.jpa.HibernatePersistenceProvider");
             System.out.println("called class");
@@ -136,86 +167,22 @@ public class ParcourssController {
 				list.get(i).setlocalisation(ret.get(i).getlocalisation());	
 				System.out.println(" nom : "+ret.get(i).getnom()+" size : "+ret.get(i).gettaille()+" difficult : "+ret.get(i).getdifficulte()+"localisation  "+ ret.get(i).getlocalisation());
 				}
-		  //System.out.println("taille de ret LISSSST avant"+list.size());
 		  for(int k=0;k<list.size();k++) {
 			  if(list.get(k).gettaille() ==0)
 				list.remove(k);
 				
 		  }
 
-         // System.out.println("taille de ret LISSSST"+list.size());
 	/**********************************************************/	  
 		  DAO<Eleve> eleveDao = DAOFactory.getEleveDAO();
 		  for(int i = 1; i < 10; i++){
 		    //On fait notre recherche
-		    Eleve eleve = eleveDao.find(i);
-		    //System.out.println("\tELEVE N°" + eleve.getId() + " - NOM : " + eleve.getNom() + " - PRENOM : " + eleve.getPrenom());
-		  
+		    Eleve eleve = eleveDao.find(i);		  
 		  }
-		
 
-		// Create our entity manager
-		
-        //EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Parcourss");
-        //EntityManager entityManager = entityManagerFactory.createEntityManager();
-	    //EntityManagerFactory emf = Persistence.createEntityManagerFactory("Parcourss", System.getProperties());
-	    //EntityManager c = emf.createEntityManager();
-		
-		
-		//ok
 	    org.hibernate.jpa.HibernatePersistenceProvider entityManagerFactory =new  org.hibernate.jpa.HibernatePersistenceProvider();
 	    entityManagerFactory.createEntityManagerFactory("Parcourss", System.getProperties());
-	    //EntityManager entityManager = entityManagerFactory.createEntityManager();
-	    
-		/*try {
-          Class.forName("javax.persistence.EntityManagerFactory");
-          System.out.println("called class oto");
-      } catch (Exception e){
-          e.printStackTrace();
-      } */ 
-		
-	   /* javax.persistence.EntityManagerFactory factory = Persistence.createEntityManagerFactory("Parcourss");
-	    EntityManager entityManager = factory.createEntityManager();
-	    entityManager.getTransaction().begin();
-	    */
-        // Create our repositories
-       // ParcoursRepository parcoursRepository = new ParcoursRepository(entityManager);
-        //AuthorRepository authorRepository = new AuthorRepository(entityManager);
-        // Create an author and add 3 books to his list of books
-        //Author author = new Author("Author 1");
-        
-        /*parcours1 = new Parcours()
-        
-        author.addBook(new Book("Book 1"));
-        author.addBook(new Book("Book 2"));
-        author.addBook(new Book("Book 3"));*/
-        
-     // Search for a book by ID
-       //Optional<Parcourss> foundBook = parcoursRepository.findById(2);
-      //  foundBook.ifPresent(System.out::println);
-        // Search for a book with an invalid ID
-     //   Optional<Parcourss> notFoundParcours = parcoursRepository.findById(99);
-    //    notFoundParcours.ifPresent(System.out::println);
-        // List all books
-    //   List<Parcourss> listparcours = parcoursRepository.findAll();
-     //  System.out.println("parcours in database:");
-     //  listparcours.forEach(System.out::println);
-       //sSystem.out.println("PAPA");
-        // Find a parcours by name
-       // Optional<Parcourss> queryBook1 = parcoursRepository.findByName("mereville");
-      //  System.out.println("Query for book 2:");
-      //  queryBook1.ifPresent(System.out::println);
-        // Find a book by name using a named query
-      //  Optional<Parcourss> queryBook2 = parcoursRepository.findByNameNamedQuery("etampes");
-      //  System.out.println("Query for book 3:");
-      //  queryBook2.ifPresent(System.out::println);
-
-
-			
-         
- 
-
-	
+	  
 			//mav.addObject("list", ret);
              mav.addObject("list", ret);
 			return mav;
