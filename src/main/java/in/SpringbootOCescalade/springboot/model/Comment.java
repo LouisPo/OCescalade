@@ -29,7 +29,19 @@ public class Comment {
 	private String textarea;
 	@Column
 	private Integer user;
+	@Column
+	private Integer parcoursidentifiant;
 	
+	public Integer getParcoursidentifiant() {
+		return parcoursidentifiant;
+	}
+
+
+	public void setParcoursidentifiant(Integer parcoursidentifiant) {
+		this.parcoursidentifiant = parcoursidentifiant;
+	}
+
+
 	public Integer getComment_id() {
 		return comment_id;
 	}

@@ -10,28 +10,29 @@
 </head>
 <body>
 	<form:form  name="form" method="POST" action = "${pageContext.request.contextPath}/detail">
-	<h1>resultat des recherche</h1>
+	<h1>liste des topos</h1>
 	<table border = "1">
 		<tr>
+		<input type ="hidden" name="user_id" value="${user_id}">
+			<th>nomtopo</th>
 			<th>nom</th>
-			<th>taille</th>
-			<th>difficulte</th>
-			<th>localisation</th>			
+			<th>prenom</th>
+			<th>dispo</th>	
+			<th>textarea</th>					
 		</tr>
-		<c:forEach items="${list}" var="e">
+		<c:forEach items="${ret}" var="e">
 			<tr>
-				<td><a href = "${pageContext.request.contextPath}/detail?parcoursidentifiant=${e.parcours_id}&user_id=${user_id}&nom=${e.nom}&taille=${e.taille}&difficulte=${e.difficulte}&localisation=${e.localisation}"   onclick="document.getElementById("form").submit();">${e.nom}</a></td>
-				
-				<input type ="hidden" name="user_id" value="${user_id}">
-				<input type ="hidden" name="parcoursidentifiant" value="${e.parcours_id}">
-				<td>${e.taille}</td>
-				<td>${e.difficulte}</td>
-				<td>${e.localisation}</td>				
+				<td>${e.nomtopo}</td>
+				<td><a href = "${pageContext.request.contextPath}/openProfilHrefView?&identifiant=${user_id}&user_id=${e.user_id}"   onclick="document.getElementById("form").submit();">${e.nom}</a></td>
+				<td>${e.prenom}</td>
+				<td>${e.dispo}</td>		
+				<td>${e.textarea}</td>						
 				<td>
 					
-					<a href = "${pageContext.request.contextPath}/deleteparcours/${e.parcours_id}">Supprimer</a>
+					
 				</td>
 			</tr>
+			
 		</c:forEach>
 	</table>
 </form:form>

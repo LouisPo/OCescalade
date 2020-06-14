@@ -10,6 +10,7 @@
 
         	 alert("toto");
         	     document.getElementById("form").action = "${pageContext.request.contextPath}/ajoutCommentView"; 
+        	     //document.getElementById("myForm").action = "/action_page.php";
         	     //document.frm.action="${pageContext.request.contextPath}/openParcoursRechercheView";
             	 document.getElementById("form").submit(); 
                  return true;
@@ -30,6 +31,16 @@
 
 	<form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/ajoutCommentView">
 	<h1>Detail du parcours</h1>
+		<table border = "0">
+		<tr>
+			<th>laissez votre commentaire</th>
+			<th>Commentaires autres utilisateurs</th>
+	   </tr>
+			<tr>
+			<th><textarea  name="textarea" rows="5" cols="33">${textarea}</textarea></th>
+			<th><textarea name="textareaNomodif" readonly="readonly" rows="15" cols="33">${textareaNomodif}</textarea></th>
+	   </tr>
+	</table>
 	<table border = "1">
 		<tr>
 			<th>nom</th>
@@ -40,23 +51,36 @@
 		</tr>
 		
 			<tr>
-				<td>${parcours.nom}</td>
-				<td>${parcours.taille}</td>
-				<td>${parcours.difficulte}</td>
-				<td>${parcours.localisation}</td>				
+				<td>${nom}</td>
+				<td>${taille}</td>
+				<td>${difficulte}</td>
+				<td>${localisation}</td>
+								
 				<td>
-					
 					<a href = "${pageContext.request.contextPath}/deleteparcours/${parcours.parcours_id}">Supprimer</a>
 				</td>
 			</tr>
-			commentaire sur le parcours
-		<textarea  name="textarea" rows="5" cols="33"></textarea>
-	    <input type ="hidden" name="user" value="${parcours.parcours_id}">
+	
+		
+        
+	    <input type ="hidden" name="nom" value="${nom}">
+	    <input type ="hidden" name="taille" value="${taille}">
+	    <input type ="hidden" name="difficulte" value="${difficulte}">
+	    <input type ="hidden" name="localisation" value="${localisation}">
+	    <input type ="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
+	    <input type ="hidden" name="user_id" value="${user_id}">
 	</table>
 
-	<button type="submit">recherche parcours</button>
-	<button>envoyer commentaire</button>
+	
+	<button onclick="window.location.href='${pageContext.request.contextPath}/ajoutCommentView'">envoyer commentaire</button>
+	
+</form:form>
 
+
+
+<form:form  name="formulaire2" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
+<input type ="hidden" name="user_id" value="${user_id}">
+<button type="submit">recherche parcours</button>
 </form:form>
 </body>
 </html>

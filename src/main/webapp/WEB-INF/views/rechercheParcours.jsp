@@ -53,7 +53,7 @@
 	<option value="1">facile</option>
 	<option value="2">moyen</option>
 	<option value="3">difficile</option>
-	
+	<input type ="hidden" name="user_id" value="${user_id}">
 	</select></td></tr>
 	<tr><td>	Entrer la localisation: </td><td><form:input path="localisation"/></td></tr>
 		</table>

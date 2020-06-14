@@ -12,43 +12,45 @@ import org.springframework.stereotype.Repository;
 import in.SpringbootOCescalade.springboot.model.*;
 
 @Repository
-public class CommentDAOImpl implements CommentDAO {
+public class TopoDAOImpl implements TopoDAO {
 
 	@Autowired
 	private EntityManager entityManager;
 	
 	@Override
-	public List<Comment> get() {
+	public List<Topo> get() {
 		Session currentSession = entityManager.unwrap(Session.class);
-		Query<Comment> query = currentSession.createQuery("from commentaire", Comment.class);
-		List<Comment> list = query.getResultList();
+		Query<Topo> query = currentSession.createQuery("from topo", Topo.class);
+		List<Topo> list = query.getResultList();
 		return list;
 	}
 
 	@Override
-	public Comment get(int id) {
+	public Topo get(int id) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		Comment commentaireObj = currentSession.get(Comment.class, id);
-		return commentaireObj;
+		Topo topoObj = currentSession.get(Topo.class, id);
+		return topoObj;
 	}
 
 	@Override
-	public void save(Comment commentaire) {
+	public void save(Topo topo) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		currentSession.saveOrUpdate(commentaire);
+		currentSession.saveOrUpdate(topo);
 	}
 
 	@Override
 	public void delete(int id) {
 		Session currentSession = entityManager.unwrap(Session.class);
-		Comment commentaireObj = currentSession.get(Comment.class, id);
-		currentSession.delete(commentaireObj);
+		Topo topoObj = currentSession.get(Topo.class, id);
+		currentSession.delete(topoObj);
 	}
 
 	@Override
-	public void insertcommentaire(String textarea, Integer user,Integer parcoursidentifiant) {
+	public void inserttopo(String textarea, Integer user, Integer parcoursidentifiant) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

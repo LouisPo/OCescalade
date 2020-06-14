@@ -15,8 +15,24 @@
 	<tr><td></td><td></td></tr>
 	<tr><td></td><td></td></tr>
 		</table>
-			<button onclick="window.location.href='${pageContext.request.contextPath}/openParcoursRechercheView'">Recherche parcours</button>
+		
+<form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
+<input type ="hidden" name="user_id" value="${user_id}">
+<button type="submit">recherche parcours</button>
+</form:form>
+
+<form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openProfilView">
+<input type ="hidden" name="user_id" value="${user_id}">
+<button type="submit">Consultation profil</button>
+</form:form>
+<form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openlistTopo">
+<input type ="hidden" name="user_id" value="${user_id}">
+<button type="submit">liste des topos</button>
+</form:form>			
 	<button onclick="window.location.href='${pageContext.request.contextPath}/openParcoursView'">Creation parcours</button>
+	
+	<input type ="hidden" name="user_id" value="${user_id}">
+	
 	
 </body>
 </html>

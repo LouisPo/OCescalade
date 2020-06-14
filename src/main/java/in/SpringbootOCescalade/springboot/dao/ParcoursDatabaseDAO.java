@@ -1,5 +1,7 @@
 package in.SpringbootOCescalade.springboot.dao;
 
+import in.SpringbootOCescalade.springboot.model.Comment;
+import in.SpringbootOCescalade.springboot.model.CommentDatabase;
 import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.ParcoursDatabase;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
@@ -50,17 +52,14 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 
 		  try {
 		    ResultSet result = this.connect.createStatement(
-		      ResultSet.TYPE_SCROLL_INSENSITIVE,
-		      //ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and localisation = '"+localisation+"'");
-		      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and localisation = '"+localisation+"' and parcours_id = '"+id+"'");
+		      ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and localisation = '"+localisation+"' and parcours_id = '"+id+"'");
 					  if(result.first())						
-					         System.out.println("TROUVE "+result.getString("nom")+"   "+result.getString("localisation"));
+					      
 					         parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getInt("difficulte"),result.getString("localisation"));    
 					  
 					  } catch (SQLException e) {
 					    e.printStackTrace();
 					  }
-		              //System.out.println("TAILLE  "+parcours.gettaille());
 		      return parcours;
 		}
 	public List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,int difficulte) {
@@ -68,9 +67,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		ResultSet result = null;  
 		//creation tableau de parcourss et parcourscourant l enregistrement courant
 		List<Parcourss> ret=new ArrayList();
-		//Parcourss parcourscourant= new Parcourss();
 		
-		System.out.println("nom : "+nom+" taille : "+taille+" difficulte : "+difficulte+"localisation  "+ localisation);
 
 		  try {
 			  
@@ -153,9 +150,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		    	Integer size = result.getInt(3); 
 		    	Integer difficult = result.getInt(4);
 		    	String local = result.getString(5); 
-		    	int row = result.getRow(); 
-		    	System.out.println("Données contenues dans la ligne "+row); 
-		    	System.out.println("id : "+id+" nom : "+nomm+" size : "+size+" difficult : "+difficult+"localisation  "+ local);
+		    	int row = result.getRow();
 		    	parcourscourant.setId(id);parcourscourant.setnom(nomm);parcourscourant.settaille(size);parcourscourant.setdifficulte(difficult);parcourscourant.setlocalisation(local);
 		    	//ajout de parcourscourant au tableau liste de parcours
 		    	ret.add(parcourscourant);
@@ -179,5 +174,92 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void deletecomment(int user, int parcoursidentifiant) {
+		
+		Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
+		java.sql.Statement stmt;
+
+		
+		  CommentDatabase commentaire = new CommentDatabase();   
+
+		  try {
+			  stmt = connection.createStatement();
+			    //stmt.executeUpdate("insert into commentaire(textarea,user) values ('"+textarea+"','"+user+"')");
+			  stmt.executeUpdate("DELETE  FROM commentaire WHERE user = '"+user+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+		
+
 	
-	}	
+	@Override
+	public List<Comment> findcomment(int user, int parcoursidentifiant) {
+		CommentDatabase parcours = new CommentDatabase();      
+		ResultSet result = null;  
+		//creation tableau de parcourss et parcourscourant l enregistrement courant
+		List<Comment> ret=new ArrayList();
+        try {
+			result = this.connect.createStatement(
+			ResultSet.TYPE_SCROLL_INSENSITIVE,
+			ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM commentaire WHERE user = '"+user+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    try {
+			while(result.next()){
+				Comment commentcourant= new Comment();
+				Integer comment_id = result.getInt(1); 
+				String textarea = result.getString(2); 
+				user = result.getInt(3); 
+			    parcoursidentifiant = result.getInt(4);
+				int row = result.getRow();
+				commentcourant.setComment_id(comment_id);commentcourant.setUser(user);commentcourant.setTextarea(textarea);commentcourant.setParcoursidentifiant(parcoursidentifiant);
+				//ajout de commentcourant au tableau liste de commentaire
+				ret.add(commentcourant);
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	@Override
+	public List<Comment> findcommentnotmodif(int user, int parcoursidentifiant) {
+		CommentDatabase parcours = new CommentDatabase();      
+		ResultSet result = null;  
+		//creation tableau de parcourss et parcourscourant l enregistrement courant
+		List<Comment> ret=new ArrayList();
+        try {
+			result = this.connect.createStatement(
+			ResultSet.TYPE_SCROLL_INSENSITIVE,
+			ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM commentaire WHERE user != '"+user+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    try {
+			while(result.next()){
+				Comment commentcourant= new Comment();
+				Integer comment_id = result.getInt(1); 
+				String textarea = result.getString(2)+"\n";
+				Integer  userr = result.getInt(3); 
+			    parcoursidentifiant = result.getInt(4);
+				int row = result.getRow();
+				commentcourant.setComment_id(comment_id);commentcourant.setUser(userr);commentcourant.setTextarea(textarea);commentcourant.setParcoursidentifiant(parcoursidentifiant);
+				ret.add(commentcourant);
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	}
+	
+		

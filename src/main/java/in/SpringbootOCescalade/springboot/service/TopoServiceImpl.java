@@ -10,43 +10,45 @@ import in.SpringbootOCescalade.springboot.dao.*;
 import in.SpringbootOCescalade.springboot.model.*;
 
 @Service
-public class CommentServiceImpl implements CommentService {
+public class TopoServiceImpl implements TopoService {
 
 	@Autowired
-	private CommentDAO CommentDAO;
+	private TopoDAO TopoDAO;
 	
 	@Transactional
 	@Override
-	public List<Comment> get() {
-		return CommentDAO.get();
+	public List<Topo> get() {
+		return TopoDAO.get();
 	}
 
 	@Transactional
 	@Override
-	public Comment get(int id) {
-		return CommentDAO.get(id);
+	public Topo get(int id) {
+		return TopoDAO.get(id);
 	}
 
 	@Transactional
 	@Override
-	public void save(Comment commentaire) {
-		CommentDAO.save(commentaire);
+	public void save(Topo topo) {
+		TopoDAO.save(topo);
 	}
 
 	@Transactional
 	@Override
 	public void delete(int id) {
-		CommentDAO.delete(id);
+		TopoDAO.delete(id);
 	}
 
 	@Override
-	public void insertcommentaire(String textarea, Integer user) {
+	public void inserttopo(String textarea, Integer user) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
+
 	@Override
-	public List<Comment> findcomment(int user, int parcoursidentifiant) {
+	public List<Topo> findtopo(int user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

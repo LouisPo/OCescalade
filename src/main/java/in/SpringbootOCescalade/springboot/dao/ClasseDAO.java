@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 import in.SpringbootOCescalade.springboot.dao.SdzConnection;
+import in.SpringbootOCescalade.springboot.model.Comment;
 import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
 
@@ -100,5 +101,11 @@ public List<Employee> findconnexion(String nom, String localisation) {
 public void save(String textarea, int user) {
 	// TODO Auto-generated method stub
 	
+}
+
+@Override
+public List<Comment> findcomment(int user, int parcoursidentifiant) {
+	// TODO Auto-generated method stub
+	return null;
 }
 }

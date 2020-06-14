@@ -3,13 +3,13 @@ package in.SpringbootOCescalade.springboot.model;
 
 public class ParcoursDatabase {
 	  //ID
-	private int parcours_id = 0;
+	private Integer parcours_id;
 	private String nom;
 	private Integer taille;
 	private Integer difficulte;
 	private String localisation;
 	
-	public ParcoursDatabase(int parcours_id, String nom, int taille, int  difficulte, String localisation) {
+	public ParcoursDatabase(Integer parcours_id, String nom, int taille, int  difficulte, String localisation) {
 	    this.parcours_id = parcours_id;
 	    this.nom = nom;
 	    this.taille = taille;

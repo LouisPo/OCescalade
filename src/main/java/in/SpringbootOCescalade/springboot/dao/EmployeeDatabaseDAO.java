@@ -1,5 +1,6 @@
 package in.SpringbootOCescalade.springboot.dao;
 
+import in.SpringbootOCescalade.springboot.model.Comment;
 import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.EmployeeDatabase;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
@@ -71,7 +72,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		    	System.out.println("Données contenues dans la ligne "+row); 
 		    	System.out.println("id : "+user_id+" nom : "+nomm+" prenom : "+prenom+" mdp : "+password);
 		    	employecourant.setId(user_id);employecourant.setnom(nomm);employecourant.setprenom(prenom);employecourant.setmail(mail);;employecourant.settel(tel);;employecourant.setmdp(password);
-		    	//ajout de parcourscourant au tableau liste de parcours
+		    	//ajout de employecourant au tableau liste de employe
 		    	ret.add(employecourant);
 		    	}
 		        
@@ -125,6 +126,12 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 	public void save(String textarea, int user) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Comment> findcomment(int user, int parcoursidentifiant) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

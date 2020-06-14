@@ -1,7 +1,7 @@
 package in.SpringbootOCescalade.springboot.model;
 
 
-public class CommentDatabase {
+public class TopoDatabase {
 	  //ID
 	private int comment_id = 0;
 	public int getComment_id() {
@@ -32,13 +32,13 @@ public class CommentDatabase {
 	private Integer user;
 	private Integer parcoursidentifiant;
 	
-	public CommentDatabase(int comment_id, String textarea, int use,int parcoursidentifiant) {
+	public TopoDatabase(int comment_id, String textarea, int use,int parcoursidentifiant) {
 	    this.comment_id = comment_id;
 	    this.textarea = textarea;
 	    this.user = user;
 	    this.parcoursidentifiant = parcoursidentifiant;    
 	  }
-	public CommentDatabase(){};
+	public TopoDatabase(){};
 
 
 	

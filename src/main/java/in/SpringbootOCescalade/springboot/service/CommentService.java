@@ -12,4 +12,5 @@ public interface CommentService {
 	void save(Comment commentaire);
 	void insertcommentaire(String  textarea,Integer user);
 	void delete(int id);
+	List<Comment> findcomment(int user,int parcoursidentifiant);
 }

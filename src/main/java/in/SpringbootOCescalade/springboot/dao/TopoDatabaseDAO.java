@@ -17,8 +17,8 @@ import java.sql.*;
 
 import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 
-	public class CommentDatabaseDAO extends DAO<ParcoursDatabase> {
-	public CommentDatabaseDAO(Connection conn) {
+	public class TopoDatabaseDAO extends DAO<ParcoursDatabase> {
+	public TopoDatabaseDAO(Connection conn) {
 	  super(conn);
 	}
 

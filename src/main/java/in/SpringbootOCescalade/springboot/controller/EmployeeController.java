@@ -23,16 +23,10 @@ import in.SpringbootOCescalade.springboot.service.EmployeeService;
 public class EmployeeController {
 	
 	@Autowired
-	private EmployeeService employeeService;
+	public EmployeeService employeeService;
 	
 	//modification page accueil du site
-	/*@RequestMapping(value = {"/", "/home", "/index"})
-	public ModelAndView get() {
-		ModelAndView mav = new ModelAndView("employeesList");
-		List<Employee> list = employeeService.get();
-		mav.addObject("list", list);
-		return mav;
-	}*/
+
 	
 	//new
 	@RequestMapping(value = {"/", "/home", "/index"})
@@ -87,6 +81,7 @@ public class EmployeeController {
 		  //il a rentre un bon user et un bon password
 		  else {
 			  mav = new ModelAndView("connexionok");
+			  mav.addObject("user_id", ret.get(0).getuser_id());
 		  }
 		  
 		  if(ret.get(0).getmail().equals("probleme_user") ) {
