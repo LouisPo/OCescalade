@@ -387,7 +387,7 @@ public class ParcourssController {
 		
 		mav.addObject("identifiant", identifiant);
 		mav.addObject("textarea", tab[6]);
-		System.out.println("table7 vaut"+tab[7]+" userid"+user_id+"  identifiant  "+identifiant);
+		mav.addObject("dispoperso", tab[5]);
 		mav.addObject("identifiantpret", tab[7]);
 		mav.addObject("user_id", user_id);
 		mav.addObject("ret", ret);

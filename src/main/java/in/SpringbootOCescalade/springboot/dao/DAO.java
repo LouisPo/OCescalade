@@ -1,11 +1,16 @@
 package in.SpringbootOCescalade.springboot.dao;
 
 import java.sql.Connection;
+import java.util.Date;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.Comment;
@@ -388,8 +393,11 @@ public void insertcommentaire(String textarea, int user,int parcoursidentifiant)
 		e.printStackTrace();
 	}
 
-	
-  textarea=  "**"+name+ "   " +prenom+"**"+"\n" +textarea;
+    Date dateactuelle = new Date();
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
+    String dat = dateFormat.format(dateactuelle);	
+    
+    textarea=  "**"+name+ "   " +prenom+"   "+dateactuelle+"**"+"\n" +textarea;
 
 	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
 	java.sql.Statement stmt;

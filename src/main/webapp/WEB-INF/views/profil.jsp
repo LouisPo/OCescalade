@@ -37,7 +37,9 @@
 
 </form:form>
 
-
+       
+<c:if test="${! empty nomdemandeur}">
+               
 	<h1>Votre Demande en cours</h1>
 	<table border = "1">
 		<tr>
@@ -69,6 +71,7 @@
 		
 	</table>
 
+   </c:if>  
 
 
 

@@ -13,6 +13,8 @@
 
 	<form:form  name="form" action = "${pageContext.request.contextPath}/insertTopoView">
 	<h1>Detail du topo</h1>
+
+	<c:if test = "${dispoperso ne 'PRETE'}">
 		<table border = "0">
 		<tr>
 			<th>contenu du topo</th>
@@ -43,11 +45,17 @@
 			<input type ="hidden" name="identifiant" value="${identifiant}">
 	   </tr>
 	</table>
+	</c:if>
+		<c:if test = "${dispoperso eq 'PRETE'}">
+	Le Topo a ete prete
+	</c:if>
 <p>
+		
+		
+	<c:if test = "${e.nomtopo eq ''}">
 	<table border = "0">		<tr>
 			<th>Topos qui ont ete pretes</th>					
 		</tr>
-	
 		<tr>
 			<th>nomtopo</th>
 			<th>nom</th>
@@ -62,14 +70,13 @@
 				<td>${e.prenom}</td>
 				<td>${e.dispo}</td>		
 				<td>${e.textarea}</td>						
-				<td>
-					
-					
-				</td>
-			</tr>
-			
+				<td></td>
+			</tr>	
 		</c:forEach>
 	</table>
+	</c:if>
+	
+	
 	 <c:if test = "${user_id ne identifiant}">
 			    <c:if test = "${identifiant == 0}"><button type="submit">Modifier le topo</button>
                 </c:if> 
