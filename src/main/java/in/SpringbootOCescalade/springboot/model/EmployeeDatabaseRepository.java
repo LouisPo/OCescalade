@@ -21,6 +21,8 @@ public class EmployeeDatabaseRepository {
     public List<EmployeeDatabase> findAll() {
         return entityManager.createQuery("from Parcours").getResultList();
     }
+    
+
     public Optional<EmployeeDatabase> findByName(String name) {
         EmployeeDatabase employee = entityManager.createQuery("SELECT b FROM Parcours b WHERE b.nom = :name", EmployeeDatabase.class)
                 .setParameter("name", name)

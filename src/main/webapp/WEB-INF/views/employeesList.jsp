@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,15 +12,16 @@
 </head>
 <body>
 	<h1>Liste des inscrits</h1>
-	<table border = "1">
+	
+	<table border="1">
 		<tr>
-		<!--  	<th>user_id</th>-->
+			<!--  	<th>user_id</th>-->
 			<th>nom</th>
 			<th>prenom</th>
 			<th>mail</th>
 			<th>tel</th>
 			<th>mdp</th>
-			
+
 		</tr>
 		<c:forEach items="${list}" var="e">
 			<tr>
@@ -29,17 +32,38 @@
 				<td>${e.tel}</td>
 				<td>${e.mdp}</td>
 				
+
+				
 				<td>
-			<!--  <a href = "${pageContext.request.contextPath}/employee/${e.user_id}">Ajouter</a>-->
-					
-					<a href = "${pageContext.request.contextPath}/delete/${e.user_id}">Supprimer</a>
+				<c:if test = "${fn:substring(e.prenom, 0, 2) ne 'AD'}">
+				   <a href = "${pageContext.request.contextPath}/becomAdmin?&identifiant=${e.user_id}&user_id=${user_id}"   onclick="document.getElementById("form").submit();">nommer administrateur</a>
+				</c:if> 
 				</td>
+				
+				</td>
+				<td><a href="${pageContext.request.contextPath}/delete/${e.user_id}">Supprimer</a></td>
+
 			</tr>
 		</c:forEach>
 	</table>
-	<button onclick="window.location.href='${pageContext.request.contextPath}/openEmployeeView'">Ajouter utilisateur</button>
-	<button onclick="window.location.href='${pageContext.request.contextPath}/openParcoursView'">liste des parcours</button>
 	
+	<form:form name="formulaire7" modelAttribute="parcours"
+		action="${pageContext.request.contextPath}/openEmployeeView">
+		<input type="hidden" name="user_id" value="${user_id}">
+			<button onclick="window.location.href='${pageContext.request.contextPath}/openEmployeeView'">Ajouter utilisateur</button>
+	</form:form>
+
+		
+		
+		
+	<button
+		onclick="window.location.href='${pageContext.request.contextPath}/openParcoursView'">liste
+		des parcours</button>
+	<form:form name="formulaire" modelAttribute="parcours"
+		action="${pageContext.request.contextPath}/openAccueilViewFrom">
+		<input type="hidden" name="user_id" value="${user_id}">
+		<button type="submit">Accueil</button>
+	</form:form>
 
 </body>
 </html>

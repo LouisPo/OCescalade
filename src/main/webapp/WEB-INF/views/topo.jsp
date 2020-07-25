@@ -115,6 +115,11 @@
 <form:form  name="formulaire2" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
 <button type="submit">recherche parcours</button>
+
+</form:form>
+<form:form  name="formulaire5" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
+<input type ="hidden" name="user_id" value="${user_id}">
+<button type="submit">Accueil</button>
 </form:form>
 </body>
 </html>

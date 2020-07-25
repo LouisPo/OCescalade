@@ -59,5 +59,9 @@
 		</table>
 		<form:hidden path = "parcours_id"/>
 		<button type = "submit" onclick="javascript:check()">Recherchez</button></form:form>
+		<form:form  name="formulaire5" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
+<input type ="hidden" name="user_id" value="${user_id}">
+<button type="submit">Accueil</button>
+</form:form>
 </body>
 </html>

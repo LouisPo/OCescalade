@@ -45,4 +45,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		currentSession.delete(employeeObj);
 	}
 
+	@Override
+	public void changetoadmin(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

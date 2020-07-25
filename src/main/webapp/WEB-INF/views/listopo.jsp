@@ -14,7 +14,6 @@
 	<table border = "1">
 		<tr>
 		<input type ="hidden" name="user_id" value="${user_id}">
-			<th>nomtopo</th>
 			<th>nom</th>
 			<th>prenom</th>
 			<th>dispo</th>	
@@ -22,15 +21,11 @@
 		</tr>
 		<c:forEach items="${ret}" var="e">
 			<tr>
-				<td>${e.nomtopo}</td>
 				<td><a href = "${pageContext.request.contextPath}/openProfilHrefView?&identifiant=${user_id}&user_id=${e.user_id}"   onclick="document.getElementById("form").submit();">${e.nom}</a></td>
 				<td>${e.prenom}</td>
 				<td>${e.dispo}</td>		
 				<td>${e.textarea}</td>						
-				<td>
-					
-					
-				</td>
+
 			</tr>
 			
 		</c:forEach>
@@ -40,6 +35,10 @@
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
 <button type="submit">recherche parcours</button>
+</form:form>
+<form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
+<input type ="hidden" name="user_id" value="${user_id}">
+<button type="submit">Accueil</button>
 </form:form>
 </body>
 </html>

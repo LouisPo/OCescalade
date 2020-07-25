@@ -24,7 +24,12 @@
 	<tr><td>	Entrer la localisation: </td><td><form:input path="localisation"/></td></tr>
 		</table>
 		<form:hidden path = "parcours_id"/>
+		<input type ="hidden" name="user_id" value="${user_id}">
 		<button type = "submit">Enregistrer</button>
 	</form:form>
+	<form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
+<input type ="hidden" name="user_id" value="${user_id}">
+<button type="submit">Accueil</button>
+</form:form>
 </body>
 </html>

@@ -1,0 +1,8 @@
+
+
+h1{
+    color:red;
+}
+
+<link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" >
+

@@ -38,6 +38,7 @@ import in.SpringbootOCescalade.springboot.model.*;
 public class ParcourssController {
 	
 
+	
 	@Autowired
 	private ParcourssService parcoursService;
 	private CommentService commentService;
@@ -50,12 +51,12 @@ public class ParcourssController {
 		mav2.addObject("list", list);
 		return mav2;
 	}
-	
-	@RequestMapping("/openParcoursView")
-	public ModelAndView openParcoursAddView() {
+	@RequestMapping(value="/openParcoursView", method=RequestMethod.POST)
+	public ModelAndView openParcoursView(@RequestParam("user_id") String user_id) {
 		ModelAndView mav = new ModelAndView("parcoursAdd");
 		mav.addObject("parcours", new Parcourss());
-		
+		mav.addObject("user_id", user_id);  
+
 		return mav;
 	}   
 
@@ -105,18 +106,25 @@ public class ParcourssController {
         taille = ServletRequestUtils.getStringParameter(request, "taille");
         difficulte = ServletRequestUtils.getStringParameter(request, "difficulte");
         localisation = ServletRequestUtils.getStringParameter(request, "localisation");
+      
+        //recuperation des infos du user connecter
+        String[] tab = new String[4];
+		DAO<CommentDatabase> commentaireDao3 = DAOFactory.getCommentDAO();
+		tab = commentaireDao3.recupuser(Integer.parseInt(user_id));
+        
         
 		List<Comment> ret=new ArrayList();
 		//ret  = commentaireDao.findcomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
 		ret  = commentaireDao.findcomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
+		//commentaire user connecter modifiable
 		String textarea="";
 		  for(int i=0;i<ret.size();i++) {	
 			  textarea = textarea +ret.get(i).getTextarea();
 				}
 		
 		
-		  //textarea non modifiable
+		  //textarea non modifiable comentaire autres user
 		  List<Comment> ret2=new ArrayList();
 		  DAO<CommentDatabase> commentaireDao2 = DAOFactory.getCommentDAO();
 			ret2  = commentaireDao2.findcommentnotmodif(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
@@ -133,13 +141,12 @@ public class ParcourssController {
 		mav.addObject("textareaNomodif", textareaNomodif);
 		mav.addObject("user_id", user_id);
 		mav.addObject("nom", nom);
+		mav.addObject("prenom",tab[2]);
 		mav.addObject("taille", taille);
 		mav.addObject("difficulte", difficulte);
 		mav.addObject("localisation", localisation);
 		return mav;
 	}
-	
-	
 	
 	@RequestMapping(value="/ajoutCommentView", method=RequestMethod.POST)
 	public ModelAndView savecomment(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("textarea") String textarea,@RequestParam("textareaNomodif") String textareaNomodif,@RequestParam("user_id") String user_id,@RequestParam("nom") String nom,@RequestParam("taille") String taille,@RequestParam("difficulte") String difficulte,@RequestParam("localisation") String localisation,@RequestParam("parcoursidentifiant") String parcoursidentifiant) {
@@ -156,7 +163,6 @@ public class ParcourssController {
 		List<Comment> ret=new ArrayList();
 		ret  = commentaireDao.findcomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
 
-	
 		List<Parcourss> list = parcoursService.getparcours();
 		
 		mav.addObject("employee", new Employee());
@@ -170,11 +176,12 @@ public class ParcourssController {
 		mav.addObject("textareaNomodif", textareaNomodif);
 		return mav;
 	}
-	@RequestMapping("/saveparcours")
-	public ModelAndView saveparcours(@ModelAttribute("parcours") Parcourss parcoursObj) {
+	@RequestMapping(value="/saveparcours", method=RequestMethod.POST)
+	public ModelAndView saveparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("user_id") String user_id) {
 		ModelAndView mav = new ModelAndView("parcoursList");
 		parcoursService.saveparcours(parcoursObj);
 		List<Parcourss> list = parcoursService.getparcours();
+		mav.addObject("user_id", user_id);
 		mav.addObject("list", list);
 		return mav;
 	}

@@ -86,6 +86,9 @@
 <input type ="hidden" name="identifiant" value="${identifiant}">
 <button type="submit">consulter le topo</button>
 </form:form>
-
+<form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
+<input type ="hidden" name="user_id" value="${user_id}">
+<button type="submit">Accueil</button>
+</form:form>
 </body>
 </html>

@@ -3,6 +3,11 @@ package in.SpringbootOCescalade.springboot.dao;
 import java.sql.Connection;
 import java.util.Date;
 
+//nouveau format de daate sous java 8
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -393,10 +398,11 @@ public void insertcommentaire(String textarea, int user,int parcoursidentifiant)
 		e.printStackTrace();
 	}
 
-    Date dateactuelle = new Date();
-    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
-    String dat = dateFormat.format(dateactuelle);	
-    
+    //Date dateactuelle = new Date();
+    //DateFormat dateFormat = new SimpleDateFormat("dd-MM-yy");
+    //String dat = dateFormat.format(dateactuelle);	
+    LocalDateTime currentTime = LocalDateTime.now();
+    LocalDate dateactuelle = currentTime.toLocalDate();
     textarea=  "**"+name+ "   " +prenom+"   "+dateactuelle+"**"+"\n" +textarea;
 
 	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
@@ -417,6 +423,52 @@ public List<Comment> findcommentnotmodif(int user, int parcoursidentifiant) {
 	// TODO Auto-generated method stub
 	return null;
 }
+
+
+
+public void changetoadmin(int identifiant) {
+	
+	//on recupere le nom et le prenom de la personne qui cree les commentairs
+		ResultSet result = null;
+		String name="";
+		String prenom="";
+	    try {
+			result = this.connect.createStatement(
+			ResultSet.TYPE_SCROLL_INSENSITIVE,
+			ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM user WHERE user_id = '"+identifiant+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    try {
+			while(result.next()){ 
+				name = result.getString(2); 
+				prenom = result.getString(3);
+				int row = result.getRow();
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	
+	
+
+
+	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
+	java.sql.Statement stmt;
+	 CommentDatabase commentaire = new CommentDatabase();   
+     String disp = "AD"+prenom;
+   
+	 try {
+		  stmt = connection.createStatement();
+		  stmt.executeUpdate("UPDATE  user SET prenom = '"+disp+"'"+"WHERE user_id = '"+identifiant+"'");
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
 
 
 public void deletecomment(int user, int parcoursidentifiant) {
