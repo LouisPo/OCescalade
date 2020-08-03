@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 
-<title>page de login</title>
+<title>page d'index</title>
 </head>
 <body>
 

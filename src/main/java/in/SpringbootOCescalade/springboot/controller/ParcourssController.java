@@ -67,7 +67,6 @@ public class ParcourssController {
 		if(parcoursObj == null) {
 			throw new RuntimeException("Parcours not found"+id);
 		}
-		
 		mav.addObject("parcours", parcoursObj);
 		mav.addObject("parcoursidentifiant", id);
 		mav.addObject("user_id", id);  
@@ -75,6 +74,58 @@ public class ParcourssController {
 		
 		return mav;
 	}
+	@RequestMapping(value="/ValiderView", method=RequestMethod.POST)
+	public ModelAndView ValiderView(HttpServletRequest request,@RequestParam("parcoursidentifiant") String parcoursidentifiant,@RequestParam("user_id") String user_id,@RequestParam("nom") String nom,@RequestParam("taille") String taille,@RequestParam("difficulte") String difficulte,@RequestParam("localisation") String localisation) throws ServletRequestBindingException {
+        //recuperation des parametres http
+        user_id = ServletRequestUtils.getStringParameter(request, "user_id");
+        parcoursidentifiant = ServletRequestUtils.getStringParameter(request, "parcoursidentifiant");
+        nom = ServletRequestUtils.getStringParameter(request, "nom");
+        taille = ServletRequestUtils.getStringParameter(request, "taille");
+        difficulte = ServletRequestUtils.getStringParameter(request, "difficulte");
+        localisation = ServletRequestUtils.getStringParameter(request, "localisation");
+      
+        //recuperation des infos du user connecter
+        String[] tab = new String[4];
+		DAO<CommentDatabase> commentaireDao3 = DAOFactory.getCommentDAO();
+		tab = commentaireDao3.recupuser(Integer.parseInt(user_id));
+        
+        
+		List<Comment> ret=new ArrayList();
+		//ret  = commentaireDao.findcomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
+		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
+		ret  = commentaireDao.findcomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
+		//commentaire user connecter modifiable
+		String textarea="";
+		  for(int i=0;i<ret.size();i++) {	
+			  textarea = textarea +ret.get(i).getTextarea();
+				}
+		
+		
+		  //textarea non modifiable comentaire autres user
+		  List<Comment> ret2=new ArrayList();
+		  DAO<CommentDatabase> commentaireDao2 = DAOFactory.getCommentDAO();
+			ret2  = commentaireDao2.findcommentnotmodif(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
+			String textareaNomodif="";
+			  for(int j=0;j<ret2.size();j++) {
+				  textareaNomodif = textareaNomodif +ret2.get(j).getTextarea();
+					}
+			  textareaNomodif = "\n"+textareaNomodif+"\n";
+		//page affichée
+		ModelAndView mav = new ModelAndView("parcoursdetail");
+
+		mav.addObject("parcoursidentifiant", parcoursidentifiant);
+		mav.addObject("textarea", textarea);
+		mav.addObject("textareaNomodif", textareaNomodif);
+		mav.addObject("user_id", user_id);
+		mav.addObject("nom", nom);
+		mav.addObject("prenom",tab[2]);
+		mav.addObject("taille", taille);
+		mav.addObject("difficulte", difficulte);
+		mav.addObject("localisation", localisation);
+		mav.addObject("passage", "NO");
+		return mav;
+	}
+
 	//on affiche la page de profil en venant de la page de list des topos en clickant sur un lien
 	@RequestMapping(value="/openProfilHrefView", method=RequestMethod.GET)
 	public ModelAndView openProfilHrefView(HttpServletRequest request,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) throws ServletRequestBindingException {
@@ -130,7 +181,7 @@ public class ParcourssController {
 			ret2  = commentaireDao2.findcommentnotmodif(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
 			String textareaNomodif="";
 			  for(int j=0;j<ret2.size();j++) {
-				  textareaNomodif = textareaNomodif +ret2.get(j).getTextarea();
+				  textareaNomodif = textareaNomodif +"----------"+ret2.get(j).getTextarea();
 					}
 			  textareaNomodif = "\n"+textareaNomodif+"\n";
 		//page affichée
@@ -145,6 +196,8 @@ public class ParcourssController {
 		mav.addObject("taille", taille);
 		mav.addObject("difficulte", difficulte);
 		mav.addObject("localisation", localisation);
+		mav.addObject("passage", "YES");
+		mav.addObject("list", ret2);
 		return mav;
 	}
 	

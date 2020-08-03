@@ -38,6 +38,11 @@ public class EmployeeController {
 		ModelAndView mav = new ModelAndView("login");
 		return mav;
 	}
+	@RequestMapping("/DeconnexionView")
+	public ModelAndView DeconnexionView() {
+		ModelAndView mav = new ModelAndView("login");
+		return mav;
+	}
 	//new
 	@RequestMapping("/openConnexionView")
 	public ModelAndView openConnexionView() {

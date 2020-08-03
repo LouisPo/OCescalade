@@ -34,10 +34,11 @@
 	<form:form name="form" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/ajoutCommentView">
 		<h1>Detail du parcours</h1>
-		<table border="0">
+		<table border="1">
 			<tr>
 				<th>laissez votre commentaire</th>
 				<th>Commentaires autres utilisateurs</th>
+				<th>Commentaires autres utilisateurs New</th>
 			</tr>
 			<tr>
 				<th><textarea name="textarea" rows="5" cols="33">${textarea}</textarea></th>
@@ -51,8 +52,46 @@
 				   </c:if>		
 				   	
 				</th>
+	
+		
 			</tr>
 		</table>
+		
+		
+		
+		
+		
+		
+		<table border="1">
+		<tr>
+			<th>comment id</th>
+			<th>prenom</th>
+			<th>commentaire</th>
+			<th>tel</th>
+			<th>mdp</th>
+
+		</tr>
+		<c:forEach items="${list}" var="e">
+			<tr>
+				<td>${e.comment_id}</td>
+				<td>${e.user}</td>
+				<td>${e.textarea}</td>
+				<td>${e.user}</td>
+				<td>${e.user}</td>
+
+			</tr>
+		</c:forEach>
+	</table>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<table border="1">
 			<tr>
 				<th>nom</th>
@@ -79,8 +118,7 @@
 			<input type="hidden" name="taille" value="${taille}">
 			<input type="hidden" name="difficulte" value="${difficulte}">
 			<input type="hidden" name="localisation" value="${localisation}">
-			<input type="hidden" name="parcoursidentifiant"
-				value="${parcoursidentifiant}">
+			<input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
 			<input type="hidden" name="user_id" value="${user_id}">
 		</table>
 
@@ -88,10 +126,23 @@
 		<button
 			onclick="window.location.href='${pageContext.request.contextPath}/ajoutCommentView'">envoyer
 			commentaire</button>
+		</form:form>
 
-	</form:form>
+	<c:if test = "${passage eq 'YES'}">		
 
-
+			<form:form name="formulaire6" modelAttribute="parcours"
+			action="${pageContext.request.contextPath}/ValiderView">
+			<input type="hidden" name="user_id" value="${user_id}">
+			<input type="hidden" name="vue" value="${passage}">	
+			<input type="hidden" name="nom" value="${nom}">
+			<input type="hidden" name="taille" value="${taille}">
+			<input type="hidden" name="difficulte" value="${difficulte}">
+			<input type="hidden" name="localisation" value="${localisation}">
+			<input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
+			<input type="hidden" name="user_id" value="${user_id}">	
+			<button type="submit">Valider parcours</button>
+		</form:form>
+     </c:if>
 
 	<form:form name="formulaire2" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openParcoursRechercheView">
@@ -102,6 +153,11 @@
 		action="${pageContext.request.contextPath}/openAccueilViewFrom">
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button type="submit">Accueil</button>
+	</form:form>
+		<form:form name="formulaire6" modelAttribute="parcours"
+		action="${pageContext.request.contextPath}/DeconnexionView">
+		<input type="hidden" name="user_id" value="${user_id}">
+		<button type="submit">Deconnexion</button>
 	</form:form>
 </body>
 </html>
