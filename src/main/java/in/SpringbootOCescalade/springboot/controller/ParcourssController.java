@@ -83,7 +83,16 @@ public class ParcourssController {
         taille = ServletRequestUtils.getStringParameter(request, "taille");
         difficulte = ServletRequestUtils.getStringParameter(request, "difficulte");
         localisation = ServletRequestUtils.getStringParameter(request, "localisation");
-      
+        
+        //recuperation des caracteristiques du parcours etudie
+        //On récupère un objet faisant le lien entre la base et nos objets 
+        DAO<ParcoursDatabase> parcoursDao = DAOFactory.getParcoursDAO();
+        ParcoursDatabase parcours = parcoursDao.find(Integer.parseInt(parcoursidentifiant));
+  
+        //Ecriture a Oui du champ validation
+		DAO<ParcoursDatabase> parcoursEtudie = DAOFactory.getCommentDAO();
+		parcoursEtudie.validerparcours(Integer.parseInt(parcoursidentifiant));
+        
         //recuperation des infos du user connecter
         String[] tab = new String[4];
 		DAO<CommentDatabase> commentaireDao3 = DAOFactory.getCommentDAO();
@@ -123,6 +132,7 @@ public class ParcourssController {
 		mav.addObject("difficulte", difficulte);
 		mav.addObject("localisation", localisation);
 		mav.addObject("passage", "NO");
+		mav.addObject("list", ret2);
 		return mav;
 	}
 
@@ -163,6 +173,12 @@ public class ParcourssController {
 		DAO<CommentDatabase> commentaireDao3 = DAOFactory.getCommentDAO();
 		tab = commentaireDao3.recupuser(Integer.parseInt(user_id));
         
+		
+        //recuperation des caracteristiques du parcours etudie
+        //On récupère un objet faisant le lien entre la base et nos objets 
+        DAO<ParcoursDatabase> parcoursDao = DAOFactory.getParcoursDAO();
+        ParcoursDatabase parcours = parcoursDao.find(Integer.parseInt(parcoursidentifiant));
+		
         
 		List<Comment> ret=new ArrayList();
 		//ret  = commentaireDao.findcomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
@@ -196,14 +212,60 @@ public class ParcourssController {
 		mav.addObject("taille", taille);
 		mav.addObject("difficulte", difficulte);
 		mav.addObject("localisation", localisation);
-		mav.addObject("passage", "YES");
+		mav.addObject("passage", parcours.getValidation());
 		mav.addObject("list", ret2);
 		return mav;
 	}
-	
+	@RequestMapping(value="/modifiezcomment", method=RequestMethod.POST)
+	public ModelAndView modifiezcomment(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("textarea") String textarea,@RequestParam("user_id") String user_id,@RequestParam("identifiantusermodif") String identifiantusermodif,@RequestParam("nom") String nom,@RequestParam("taille") String taille,@RequestParam("difficulte") String difficulte,@RequestParam("localisation") String localisation,@RequestParam("parcoursidentifiant") String parcoursidentifiant) {
+
+		//page affichéetextareaaaaa
+		ModelAndView mav = new ModelAndView("parcoursdetail");
+
+        //recuperation des infos du user connecter
+        String[] tab = new String[4];
+		DAO<CommentDatabase> commentaireDao3 = DAOFactory.getCommentDAO();
+		tab = commentaireDao3.recupuser(Integer.parseInt(user_id));
+		
+		//connexion a la BD
+		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
+		//appel de la requete d insertion d un commentaire
+
+		commentaireDao.deletecomment(Integer.parseInt(identifiantusermodif),Integer.parseInt(parcoursidentifiant));
+		commentaireDao.insertcommentaire( textarea,Integer.parseInt(identifiantusermodif),Integer.parseInt(parcoursidentifiant),"identite","date");
+		
+		List<Comment> ret=new ArrayList();
+		ret  = commentaireDao.findcomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
+
+		//textarea non modifiable comentaire autres user
+		List<Comment> ret2=new ArrayList();
+	    DAO<CommentDatabase> commentaireDao2 = DAOFactory.getCommentDAO();
+	    ret2  = commentaireDao2.findcommentnotmodif(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
+		
+		List<Parcourss> list = parcoursService.getparcours();
+		
+		mav.addObject("employee", new Employee());
+		mav.addObject("nom", nom);
+		mav.addObject("taille", taille);
+		mav.addObject("difficulte", difficulte);
+		mav.addObject("localisation", localisation);
+		mav.addObject("parcoursidentifiant", parcoursidentifiant);
+		mav.addObject("user_id", user_id);
+		mav.addObject("textarea", ret.get(0).getTextarea());
+		mav.addObject("textareaNomodif", "");
+		mav.addObject("list",ret2);
+		mav.addObject("prenom",tab[2]);
+		return mav;
+	}
 	@RequestMapping(value="/ajoutCommentView", method=RequestMethod.POST)
 	public ModelAndView savecomment(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("textarea") String textarea,@RequestParam("textareaNomodif") String textareaNomodif,@RequestParam("user_id") String user_id,@RequestParam("nom") String nom,@RequestParam("taille") String taille,@RequestParam("difficulte") String difficulte,@RequestParam("localisation") String localisation,@RequestParam("parcoursidentifiant") String parcoursidentifiant) {
 
+        //recuperation des infos du user connecter
+        String[] tab = new String[4];
+		DAO<CommentDatabase> commentaireDao3 = DAOFactory.getCommentDAO();
+		tab = commentaireDao3.recupuser(Integer.parseInt(user_id));
+		
+		
 		//page affichée
 		ModelAndView mav = new ModelAndView("parcoursdetail");
 
@@ -212,10 +274,15 @@ public class ParcourssController {
 		//appel de la requete d insertion d un commentaire
 
 		commentaireDao.deletecomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
-		commentaireDao.insertcommentaire( textarea,Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
+		commentaireDao.insertcommentaire( textarea,Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant),"identite","date");
 		List<Comment> ret=new ArrayList();
 		ret  = commentaireDao.findcomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
 
+		//textarea non modifiable comentaire autres user
+		List<Comment> ret2=new ArrayList();
+	    DAO<CommentDatabase> commentaireDao2 = DAOFactory.getCommentDAO();
+	    ret2  = commentaireDao2.findcommentnotmodif(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
+		
 		List<Parcourss> list = parcoursService.getparcours();
 		
 		mav.addObject("employee", new Employee());
@@ -227,6 +294,8 @@ public class ParcourssController {
 		mav.addObject("user_id", user_id);
 		mav.addObject("textarea", textarea);
 		mav.addObject("textareaNomodif", textareaNomodif);
+		mav.addObject("list", ret2);
+		mav.addObject("prenom",tab[2]);
 		return mav;
 	}
 	@RequestMapping(value="/saveparcours", method=RequestMethod.POST)
@@ -494,7 +563,7 @@ public class ParcourssController {
 		return mav;
 	}
 	@RequestMapping(value="/resultatparcours", method=RequestMethod.POST)
-	public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("localisation") String localisation,@RequestParam("difficulte") String difficulte,@RequestParam("taille") String taille,@RequestParam("nom") String nom,@RequestParam("user_id") String user_id) {
+	public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("localisation") String localisation,@RequestParam("difficulte") String difficulte,@RequestParam("difficultelettre") String difficultelettre,@RequestParam("taille") String taille,@RequestParam("nom") String nom,@RequestParam("user_id") String user_id) {
 	       
 		try {
             Class.forName("org.hibernate.jpa.HibernatePersistenceProvider");
@@ -511,14 +580,15 @@ public class ParcourssController {
 		  List<Parcourss> list = parcoursService.getparcours();  
           List<Parcourss> ret=new ArrayList();
 
+          difficulte=difficulte+difficultelettre;
 		  //REQUETE SQL on recupere le resultat de la requete 
 	      if(taille.equals("")) {taille="0";}
-		  ret  = parcoursDao.findmultipleNoid(nom, localisation,Integer.parseInt(taille),Integer.parseInt(difficulte));
+		  ret  = parcoursDao.findmultipleNoid(nom, localisation,Integer.parseInt(taille),difficulte);
           //vidage de list
 		  for(int j=0;j<list.size();j++) {
 				list.get(j).setnom("");
 				list.get(j).settaille(0);
-				list.get(j).setdifficulte(0);
+				list.get(j).setdifficulte("");
 				list.get(j).setlocalisation("");	
 				}
          //remplissage avec resultat de la requete SQL
@@ -535,11 +605,11 @@ public class ParcourssController {
 		  }
 
 	/**********************************************************/	  
-		  DAO<Eleve> eleveDao = DAOFactory.getEleveDAO();
-		  for(int i = 1; i < 10; i++){
+		 // DAO<Eleve> eleveDao = DAOFactory.getEleveDAO();
+		 // for(int i = 1; i < 10; i++){
 		    //On fait notre recherche
-		    Eleve eleve = eleveDao.find(i);		  
-		  }
+		   // Eleve eleve = eleveDao.find(i);		  
+		  //}
 
 	    org.hibernate.jpa.HibernatePersistenceProvider entityManagerFactory =new  org.hibernate.jpa.HibernatePersistenceProvider();
 	    entityManagerFactory.createEntityManagerFactory("Parcourss", System.getProperties());

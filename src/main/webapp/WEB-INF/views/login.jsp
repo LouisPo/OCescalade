@@ -6,24 +6,24 @@
 <html>
 <head>
 
-    <link rel="stylesheet" href="/css/ocesc.css" />
+  
     
-
+  <link rel="stylesheet" type="text/css" href="/css/ocescalade.css"/>
      
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 
 <title>page d'index</title>
 </head>
-<body>
+<body class="body">
+
+<div id="header">
+<h1><a href="#">Accueil</a></h1>
+
+</div>
 
 
-<h1>1. Test CSS</h1>
 
-
-
-
-	<h1>login</h1>
 	<table border="0">
 	<tr><td></td><td></td></tr>
 	<tr><td></td><td></td></tr>
@@ -31,7 +31,13 @@
 	</td></tr>
 	<tr><td></td><td></td></tr>
 		</table>
-	<button onclick="window.location.href='${pageContext.request.contextPath}/openConnexionView'">Connexion</button>
-	<button onclick="window.location.href='${pageContext.request.contextPath}/openEmployeeView'">Inscription</button>
+		
+		
+	<button class="button" onclick="window.location.href='${pageContext.request.contextPath}/openConnexionView'">Connexion</button>
+	
+	
+	<button class="button" onclick="window.location.href='${pageContext.request.contextPath}/openEmployeeView'">Inscription</button>
+	
+	
 </body>
 </html>

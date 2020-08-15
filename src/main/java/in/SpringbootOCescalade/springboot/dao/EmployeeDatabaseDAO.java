@@ -33,7 +33,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 	  return false;
 	}
 	@Override
-	public List<Parcourss> findmultipleNoid(String nom, String localisation, int taille, int difficulte) {
+	public List<Parcourss> findmultipleNoid(String nom, String localisation, int taille, String difficulte) {
 		// TODO Auto-generated method stub
 		return null;
 	}	

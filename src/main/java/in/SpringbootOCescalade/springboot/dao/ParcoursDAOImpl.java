@@ -35,6 +35,9 @@ public class ParcoursDAOImpl implements ParcoursDAO {
 	@Override
 	public void save(Parcourss parcours) {
 		Session currentSession = entityManager.unwrap(Session.class);
+		if(parcours.getValidation()==null) {
+			parcours.setValidation("NON");
+		}
 		currentSession.saveOrUpdate(parcours);
 	}
 

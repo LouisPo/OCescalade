@@ -74,7 +74,7 @@ public abstract class DAO<T> {
 * @param id
 * @return T
 */
-public abstract List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,int difficulte);
+public abstract List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,String difficulte);
 
 public  List<Comment> findcomment(int user,int parcoursidentifiant)
 {
@@ -310,7 +310,6 @@ public List<Topo> listTopo(int user) {
 }
 public String[] recuptopo(int user) {
 	String[] tab = new String[8];
-
 	ResultSet result = null;
     try {
 		result = this.connect.createStatement(
@@ -374,7 +373,7 @@ public String[] recupuser(int user) {
 
 
 
-public void insertcommentaire(String textarea, int user,int parcoursidentifiant) {
+public void insertcommentaire(String textarea, int user,int parcoursidentifiant,String identite,String date) {
 	//on recupere le nom et le prenom de la personne qui cree les commentairs
 	ResultSet result = null;
 	String name="";
@@ -403,7 +402,7 @@ public void insertcommentaire(String textarea, int user,int parcoursidentifiant)
     //String dat = dateFormat.format(dateactuelle);	
     LocalDateTime currentTime = LocalDateTime.now();
     LocalDate dateactuelle = currentTime.toLocalDate();
-    textarea=  "**"+name+ "   " +prenom+"   "+dateactuelle+"**"+"\n" +textarea;
+    //textarea=  "**"+name+ "   " +prenom+"   "+dateactuelle+"**"+"\n" +textarea;
 
 	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
 	java.sql.Statement stmt;
@@ -412,8 +411,9 @@ public void insertcommentaire(String textarea, int user,int parcoursidentifiant)
 
 	  try {
 		  stmt = connection.createStatement();
-		  stmt.executeUpdate("insert into commentaire(textarea,user,parcoursidentifiant) values ('"+textarea+"','"+user+"','"+parcoursidentifiant+"')");
-	} catch (SQLException e) {
+		 // stmt.executeUpdate("insert into commentaire(textarea,user,parcoursidentifiant,identite,date) values ('"+textarea+"','"+user+"','"+parcoursidentifiant+"')");
+		  stmt.executeUpdate("insert into commentaire(textarea,user,parcoursidentifiant,identite,date) values ('"+textarea+"','"+user+"','"+parcoursidentifiant+"','"+name+"','"+dateactuelle+"')");
+	  } catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -489,6 +489,11 @@ public void deletecomment(int user, int parcoursidentifiant) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	
+}
+
+public void validerparcours(int parcoursidentifiant) {
+	// TODO Auto-generated method stub
 	
 }
 	

@@ -33,7 +33,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 	public boolean update(ParcoursDatabase obj) {
 	  return false;
 	}
-	void insertcommentaire(String  textarea,Integer user,Integer parcoursidentifiant) {
+	void insertcommentaire(String  textarea,Integer user,Integer parcoursidentifiant,String identite,String date) {
 		
 	}
 	public ParcoursDatabase find(int id) {
@@ -45,14 +45,14 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 	      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE parcours_id = " + id);
 		  
 				  if(result.first())
-				      parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getInt("difficulte"),result.getString("localisation"));         
+				      parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getString("difficulte"),result.getString("localisation"),result.getString("validation"));         
 				  } catch (SQLException e) {
 				    e.printStackTrace();
 				  }
 	      return parcours;
 	}
 	
-	public void insertcommentaire(int id,String textarea,int parcoursidentifiant) {
+	public void insertcommentaire(int id,String textarea,int parcoursidentifiant,String identite,String date) {
 		Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
 		java.sql.Statement stmt;
 		
@@ -81,7 +81,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and localisation = '"+localisation+"' and parcours_id = '"+id+"'");
 					  if(result.first())						
 					         System.out.println("TROUVE "+result.getString("nom")+"   "+result.getString("localisation"));
-					         parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getInt("difficulte"),result.getString("localisation"));    
+					         parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getString("difficulte"),result.getString("localisation"),result.getString("validation"));    
 					  
 					  } catch (SQLException e) {
 					    e.printStackTrace();
@@ -89,7 +89,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		              //System.out.println("TAILLE  "+parcours.gettaille());
 		      return parcours;
 		}
-	public List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,int difficulte) {
+	public List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,String difficulte) {
 		ParcoursDatabase parcours = new ParcoursDatabase();      
 		ResultSet result = null;  
 		//creation tableau de parcourss et parcourscourant l enregistrement courant
@@ -177,7 +177,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		    	Integer id = result.getInt(1); 
 		    	String nomm = result.getString(2); 
 		    	Integer size = result.getInt(3); 
-		    	Integer difficult = result.getInt(4);
+		    	String difficult = result.getString(4);
 		    	String local = result.getString(5); 
 		    	int row = result.getRow(); 
 		    	System.out.println("Données contenues dans la ligne "+row); 

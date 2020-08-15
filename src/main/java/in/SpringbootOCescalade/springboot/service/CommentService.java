@@ -10,7 +10,7 @@ public interface CommentService {
 	Comment get(int id);
 	
 	void save(Comment commentaire);
-	void insertcommentaire(String  textarea,Integer user);
+	void insertcommentaire(String  textarea,Integer user,String identite,String date);
 	void delete(int id);
 	List<Comment> findcomment(int user,int parcoursidentifiant);
 }

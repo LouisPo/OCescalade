@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="/css/ocescalade.css"/>
 <title>Insert title here</title>
 </head>
 <body>
@@ -13,15 +14,24 @@
 	<form:form action = "${pageContext.request.contextPath}/saveparcours" modelAttribute="parcours">
 	<table>
 	<tr><td>	Entrer le nom:    </td><td><form:input path="nom"/></td></tr>
-	<tr><td>	Entrer la taille: </td><td><form:input path="taille"/></td></tr>
-	<tr><td>	Entrer la difficulte: </td><td>
+	<tr><td>	Entrer la longueur: </td><td><form:input path="taille"/></td></tr>
+	<tr><td>	Entrer la cotation: </td><td>
 	<select name="difficulte">
-	<option value="1">facile</option>
-	<option value="2">moyen</option>
-	<option value="3">difficile</option>
+	<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
 	
-	</select></td></tr>
-	<tr><td>	Entrer la localisation: </td><td><form:input path="localisation"/></td></tr>
+	</select></td>
+	<td><select name="difficultelettre">
+						<option value="a">a</option>
+						<option value="b">b</option>
+						<option value="c">c</option>
+				</select></td></tr>
+	<tr><td>	Entrer le lieu: </td><td><form:input path="localisation"/></td></tr>
 		</table>
 		<form:hidden path = "parcours_id"/>
 		<input type ="hidden" name="user_id" value="${user_id}">
@@ -29,12 +39,12 @@
 	</form:form>
 	<form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button type="submit">Accueil</button>
+<button class="button"  type="submit">Accueil</button>
 </form:form>
 	<form:form name="formulaire6" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/DeconnexionView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Deconnexion</button>
+		<button class="button"  type="submit">Deconnexion</button>
 	</form:form>
 </body>
 </html>

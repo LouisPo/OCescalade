@@ -12,7 +12,7 @@ public interface CommentDAO {
 	
 	void save(Comment commentaire);
 	
-	void insertcommentaire(String  textarea,Integer user,Integer parcoursidentifiant);
+	void insertcommentaire(String  textarea,Integer user,Integer parcoursidentifiant,String identite,String date);
 
 	void delete(int id);
 }

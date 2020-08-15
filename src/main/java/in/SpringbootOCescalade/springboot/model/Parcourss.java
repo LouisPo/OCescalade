@@ -35,10 +35,18 @@ public class Parcourss {
 	@Column
 	private Integer taille;
 	@Column
-	private Integer difficulte;
+	private String difficulte;
 	@Column
 	private String localisation;
+	@Column
+	private String validation;
 	
+	public String getValidation() {
+		return validation;
+	}
+	public void setValidation(String validation) {
+		this.validation = validation;
+	}
 	public Integer getparcours_id() {
 		return parcours_id;
 	}
@@ -57,10 +65,10 @@ public class Parcourss {
 	public void settaille(Integer taille) {
 		this.taille = taille;
 	}
-	public Integer getdifficulte() {
+	public String getdifficulte() {
 		return difficulte;
 	}
-	public void setdifficulte(Integer difficulte) {
+	public void setdifficulte(String difficulte) {
 		this.difficulte = difficulte;
 	}
 	public String getlocalisation() {

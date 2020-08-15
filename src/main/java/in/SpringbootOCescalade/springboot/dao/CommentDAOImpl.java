@@ -46,7 +46,7 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
-	public void insertcommentaire(String textarea, Integer user,Integer parcoursidentifiant) {
+	public void insertcommentaire(String textarea, Integer user,Integer parcoursidentifiant,String identite,String date) {
 		// TODO Auto-generated method stub
 		
 	}

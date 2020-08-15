@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="/css/ocescalade.css"/>
 <title>Insert title here</title>
 </head>
 <body>
@@ -50,24 +51,24 @@
 	<form:form name="formulaire7" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openEmployeeView">
 		<input type="hidden" name="user_id" value="${user_id}">
-			<button onclick="window.location.href='${pageContext.request.contextPath}/openEmployeeView'">Ajouter utilisateur</button>
+			<button class="button"  onclick="window.location.href='${pageContext.request.contextPath}/openEmployeeView'">Ajouter utilisateur</button>
 	</form:form>
 
 		
 		
 		
-	<button
+	<button class="button" 
 		onclick="window.location.href='${pageContext.request.contextPath}/openParcoursView'">liste
 		des parcours</button>
 	<form:form name="formulaire" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openAccueilViewFrom">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Accueil</button>
+		<button class="button"  type="submit">Accueil</button>
 	</form:form>
 		<form:form name="formulaire6" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/DeconnexionView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Deconnexion</button>
+		<button class="button"  type="submit">Deconnexion</button>
 	</form:form>
 
 </body>

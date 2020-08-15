@@ -41,7 +41,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 	      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE parcours_id = " + id);
 		  
 				  if(result.first())
-				      parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getInt("difficulte"),result.getString("localisation"));         
+				      parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getString("difficulte"),result.getString("localisation"),result.getString("validation"));         
 				  } catch (SQLException e) {
 				    e.printStackTrace();
 				  }
@@ -55,14 +55,14 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		      ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and localisation = '"+localisation+"' and parcours_id = '"+id+"'");
 					  if(result.first())						
 					      
-					         parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getInt("difficulte"),result.getString("localisation"));    
+					         parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getString("difficulte"),result.getString("localisation"),result.getString("validation"));    
 					  
 					  } catch (SQLException e) {
 					    e.printStackTrace();
 					  }
 		      return parcours;
 		}
-	public List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,int difficulte) {
+	public List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,String difficulte) {
 		ParcoursDatabase parcours = new ParcoursDatabase();      
 		ResultSet result = null;  
 		//creation tableau de parcourss et parcourscourant l enregistrement courant
@@ -148,7 +148,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		    	Integer id = result.getInt(1); 
 		    	String nomm = result.getString(2); 
 		    	Integer size = result.getInt(3); 
-		    	Integer difficult = result.getInt(4);
+		    	String difficult = result.getString(4);
 		    	String local = result.getString(5); 
 		    	int row = result.getRow();
 		    	parcourscourant.setId(id);parcourscourant.setnom(nomm);parcourscourant.settaille(size);parcourscourant.setdifficulte(difficult);parcourscourant.setlocalisation(local);
@@ -174,7 +174,25 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void validerparcours(int parcoursidentifiant) {
+		
+		Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
+		java.sql.Statement stmt;
 
+		
+		  ParcoursDatabase commentaire = new ParcoursDatabase();   
+          String valid="OUI";
+          
+		  try {
+			  stmt = connection.createStatement();
+			  stmt.executeUpdate("UPDATE  parcours SET validation = '"+valid+"'"+"WHERE parcours_id = '"+parcoursidentifiant+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	@Override
 	public void deletecomment(int user, int parcoursidentifiant) {
 		
@@ -250,8 +268,12 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 				String textarea = result.getString(2)+"\n";
 				Integer  userr = result.getInt(3); 
 			    parcoursidentifiant = result.getInt(4);
+			    String  identite = result.getString(5); 
+                String date = result.getString(6);
+			    
 				int row = result.getRow();
 				commentcourant.setComment_id(comment_id);commentcourant.setUser(userr);commentcourant.setTextarea(textarea);commentcourant.setParcoursidentifiant(parcoursidentifiant);
+				commentcourant.setIdentite(identite);commentcourant.setDate(date);
 				ret.add(commentcourant);
 				}
 		} catch (SQLException e) {

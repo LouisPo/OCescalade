@@ -5,6 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/css/ocescalade.css" />
 <script>
 	function check() {
 		var name = document.frm.nom.value;
@@ -13,7 +14,7 @@
 		var nbr = document.frm.taille.value;
 
 		if (isNaN(nbr)) {
-			alert("Veuillez rentrez une valeur numérique pour la taille");
+			alert("Veuillez rentrez une valeur numérique pour la longueur");
 			alert(name);
 
 			//probleme arrive pas a garder le champ nom en memoire si il y a une erreur sur la taille
@@ -44,35 +45,46 @@
 				<td><form:input path="nom" /></td>
 			</tr>
 			<tr>
-				<td>Entrer la taille:</td>
+				<td>Entrer la longueur:</td>
 				<td><form:input path="taille" /></td>
 			</tr>
 			<tr>
-				<td>Entrer la difficulte:</td>
+				<td>Entrer la cotation:</td>
 				<td><select name="difficulte">
-						<option value="1">facile</option>
-						<option value="2">moyen</option>
-						<option value="3">difficile</option>
+
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+
 						<input type="hidden" name="user_id" value="${user_id}">
+				</select></td>
+				<td><select name="difficultelettre">
+						<option value="a">a</option>
+						<option value="b">b</option>
+						<option value="c">c</option>
 				</select></td>
 			</tr>
 			<tr>
-				<td>Entrer la localisation:</td>
+				<td>Entrer le lieu:</td>
 				<td><form:input path="localisation" /></td>
 			</tr>
 		</table>
 		<form:hidden path="parcours_id" />
-		<button type="submit" onclick="javascript:check()">Recherchez</button>
+		<button class="button" type="submit" onclick="javascript:check()">Recherchez</button>
 	</form:form>
 	<form:form name="formulaire5" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openAccueilViewFrom">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Accueil</button>
+		<button class="button" type="submit">Accueil</button>
 	</form:form>
 	<form:form name="formulaire6" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/DeconnexionView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Deconnexion</button>
+		<button class="button" type="submit">Deconnexion</button>
 	</form:form>
 </body>
 </html>

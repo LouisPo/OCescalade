@@ -40,7 +40,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void insertcommentaire(String textarea, Integer user) {
+	public void insertcommentaire(String textarea, Integer user,String identite,String date) {
 		// TODO Auto-generated method stub
 		
 	}

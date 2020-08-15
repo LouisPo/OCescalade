@@ -6,15 +6,23 @@ public class ParcoursDatabase {
 	private Integer parcours_id;
 	private String nom;
 	private Integer taille;
-	private Integer difficulte;
+	private String difficulte;
 	private String localisation;
+	public String getValidation() {
+		return validation;
+	}
+	public void setValidation(String validation) {
+		this.validation = validation;
+	}
+	private String validation;
 	
-	public ParcoursDatabase(Integer parcours_id, String nom, int taille, int  difficulte, String localisation) {
+	public ParcoursDatabase(Integer parcours_id, String nom, int taille, String  difficulte, String localisation,String validation) {
 	    this.parcours_id = parcours_id;
 	    this.nom = nom;
 	    this.taille = taille;
 	    this.difficulte = difficulte;
 	    this.localisation = localisation;
+	    this.validation = validation;
 	  }
 	  public ParcoursDatabase(){};
 
@@ -37,10 +45,10 @@ public class ParcoursDatabase {
 	public void settaille(Integer taille) {
 		this.taille = taille;
 	}
-	public Integer getdifficulte() {
+	public String getdifficulte() {
 		return difficulte;
 	}
-	public void setdifficulte(Integer difficulte) {
+	public void setdifficulte(String difficulte) {
 		this.difficulte = difficulte;
 	}
 	public String getlocalisation() {

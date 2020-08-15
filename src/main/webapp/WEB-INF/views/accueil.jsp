@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="/css/ocescalade.css"/>
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,24 +15,24 @@
 	<table>
 <tr><td><form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button type="submit">recherche parcours</button>
+<button  class="button" type="submit">recherche parcours</button>
 </form:form></td>
 
 <td><form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openProfilView">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button type="submit">Consultation profil</button>
+<button  class="button" type="submit">Consultation profil</button>
 </form:form></td></tr>
 
 
 	<tr><td><form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openlistTopo">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button type="submit">liste des topos</button>
+<button  class="button" type="submit">liste des topos</button>
 </form:form></td>
 
 <c:if test = "${admin eq 'AD'}">
 	<td><form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/listinscrit">
 	<input type ="hidden" name="user_id" value="${user_id}">
-	<button type="submit">liste des inscrits</button>
+	<button  class="button" type="submit">liste des inscrits</button>
 	</form:form></td>
 </c:if>  
 
@@ -43,12 +44,12 @@
 
 			<form:form  name="form8" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursView">
 	<input type ="hidden" name="user_id" value="${user_id}">
-	<button type="submit">Creation parcours</button>
+	<button  class="button" type="submit">Creation parcours</button>
 	</form:form>
 		<form:form name="formulaire6" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/DeconnexionView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Deconnexion</button>
+		<button  class="button" type="submit">Deconnexion</button>
 	</form:form>
 	
 	

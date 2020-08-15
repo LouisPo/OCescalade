@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="/css/ocescalade.css"/>
 <title>Insert title here</title>
 </head>
 <body>
@@ -35,16 +36,16 @@
 			</tr>
 		</table>
 		<input type ="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Enregistrer</button>
+		<button class="button"  type="submit">Enregistrer</button>
 	</form:form>
 	<form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button type="submit">Accueil</button>
+<button class="button"  type="submit">Accueil</button>
 </form:form>
 	<form:form name="formulaire6" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/DeconnexionView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Deconnexion</button>
+		<button class="button"  type="submit">Deconnexion</button>
 	</form:form>
 </body>
 </html>

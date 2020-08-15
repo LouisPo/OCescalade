@@ -6,7 +6,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+-<head>
 <script>
 	function check() {
 
@@ -27,6 +27,7 @@
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="/css/ocescalade.css"/>
 <title>Insert title here</title>
 </head>
 <body>
@@ -34,70 +35,17 @@
 	<form:form name="form" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/ajoutCommentView">
 		<h1>Detail du parcours</h1>
-		<table border="1">
-			<tr>
-				<th>laissez votre commentaire</th>
-				<th>Commentaires autres utilisateurs</th>
-				<th>Commentaires autres utilisateurs New</th>
-			</tr>
-			<tr>
-				<th><textarea name="textarea" rows="5" cols="33">${textarea}</textarea></th>
-				<th>
-				   <c:if test="${fn:substring(prenom, 0, 2) ne 'AD'}">
-						<textarea name="textareaNomodif" readonly="readonly" rows="15" cols="33">${textareaNomodif}</textarea>
-				   </c:if>	
-				   
-				   <c:if test="${fn:substring(prenom, 0, 2) eq 'AD'}">
-						<textarea name="textareaNomodif"  rows="15" cols="33">${textareaNomodif}</textarea>
-				   </c:if>		
-				   	
-				</th>
-	
 		
-			</tr>
-		</table>
-		
-		
-		
-		
-		
-		
-		<table border="1">
-		<tr>
-			<th>comment id</th>
-			<th>prenom</th>
-			<th>commentaire</th>
-			<th>tel</th>
-			<th>mdp</th>
-
-		</tr>
-		<c:forEach items="${list}" var="e">
-			<tr>
-				<td>${e.comment_id}</td>
-				<td>${e.user}</td>
-				<td>${e.textarea}</td>
-				<td>${e.user}</td>
-				<td>${e.user}</td>
-
-			</tr>
-		</c:forEach>
-	</table>
-		
-		
-		
-		
-		
-		
-		
-		
+			Parcours actuel
+	<p>
 		
 		
 		<table border="1">
 			<tr>
 				<th>nom</th>
-				<th>taille</th>
-				<th>difficulte</th>
-				<th>localisation</th>
+				<th>longueur</th>
+				<th>cotation</th>
+				<th>lieu</th>
 
 			</tr>
 
@@ -121,14 +69,79 @@
 			<input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
 			<input type="hidden" name="user_id" value="${user_id}">
 		</table>
-
-
+		
+		<p>
+		
+		
+		<table border="1">
+			<tr>
+				<th>Votre commentaire</th>
+			</tr>
+			<tr>
+				<th><textarea name="textarea" rows="5" cols="33">${textarea}</textarea></th>
+                <input type="hidden" name="textareaNomodif" value="">
+	
+		
+			</tr>
+		</table>
+		
 		<button
 			onclick="window.location.href='${pageContext.request.contextPath}/ajoutCommentView'">envoyer
 			commentaire</button>
 		</form:form>
+		
+		
+		<p>
+		Commentaires autres utilisateurs
+		<p>
+		
+		<table border="1">
+		<tr>
+			<th>Date</th>
+			<th>Commentateur</th>
+			<th>commentaires</th>
+			<th></th>
+			<th></th>
 
-	<c:if test = "${passage eq 'YES'}">		
+		</tr>
+		<c:forEach items="${list}" var="e">
+			<tr>
+				<td>${e.date}</td>
+				<td>${e.identite}</td>
+				<form:form name="formulaire45" modelAttribute="parcours" action="${pageContext.request.contextPath}/modifiezcomment">
+				<td>
+				   <c:if test="${fn:substring(prenom, 0, 2) ne 'AD'}">
+						<textarea name="textarea" readonly="readonly" rows="5" cols="33">${e.textarea}</textarea>
+				   </c:if>	
+				   
+				   <c:if test="${fn:substring(prenom, 0, 2) eq 'AD'}">
+						<textarea name="textarea"  rows="5" cols="33">${e.textarea}</textarea>
+				   </c:if>		
+				   	
+				</td>
+		
+				<td>
+		              <input type="hidden" name="identifiantusermodif" value="${e.user}">
+		              <input type="hidden" name="user_id" value="${user_id}">
+						<input type="hidden" name="nom" value="${nom}">
+						<input type="hidden" name="taille" value="${taille}">
+						<input type="hidden" name="difficulte" value="${difficulte}">
+						<input type="hidden" name="localisation" value="${localisation}">
+						<input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
+                      <c:if test="${fn:substring(prenom, 0, 2) eq 'AD'}">
+		                  <button v type="submit">Modifiez le </button>
+		               </c:if>		
+	                 </form:form>
+	             </td>
+				<td></td>
+
+			</tr>
+		</c:forEach>
+	</table>
+		
+	<p>
+<p>
+	<c:if test = "${passage eq ''}">		
 
 			<form:form name="formulaire6" modelAttribute="parcours"
 			action="${pageContext.request.contextPath}/ValiderView">
@@ -140,24 +153,24 @@
 			<input type="hidden" name="localisation" value="${localisation}">
 			<input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
 			<input type="hidden" name="user_id" value="${user_id}">	
-			<button type="submit">Valider parcours</button>
+			<button class="button"  type="submit">Valider parcours</button>
 		</form:form>
      </c:if>
 
 	<form:form name="formulaire2" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openParcoursRechercheView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">recherche parcours</button>
+		<button class="button"  type="submit">recherche parcours</button>
 	</form:form>
 	<form:form name="formulaire5" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openAccueilViewFrom">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Accueil</button>
+		<button class="button"  type="submit">Accueil</button>
 	</form:form>
 		<form:form name="formulaire6" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/DeconnexionView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Deconnexion</button>
+		<button class="button"  type="submit">Deconnexion</button>
 	</form:form>
 </body>
 </html>

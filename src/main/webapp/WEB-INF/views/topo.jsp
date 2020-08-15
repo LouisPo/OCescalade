@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<link rel="stylesheet" type="text/css" href="/css/ocescalade.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -114,17 +114,17 @@
 
 <form:form  name="formulaire2" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button type="submit">recherche parcours</button>
+<button class="button" type="submit">recherche parcours</button>
 
 </form:form>
 <form:form  name="formulaire5" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button type="submit">Accueil</button>
+<button class="button" type="submit">Accueil</button>
 </form:form>
 	<form:form name="formulaire6" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/DeconnexionView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button type="submit">Deconnexion</button>
+		<button class="button" type="submit">Deconnexion</button>
 	</form:form>
 </body>
 </html>

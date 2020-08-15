@@ -31,12 +31,34 @@ public class CommentDatabase {
 	private String textarea;
 	private Integer user;
 	private Integer parcoursidentifiant;
-	
-	public CommentDatabase(int comment_id, String textarea, int use,int parcoursidentifiant) {
+	public Integer getParcoursidentifiant() {
+		return parcoursidentifiant;
+	}
+	public void setParcoursidentifiant(Integer parcoursidentifiant) {
+		this.parcoursidentifiant = parcoursidentifiant;
+	}
+	public String getIdentite() {
+		return identite;
+	}
+	public void setIdentite(String identite) {
+		this.identite = identite;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
+	private String identite;
+	private String date;
+	public CommentDatabase(int comment_id, String textarea, int use,int parcoursidentifiant,String identite,String date) {
 	    this.comment_id = comment_id;
 	    this.textarea = textarea;
 	    this.user = user;
-	    this.parcoursidentifiant = parcoursidentifiant;    
+	    this.parcoursidentifiant = parcoursidentifiant;  
+	    this.identite = identite;
+	    this.date = date; 
+	    
 	  }
 	public CommentDatabase(){};
 

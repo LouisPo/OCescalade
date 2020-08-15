@@ -30,8 +30,33 @@ public class Comment {
 	@Column
 	private Integer user;
 	@Column
+	private String identite;
+	public String getIdentite() {
+		return identite;
+	}
+
+
+	public void setIdentite(String identite) {
+		this.identite = identite;
+	}
+
+
+	public String getDate() {
+		return date;
+	}
+
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+
+
+
+	@Column
+	private String date;
+	@Column
 	private Integer parcoursidentifiant;
-	
 	public Integer getParcoursidentifiant() {
 		return parcoursidentifiant;
 	}
