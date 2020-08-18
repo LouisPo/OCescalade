@@ -33,8 +33,17 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<button onclick="window.location.href='${pageContext.request.contextPath}/openParcoursView'">Ajouter parcours</button>
-	<button onclick="window.location.href='${pageContext.request.contextPath}/openParcoursRechercheView'">recherche parcours</button>
+	
+	<form:form  name="formulaire11" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursView">
+         <input type ="hidden" name="user_id" value="${user_id}">
+	     <button  class="button"  type="submit">Ajouter parcours</button>
+	</form:form>
+	
+	<form:form  name="formulaire10" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
+          <input type ="hidden" name="user_id" value="${user_id}">
+	      <button  class="button"  type="submit">recherche parcours</button>
+	</form:form>
+	
 <form:form  name="formulaire5" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
 <input type ="hidden" name="user_id" value="${user_id}">
 <button class="button"  type="submit">Accueil</button>

@@ -56,7 +56,6 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
 		java.sql.Statement stmt;
 		
-		System.out.println("Vous etes dans commentdatabasedao");
 		  CommentDatabase commentaire = new CommentDatabase();   
          String user="45";
 		  try {
@@ -80,13 +79,11 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		      //ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and localisation = '"+localisation+"'");
 		      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and localisation = '"+localisation+"' and parcours_id = '"+id+"'");
 					  if(result.first())						
-					         System.out.println("TROUVE "+result.getString("nom")+"   "+result.getString("localisation"));
 					         parcours = new ParcoursDatabase(id,result.getString("nom"),result.getInt("taille"),result.getString("difficulte"),result.getString("localisation"),result.getString("validation"));    
 					  
 					  } catch (SQLException e) {
 					    e.printStackTrace();
 					  }
-		              //System.out.println("TAILLE  "+parcours.gettaille());
 		      return parcours;
 		}
 	public List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,String difficulte) {
@@ -96,8 +93,6 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		List<Parcourss> ret=new ArrayList();
 		//Parcourss parcourscourant= new Parcourss();
 		
-		System.out.println("nom : "+nom+" taille : "+taille+" difficulte : "+difficulte+"localisation  "+ localisation);
-
 		  try {
 			  
 				//recherche par taille uniquement (tous les autres champs vides)
@@ -180,8 +175,6 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		    	String difficult = result.getString(4);
 		    	String local = result.getString(5); 
 		    	int row = result.getRow(); 
-		    	System.out.println("Données contenues dans la ligne "+row); 
-		    	System.out.println("id : "+id+" nom : "+nomm+" size : "+size+" difficult : "+difficult+"localisation  "+ local);
 		    	parcourscourant.setId(id);parcourscourant.setnom(nomm);parcourscourant.settaille(size);parcourscourant.setdifficulte(difficult);parcourscourant.setlocalisation(local);
 		    	//ajout de parcourscourant au tableau liste de parcours
 		    	ret.add(parcourscourant);
@@ -229,8 +222,6 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 				user = result.getInt(3); 
 			    parcoursidentifiant = result.getInt(4);
 				int row = result.getRow(); 
-				System.out.println("Données contenues dans la ligne "+row); 
-				System.out.println("id : "+comment_id+" textarea : "+textarea+" user : "+user+" difficult : "+parcoursidentifiant);
 				commentcourant.setComment_id(comment_id);commentcourant.setUser(user);commentcourant.setTextarea(textarea);commentcourant.setParcoursidentifiant(parcoursidentifiant);
 				//ajout de commentcourant au tableau liste de commentaire
 				ret.add(commentcourant);

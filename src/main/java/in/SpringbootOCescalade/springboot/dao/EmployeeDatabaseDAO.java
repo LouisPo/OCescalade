@@ -62,13 +62,10 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(mdp);
 		boolean isPasswordMatch = passwordEncoder.matches(mdp, encodedPassword);
-		//System.out.println("Passworddddddd : " + mdp + "   isPasswordMatch    : " + isPasswordMatch);		
-		//System.out.println("nom : "+nom+" mdp non encode : "+mdp);
 
 		  try {
 			     result = this.connect.createStatement(
 				 ResultSet.TYPE_SCROLL_INSENSITIVE,
-			    // ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM user WHERE nom = '"+nom+"' and mdp = '"+encodedPassword+"'");
 				 ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM user WHERE nom = '"+nom+"'");
 			     
 		    while(result.next()){
@@ -81,16 +78,12 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		    	String password = result.getString(6);
 		    	
 		    	if(passwordEncoder.matches(mdp, password)){
-		    		System.out.println("le mot de passe correspond bien");
 			    	int row = result.getRow(); 
-			    	System.out.println("Données contenues dans la ligne "+row); 
-			    	System.out.println("id : "+user_id+" nom : "+nomm+" prenom : "+prenom+" mdp : "+password);
 			    	employecourant.setId(user_id);employecourant.setnom(nomm);employecourant.setprenom(prenom);employecourant.setmail(mail);employecourant.settel(tel);employecourant.setmdp(password);
 			    	//ajout de employecourant au tableau liste de employe
 			    	ret.add(employecourant);
 		    	    }
 		    	else {
-		    		System.out.println("le mot de passe ne correspond passs");
 				    List<Employee> ret4=new ArrayList();
 				    employecourant.setId(1);employecourant.setnom(nom);employecourant.setprenom("");employecourant.setmail("probleme_mdp");employecourant.settel(00);employecourant.setmdp("pass");
 				    ret4.add(employecourant);
@@ -103,7 +96,6 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		        
 		    //le user password est faux
 		    	if(ret.size()==0) {
-		    		System.out.println("le user password est faux");
 				     result = this.connect.createStatement(
 				     ResultSet.TYPE_SCROLL_INSENSITIVE,
 				     ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM user WHERE nom = '"+nom+"'");
@@ -121,14 +113,12 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 					    	ret.add(employecourant);
 					    	}
 				     if(ret.size()==0) {  
-		    		       System.out.println("le user n existe pas");
 					    	 List<Employee> ret3=new ArrayList();Employee employecourant= new Employee();
 					    	 employecourant.setId(1);employecourant.setnom(nom);employecourant.setprenom("");employecourant.setmail("probleme_user");employecourant.settel(00);employecourant.setmdp("pass");
 					    	 ret3.add(employecourant);
 					    	 return ret3;
 				     }
 				     else {
-				    	 System.out.println("le user  existe on a onc un probleme de password ");
 				    	 List<Employee> ret2=new ArrayList();Employee employecourant= new Employee();
 				    	 employecourant.setId(1);employecourant.setnom("probleme_mdp");employecourant.setprenom("");employecourant.setmail("probleme_mdp");employecourant.settel(00);employecourant.setmdp("");
 				    	 ret2.add(employecourant);

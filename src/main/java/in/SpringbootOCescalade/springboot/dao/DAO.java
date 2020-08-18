@@ -131,7 +131,6 @@ public void modiftopoDispo(int identifiant, int user) {
 
 	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
 	java.sql.Statement stmt;
-System.out.println("user_id vaut"+user);
 	  CommentDatabase commentaire = new CommentDatabase();   
       String disp = "NON";
 	  try {
@@ -155,7 +154,6 @@ public void topoDispoRefuse(int identifiant, int user) {
 
 	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
 	java.sql.Statement stmt;
-System.out.println("user_id vaut"+user);
 	  CommentDatabase commentaire = new CommentDatabase();   
       String disp = "OUI";
 	  try {
@@ -180,7 +178,6 @@ public void pretertopo(int identifiant, int user) {
 
 	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
 	java.sql.Statement stmt;
-    System.out.println("user_id vaut"+user);
 	  CommentDatabase commentaire = new CommentDatabase();   
       String disp = "PRETE";
 	  try {
@@ -370,7 +367,36 @@ public String[] recupuser(int user) {
     return tab;
 
 }
+public String[] recupuserwithphone(String nom,String  prenom) {
+	String[] tab = new String[6];
+	ResultSet result = null;
+    try {
+		result = this.connect.createStatement(
+		ResultSet.TYPE_SCROLL_INSENSITIVE,
+		//ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM user WHERE nom = '"+nom+"'");
+		ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM user WHERE nom = '"+nom+"' and prenom = '"+prenom+"'");
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    try {
+		while(result.next()){ 
+			tab[0] = result.getString(1); 
+			tab[1] = result.getString(2);
+			tab[2] = result.getString(3); 
+			tab[3] = result.getString(4);	
+			tab[4] = result.getString(5);
+			tab[5] = result.getString(6);	
+			int row = result.getRow();
+			}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    return tab;
 
+}
 
 
 public void insertcommentaire(String textarea, int user,int parcoursidentifiant,String identite,String date) {

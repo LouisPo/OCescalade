@@ -10,7 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>accueil user et password rentre OK</h1>
 	
 	<table>
 <tr><td><form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">

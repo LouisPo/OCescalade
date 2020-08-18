@@ -82,7 +82,6 @@ public class EmployeeController {
 		  List<Employee> ret=new ArrayList();
 		  //REQUETE SQL on recupere le resultat de la requete 
 		  ret  = employeeDao.findconnexion(nom, password);
-		  //System.out.println("taille de ret RRREEETT"+ret.size());
           //vidage de list
 		  for(int j=0;j<list.size();j++) {
 				list.get(j).setnom("");
@@ -93,7 +92,6 @@ public class EmployeeController {
 				list.get(i).setnom(ret.get(i).getnom());
 				list.get(i).setmdp(ret.get(i).getmdp());
 
-				System.out.println(" noms : "+ret.get(i).getnom()+" password : "+ret.get(i).getmdp()+" indice : "+i+" prenom : "+ret.get(i).getprenom());
 				}
 		  ModelAndView mav = new ModelAndView("connexion");
 		  //il a rentre des mauvaises informations
@@ -146,20 +144,29 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public ModelAndView save(@ModelAttribute("employee") Employee employeeObj,@RequestParam("user_id") String user_id) {
+	public ModelAndView save(@ModelAttribute("employee") Employee employeeObj,@RequestParam("user_id") String user_id,@RequestParam("nom") String nom ,@RequestParam("prenom") String prenom) {
 	//@RequestMapping("/save")
 	//spublic ModelAndView save(@ModelAttribute("employee") Employee employeeObj) {
-		ModelAndView mav = new ModelAndView("employeesList");
+		ModelAndView mav = new ModelAndView("accueil");
 		
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String password = employeeObj.getmdp();
 		String encodedPassword = passwordEncoder.encode(password);
-		
+	
 		employeeObj.setmdp(encodedPassword);
 		employeeService.save(employeeObj);
 		List<Employee> list = employeeService.get();
 		mav.addObject("list", list);
-		mav.addObject("user_id", user_id);
+		
+		//on recupere le user id qui vient d etre cree
+		//connexion a la BD
+		//requete pour recuperer le topo de l personne
+		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
+		String[] tabusercourant = new String[6];
+		tabusercourant = commentaireDao.recupuserwithphone(nom,prenom);
+	
+		
+		mav.addObject("user_id", tabusercourant[0]);
 		return mav;
 	}
 	
@@ -198,8 +205,6 @@ public class EmployeeController {
     	tabdemandeur = demandeur.recupuser(Integer.parseInt(user_id));	
     	//on extrait les 2 premiers caractere du prenom
     	String prenommFirst =tabdemandeur[2].substring(0,2); 
-        System.out.println("VAUTTTT"+tabdemandeur[2]);
-        System.out.println("VAUXXXXX"+prenommFirst);
 
         
 		//connexion a la BD

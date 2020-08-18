@@ -299,8 +299,10 @@ public class ParcourssController {
 		return mav;
 	}
 	@RequestMapping(value="/saveparcours", method=RequestMethod.POST)
-	public ModelAndView saveparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("user_id") String user_id) {
+	public ModelAndView saveparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("user_id") String user_id,@RequestParam("difficultelettre") String difficultelettre,@RequestParam("difficulte") int difficulte) {
 		ModelAndView mav = new ModelAndView("parcoursList");
+		String difficultefinal=difficulte+difficultelettre;
+		parcoursObj.setdifficulte(difficultefinal);
 		parcoursService.saveparcours(parcoursObj);
 		List<Parcourss> list = parcoursService.getparcours();
 		mav.addObject("user_id", user_id);
