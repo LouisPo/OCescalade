@@ -3,7 +3,11 @@ body {
  font-size:90%;
  background-color:lightblue;
  }
-
+td {
+font-family: Arial;
+ font-size: 16px;
+border: thin solid #6495ed;
+}
 button {
   background-color: #4CAF50;
   border: none;

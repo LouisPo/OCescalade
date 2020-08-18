@@ -534,7 +534,17 @@ public class ParcourssController {
 	
 		//requete pour recuperer le topo de l personne
 		String[] tabtopo = new String[7];
+		for(int i=0;i<tabtopo.length;i++) {
+			tabtopo[i]=" ";
+		}
 		tabtopo = commentaireDao.recuptopo(Integer.parseInt(user_id));
+		
+		if(tabtopo[0] == null) {
+			for(int i=0;i<tabtopo.length;i++) {
+				tabtopo[i]=" ";
+			}
+		}
+
 		
 		String identifiant;
 		//on recupere les infos du demandeur
@@ -542,12 +552,30 @@ public class ParcourssController {
 		    identifiant="0";
 		}
 		else {
-			identifiant=tabtopo[7];
+			if(tabtopo[0] != null) {
+			   identifiant=tabtopo[7];
+			}else {
+				identifiant="";
+			}
 		}
 		String[] tabdemandeur = new String[4];
 		DAO<CommentDatabase> demandeur = DAOFactory.getCommentDAO();
-		tabdemandeur = demandeur.recupuser(Integer.parseInt(identifiant));
 		
+		if(identifiant.equals("")) {
+			for(int i=0;i<tabdemandeur.length;i++) {
+				tabdemandeur[i]=" ";
+			}
+			
+		}
+		else {
+			if(identifiant.equals("")) {identifiant="0";}
+			tabdemandeur = demandeur.recupuser(Integer.parseInt(identifiant));
+		}
+		if(tabdemandeur[0] == null) {
+			for(int i=0;i<tabdemandeur.length;i++) {
+				tabdemandeur[i]=" ";
+			}
+		}
 		//affichage de la jsp
 		ModelAndView mav = new ModelAndView("profil");
 		
