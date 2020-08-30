@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<table border="1">
+	<table border="0">
 
 
 
@@ -19,17 +19,17 @@
 			<td><form:form name="form" modelAttribute="parcours"
 					action="${pageContext.request.contextPath}/openParcoursRechercheView">
 					<input type="hidden" name="user_id" value="${user_id}">
-					<button class="button" type="submit">recherche parcours</button>
+					<button class="button" type="submit">Recherche parcours</button>
 				</form:form></td>
 			<td><form:form name="form8" modelAttribute="parcours"
 					action="${pageContext.request.contextPath}/openParcoursView">
 					<input type="hidden" name="user_id" value="${user_id}">
-					<button class="button" type="submit">Creation parcours</button>
+					<button class="button" type="submit">Cr&eacuteation parcours</button>
 				</form:form></td>
 			<td><form:form name="form" modelAttribute="parcours"
 					action="${pageContext.request.contextPath}/openlistTopo">
 					<input type="hidden" name="user_id" value="${user_id}">
-					<button class="button" type="submit">liste des topos</button>
+					<button class="button" type="submit">Liste des topos</button>
 				</form:form></td>
 				</td><td width=50%></td>
 			<td><form:form name="form" modelAttribute="parcours"
@@ -51,7 +51,7 @@
 				<td><form:form name="form" modelAttribute="parcours"
 						action="${pageContext.request.contextPath}/listinscrit">
 						<input type="hidden" name="user_id" value="${user_id}">
-						<button class="button" type="submit">liste des inscrits</button>
+						<button class="button" type="submit">Liste des inscrits</button>
 					</form:form></td>
 			</c:if>
 

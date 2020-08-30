@@ -12,12 +12,12 @@
 <body>
 
 	<form:form  name="form" action = "${pageContext.request.contextPath}/insertTopoView">
-	<h1>Detail du topo</h1>
+	<h1>D&eacutetail du topo</h1>
 
 	<c:if test = "${dispoperso ne 'PRETE'}">
 		<table border = "0">
 		<tr>
-			<th>contenu du topo</th>
+			<th>Contenu du topo</th>
 	   </tr>
 		<tr>
 		
@@ -47,7 +47,7 @@
 	</table>
 	</c:if>
 		<c:if test = "${dispoperso eq 'PRETE'}">
-	Le Topo a ete prete
+	Le Topo a &eacutet&eacute pr&ecirct&eacute
 	</c:if>
 <p>
 		
@@ -83,14 +83,14 @@
             </c:if> 
 	
 	<c:if test = "${user_id eq identifiant}">
-       <c:if test = "${identifiantpret == 0}"><button type="submit">modifier votre topo</button></c:if> 
+       <c:if test = "${identifiantpret == 0}"><button type="submit">Modifier votre topo</button></c:if> 
     </c:if>   
    </form:form>
    
    <form:form  name="form" action = "${pageContext.request.contextPath}/openlistTopofromtopo">
    
    <c:if test = "${user_id ne identifiant}"> 
-   		<c:if test = "${identifiantpret != 0}"><button type="submit">demande de pret de Topo</button>
+   		<c:if test = "${identifiantpret != 0}"><button type="submit">Demande de pr&ecirct de Topo</button>
    		</c:if> 
    </c:if>
 			<input type ="hidden" name="user_id" value="${user_id}">
@@ -99,7 +99,7 @@
    
    <form:form  name="form" action = "${pageContext.request.contextPath}/openlistTopofromtopo">
 		    <c:if test = "${user_id ne identifiant}">
-			    <c:if test = "${identifiantpret == 0 && identifiant !=0}"><button type="submit">demande de pret de Topo</button>
+			    <c:if test = "${identifiantpret == 0 && identifiant !=0}"><button type="submit">Demande de pret de Topo</button>
                 </c:if> 
             </c:if>  
 			<input type ="hidden" name="user_id" value="${user_id}">
@@ -114,7 +114,7 @@
 
 <form:form  name="formulaire2" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button class="button" type="submit">recherche parcours</button>
+<button class="button" type="submit">Recherche parcours</button>
 
 </form:form>
 <form:form  name="formulaire5" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">

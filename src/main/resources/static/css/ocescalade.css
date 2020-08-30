@@ -6,7 +6,7 @@ body {
 td {
 font-family: Arial;
  font-size: 16px;
-border: thin solid #6495ed;
+border: none;
 }
 button {
   background-color: #4CAF50;

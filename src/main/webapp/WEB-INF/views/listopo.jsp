@@ -11,7 +11,7 @@
 </head>
 <body>
 	<form:form  name="form" method="POST" action = "${pageContext.request.contextPath}/detail">
-	<h1>liste des topos</h1>
+	<h1>Liste des topos</h1>
 	<table border = "1">
 		<tr>
 		<input type ="hidden" name="user_id" value="${user_id}">
@@ -35,7 +35,7 @@
 
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button class="button"  type="submit">recherche parcours</button>
+<button class="button"  type="submit">Recherche parcours</button>
 </form:form>
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
 <input type ="hidden" name="user_id" value="${user_id}">

@@ -12,7 +12,7 @@
 <body>
 	<form:form  name="form" method="POST" action = "${pageContext.request.contextPath}/detail">
 	<h1>liste des topos</h1>
-	<table border = "1">
+	<table border = "0">
 		<tr>
 		<input type ="hidden" name="user_id" value="${user_id}">
 		<input type ="hidden" name="ientifiant" value="${identifiant}">
@@ -37,14 +37,19 @@
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
 <button class="button"  type="submit">recherche parcours</button>
-</form:form><form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
+</form:form>
+
+<form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
 <input type ="hidden" name="user_id" value="${user_id}">
 <button class="button"  type="submit">Accueil</button>
+</form:form>
+
+
 	<form:form name="formulaire6" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/DeconnexionView">
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button class="button" type="submit">Deconnexion</button>
 	</form:form>
-</form:form>
+
 </body>
 </html>

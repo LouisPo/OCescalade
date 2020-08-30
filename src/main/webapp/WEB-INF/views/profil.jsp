@@ -28,10 +28,7 @@
 				<td>"${prenom}"</td>
 				<td>"${mail}"</td>		
 				<td>"${telephone}"</td>			
-				<td>
-					
-					<a href = "${pageContext.request.contextPath}/deleteparcours/${e.parcours_id}">Supprimer</a>
-				</td>
+				
 			</tr>
 		
 	</table>
@@ -40,6 +37,7 @@
 
        
 <c:if test="${! empty nomdemandeur}">
+               		<c:if test="${nomdemandeur ne ' ' }">
                
 	<h1>Votre Demande en cours</h1>
 	<table border = "1">
@@ -49,7 +47,7 @@
 			<th>mail</th>
 			<th></th>			
 		</tr>
-		
+		<c:if test="${nomdemandeur ne ' ' }">
 			<tr>
 				<td>"${nomdemandeur}"</td>
 				<td>"${prenomdemandeur}"</td>
@@ -69,23 +67,23 @@
                  </form:form>
                  </td>
 			</tr>
-		
+		</c:if>
 	</table>
-
+</c:if>
    </c:if>  
 
 
 
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button type="submit">recherche parcours</button>
+<button type="submit">Recherche parcours</button>
 </form:form>
 
 
 <form:form  name="form" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openTopoView">
 <input type ="hidden" name="user_id" value="${user_id}">
 <input type ="hidden" name="identifiant" value="${identifiant}">
-<button type="submit">consulter le topo</button>
+<button type="submit">Consulter le topo</button>
 </form:form>
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
 <input type ="hidden" name="user_id" value="${user_id}">

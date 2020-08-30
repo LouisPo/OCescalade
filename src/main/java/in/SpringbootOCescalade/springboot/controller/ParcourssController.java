@@ -251,7 +251,12 @@ public class ParcourssController {
 		mav.addObject("localisation", localisation);
 		mav.addObject("parcoursidentifiant", parcoursidentifiant);
 		mav.addObject("user_id", user_id);
-		mav.addObject("textarea", ret.get(0).getTextarea());
+		if(ret.size() != 0) {
+		   mav.addObject("textarea", ret.get(0).getTextarea());
+		}
+		else {
+			mav.addObject("textarea","");
+		}
 		mav.addObject("textareaNomodif", "");
 		mav.addObject("list",ret2);
 		mav.addObject("prenom",tab[2]);
@@ -594,7 +599,10 @@ public class ParcourssController {
 	}
 	@RequestMapping(value="/resultatparcours", method=RequestMethod.POST)
 	public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("localisation") String localisation,@RequestParam("difficulte") String difficulte,@RequestParam("difficultelettre") String difficultelettre,@RequestParam("taille") String taille,@RequestParam("nom") String nom,@RequestParam("user_id") String user_id) {
-	       
+		String[] tabdemandeur = new String[4];
+		DAO<CommentDatabase> demandeur = DAOFactory.getCommentDAO();
+		tabdemandeur = demandeur.recupuser(Integer.parseInt(user_id));	
+		String prenommFirst =tabdemandeur[2].substring(0,2); 
 		try {
             Class.forName("org.hibernate.jpa.HibernatePersistenceProvider");
         } catch (Exception e){
@@ -634,16 +642,9 @@ public class ParcourssController {
 				
 		  }
 
-	/**********************************************************/	  
-		 // DAO<Eleve> eleveDao = DAOFactory.getEleveDAO();
-		 // for(int i = 1; i < 10; i++){
-		    //On fait notre recherche
-		   // Eleve eleve = eleveDao.find(i);		  
-		  //}
-
 	    org.hibernate.jpa.HibernatePersistenceProvider entityManagerFactory =new  org.hibernate.jpa.HibernatePersistenceProvider();
 	    entityManagerFactory.createEntityManagerFactory("Parcourss", System.getProperties());
-
+	    mav.addObject("admin",prenommFirst);
              mav.addObject("list", ret);
 			return mav;
 			

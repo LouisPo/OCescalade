@@ -6,14 +6,12 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
--<head>
+<head>
 <script>
 	function check() {
 
 		alert("toto");
 		document.getElementById("form").action = "${pageContext.request.contextPath}/ajoutCommentView";
-		//document.getElementById("myForm").action = "/action_page.php";
-		//document.frm.action="${pageContext.request.contextPath}/openParcoursRechercheView";
 		document.getElementById("form").submit();
 		return true;
 	}
@@ -34,7 +32,7 @@
 
 	<form:form name="form" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/ajoutCommentView">
-		<h1>Detail du parcours</h1>
+		<h1>D&eacutetail du parcours</h1>
 		
 			Parcours actuel
 	<p>
@@ -55,9 +53,6 @@
 				<td>${difficulte}</td>
 				<td>${localisation}</td>
 
-				<td><a
-					href="${pageContext.request.contextPath}/deleteparcours/${parcours.parcours_id}">Supprimer</a>
-				</td>
 			</tr>
 
 
@@ -99,9 +94,8 @@
 		<tr>
 			<th>Date</th>
 			<th>Commentateur</th>
-			<th>commentaires</th>
-			<th></th>
-			<th></th>
+			<th>Commentaires</th>
+			
 
 		</tr>
 		<c:forEach items="${list}" var="e">
@@ -129,7 +123,7 @@
 						<input type="hidden" name="localisation" value="${localisation}">
 						<input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
                       <c:if test="${fn:substring(prenom, 0, 2) eq 'AD'}">
-		                  <button v type="submit">Modifiez le </button>
+		                  <button type="submit">Modifiez le </button>
 		               </c:if>		
 	                 </form:form>
 	             </td>
@@ -160,7 +154,7 @@
 	<form:form name="formulaire2" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openParcoursRechercheView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button class="button"  type="submit">recherche parcours</button>
+		<button class="button"  type="submit">Recherche parcours</button>
 	</form:form>
 	<form:form name="formulaire5" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openAccueilViewFrom">

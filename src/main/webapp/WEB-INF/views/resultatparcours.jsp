@@ -11,7 +11,7 @@
 </head>
 <body>
 	<form:form  name="form" method="POST" action = "${pageContext.request.contextPath}/detail">
-	<h1>resultat des recherche</h1>
+	<h1>Resultats des recherches</h1>
 	<table border = "1">
 		<tr>
 			<th>nom</th>
@@ -29,8 +29,10 @@
 				<td>${e.difficulte}</td>
 				<td>${e.localisation}</td>				
 				<td>
-					
-					<a href = "${pageContext.request.contextPath}/deleteparcours/${e.parcours_id}">Supprimer</a>
+		    <c:if test="${admin eq 'AD'}">
+				<td><a href = "${pageContext.request.contextPath}/deleteparcours/${e.parcours_id}">Supprimer</a>
+                </td>
+			</c:if>
 				</td>
 			</tr>
 		</c:forEach>
@@ -39,7 +41,7 @@
 
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button class="button" type="submit">recherche parcours</button>
+<button class="button" type="submit">Recherche parcours</button>
 </form:form>
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
 <input type ="hidden" name="user_id" value="${user_id}">

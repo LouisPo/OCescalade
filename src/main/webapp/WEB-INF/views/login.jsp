@@ -16,14 +16,7 @@
 <title>page d'index</title>
 </head>
 <body class="body">
-
-	<div id="header">
-	
-	</div>
-
-
-
-	<table border="1">
+<table border="0">
 		<tr><td><h1><a href="#">Accueil</a></h1></td>
 		<td width=80%></td>
 			<td>
@@ -51,7 +44,7 @@
 
 Une envie de vacances ?<br><br>
 
-Pourquoi ne pas partir sur l'&egrave;le de la R&eacute;union ?<br>
+Pourquoi ne pas partir sur l'&icirc;le de la R&eacute;union ?<br>
 Cet endroit paradisiaque est &eacute;galement propice &agrave; l'escalade ! Les fans de blocs seront ravis des nombreux spots qu'offrent l'&egrave;le et pour les autres... ce sera l'occasion de d&eacute;couvrir ce type d'escalade ;). Notez justement qu'il existe des voies pour tous les niveaux, que vous soyez d&eacute;butants ou confirm&eacute;s.
 </td></tr>		
 	</table>
