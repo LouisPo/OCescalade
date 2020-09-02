@@ -393,8 +393,9 @@ public class ParcourssController {
 			  //On récupère un objet faisant le lien entre la base et nos objets 
 			  DAO<TopoDatabase> topoDao = DAOFactory.getParcoursDAO();
 			  ModelAndView mav = new ModelAndView("listopofromaccept");
-			  mav.addObject("user_id",identifiant );
-			  mav.addObject("identifiant", user_id);
+			  //mav.addObject("user_id",identifiant );
+			  //mav.addObject("identifiant", user_id);
+
 			  List<Topo> list = new ArrayList(30);
 	          List<Topo> ret=new ArrayList();
 			  //REQUETE SQL on recupere le resultat de la requete 
@@ -403,6 +404,8 @@ public class ParcourssController {
 		    org.hibernate.jpa.HibernatePersistenceProvider entityManagerFactory =new  org.hibernate.jpa.HibernatePersistenceProvider();
 		    entityManagerFactory.createEntityManagerFactory("Parcourss", System.getProperties());
 		    mav.addObject("ret", ret);
+			mav.addObject("user_id",user_id );
+		    mav.addObject("identifiant", identifiant);
 				return mav;			
 		}
 	
@@ -525,6 +528,7 @@ public class ParcourssController {
 		mav.addObject("textarea", tab[6]);
 		mav.addObject("dispoperso", tab[5]);
 		mav.addObject("identifiantpret", tab[7]);
+		mav.addObject("user_idtopo", tab[2]);
 		mav.addObject("user_id", user_id);
 		mav.addObject("ret", ret);
 		return mav;
