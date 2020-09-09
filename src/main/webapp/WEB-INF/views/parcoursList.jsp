@@ -14,10 +14,10 @@
 	<h1>Liste des parcours</h1>
 	<table border="1">
 		<tr>
-			<th>nom</th>
-			<th>taille</th>
-			<th>difficulte</th>
-			<th>localisation</th>
+			<th>Nom</th>
+			<th>Longueur</th>
+			<th>Cotation</th>
+			<th>Lieu</th>
 
 		</tr>
 		<c:forEach items="${list}" var="e">

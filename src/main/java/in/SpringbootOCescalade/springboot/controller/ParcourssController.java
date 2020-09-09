@@ -60,6 +60,46 @@ public class ParcourssController {
 		return mav;
 	}   
 
+	
+	@RequestMapping("/ListParcours")
+	public ModelAndView ListParcours(@RequestParam("user_id") String user_id) {
+		  //On récupère un objet faisant le lien entre la base et nos objets 
+		  DAO<ParcoursDatabase> parcoursDao = DAOFactory.getParcoursDAO();
+		  List<Parcourss> list = parcoursService.getparcours();  
+          List<Parcourss> ret=new ArrayList();
+
+          //vidage de list
+		  for(int j=0;j<list.size();j++) {
+				list.get(j).setnom("");
+				list.get(j).settaille(0);
+				list.get(j).setdifficulte("");
+				list.get(j).setlocalisation("");	
+				}
+         //remplissage avec resultat de la requete SQL
+		  ret  = parcoursDao.findmultipleNoid("ALL", "",0,"");
+		  for(int i=0;i<ret.size();i++) {
+				list.get(i).setnom(ret.get(i).getnom());
+				list.get(i).settaille(ret.get(i).gettaille());
+				list.get(i).setdifficulte(ret.get(i).getdifficulte());
+				list.get(i).setlocalisation(ret.get(i).getlocalisation());	
+				}
+		  for(int k=0;k<list.size();k++) {
+			  if(list.get(k).gettaille() ==0)
+				list.remove(k);
+				
+		  }
+
+	    org.hibernate.jpa.HibernatePersistenceProvider entityManagerFactory =new  org.hibernate.jpa.HibernatePersistenceProvider();
+	    entityManagerFactory.createEntityManagerFactory("Parcourss", System.getProperties());
+		  
+		  
+		  
+		ModelAndView mav = new ModelAndView("parcoursList");
+        mav.addObject("list", ret);
+		mav.addObject("user_id", user_id);  
+		return mav;
+	}
+	
 	@RequestMapping("/parcoursdetail/{id}")
 	public ModelAndView getdetail(@PathVariable("id") int id) {
      ModelAndView mav = new ModelAndView("parcoursdetail");

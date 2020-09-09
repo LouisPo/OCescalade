@@ -68,8 +68,9 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		//creation tableau de parcourss et parcourscourant l enregistrement courant
 		List<Parcourss> ret=new ArrayList();
 		
-
 		  try {
+			  
+
 			  
 				//recherche par taille uniquement (tous les autres champs vides)
 				if( (!(taille==0)&& (localisation.equals("")) && (nom.equals("") ))) {
@@ -143,6 +144,13 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
 			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE taille = '"+taille+"' and nom = '"+nom+"' and difficulte = '"+difficulte+"'");
 				}
+				//recherche de tous les parcours
+				if( (nom.equals("ALL") )) {
+
+			              result = this.connect.createStatement(
+					      ResultSet.TYPE_SCROLL_INSENSITIVE,
+					      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours");
+			     }
 		    while(result.next()){
 		    	Parcourss parcourscourant= new Parcourss();
 		    	Integer id = result.getInt(1); 

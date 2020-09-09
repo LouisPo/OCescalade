@@ -14,7 +14,7 @@
 <body>
 	<h1>Liste des inscrits</h1>
 	
-	<table border="0">
+	<table border="1">
 		<tr>
 			<!--  	<th>user_id</th>-->
 			<th>nom</th>
@@ -48,11 +48,16 @@
 		</c:forEach>
 	</table>
 	
+	
+	<form:form name="formulaire12" modelAttribute="parcours"
+		action="${pageContext.request.contextPath}/ListParcours">
+		<input type="hidden" name="user_id" value="${user_id}">
+<button class="button" 
+		onclick="window.location.href='${pageContext.request.contextPath}/ListParcours'">liste
+		des parcours</button>	</form:form>
 
 		
-	<button class="button" 
-		onclick="window.location.href='${pageContext.request.contextPath}/openParcoursView'">liste
-		des parcours</button>
+	
 	<form:form name="formulaire" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openAccueilViewFrom">
 		<input type="hidden" name="user_id" value="${user_id}">
