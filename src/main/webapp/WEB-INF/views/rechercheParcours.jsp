@@ -6,6 +6,14 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="/css/ocescalade.css" />
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script>
 	function check() {
 		var name = document.frm.nom.value;
@@ -36,7 +44,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Recherchez votre parcours</h1>
+	<h1>Recherchez votre site</h1>
 
 	<form:form modelAttribute="parcours" name="frm">
 		<table>

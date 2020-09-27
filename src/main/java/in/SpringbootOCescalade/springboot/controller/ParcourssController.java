@@ -516,7 +516,34 @@ public class ParcourssController {
 			return mav;
 			
 	}
-	
+	@RequestMapping(value="/ajoutTopo", method=RequestMethod.POST)
+	public ModelAndView ajoutTopo(@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
+
+		//on insere le topo modifie dans la BD
+				DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
+				commentaireDao.insertnewtopo(Integer.parseInt(user_id));
+				
+				//recuperation du topo perso de la personne connecte
+				String[] tab = new String[7];
+				DAO<CommentDatabase> commentaireDaoBis = DAOFactory.getCommentDAO();
+				tab = commentaireDaoBis.recuptopo(Integer.parseInt(user_id));
+				
+				//recuperation des topos qui ont ete prete a la personne
+				//On récupère un objet faisant le lien entre la base et nos objets 
+				DAO<TopoDatabase> topoDao = DAOFactory.getParcoursDAO();
+				List<Topo> list = new ArrayList(30);
+		        List<Topo> ret=new ArrayList();
+				//REQUETE SQL on recupere le resultat de la requete 
+				ret  = topoDao.listTopPrete(Integer.parseInt(user_id));
+				
+				ModelAndView mav = new ModelAndView("newtopo");
+				mav.addObject("identifiant", identifiant);
+				mav.addObject("textarea", tab[6]);
+				mav.addObject("identifiantpret", tab[7]);
+				mav.addObject("user_id", user_id);
+				mav.addObject("ret", ret);
+				return mav;
+	}
 	//09/06
 	@RequestMapping(value="/insertTopoView", method=RequestMethod.POST)
 	public ModelAndView insertTopoView(@RequestParam("textarea") String textarea,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
@@ -529,6 +556,14 @@ public class ParcourssController {
 		DAO<CommentDatabase> commentaireDaoBis = DAOFactory.getCommentDAO();
 		tab = commentaireDaoBis.recuptopo(Integer.parseInt(user_id));
 		
+		if(tab[0] == null) {
+			   identifiant="200";
+				
+		}
+		if(tab[0] != null) {
+			   identifiant="40";
+				
+		}
 		//recuperation des topos qui ont ete prete a la personne
 		//On récupère un objet faisant le lien entre la base et nos objets 
 		DAO<TopoDatabase> topoDao = DAOFactory.getParcoursDAO();
@@ -553,6 +588,10 @@ public class ParcourssController {
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
 		tab = commentaireDao.recuptopo(Integer.parseInt(user_id));
 		
+		if(tab[0] == null) {
+		   identifiant="200";
+			
+		}
 		//recuperation des topos qui ont ete prete a la personne
 		//On récupère un objet faisant le lien entre la base et nos objets 
 		DAO<TopoDatabase> topoDao = DAOFactory.getParcoursDAO();
@@ -578,10 +617,12 @@ public class ParcourssController {
 		//on recupere le nom et le prenom de la personne pour les passer a la page
 		//connexion a la BD
 		String[] tab = new String[4];
+		String identifiant="100";
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
 		tab = commentaireDao.recupuser(Integer.parseInt(user_id));
 	
-		//requete pour recuperer le topo de l personne
+		String[] tabdemandeur = new String[4];
+		//requete pour recuperer le topo dfindente l personne
 		String[] tabtopo = new String[7];
 		for(int i=0;i<tabtopo.length;i++) {
 			tabtopo[i]=" ";
@@ -589,25 +630,19 @@ public class ParcourssController {
 		tabtopo = commentaireDao.recuptopo(Integer.parseInt(user_id));
 		
 		if(tabtopo[0] == null) {
-			for(int i=0;i<tabtopo.length;i++) {
-				tabtopo[i]=" ";
-			}
+
 		}
 
-		
-		String identifiant;
+	if(tabtopo[0] != null) {
+
 		//on recupere les infos du demandeur
 		if(tabtopo[5].equals("PRETE")) {
 		    identifiant="0";
 		}
 		else {
-			if(tabtopo[0] != null) {
 			   identifiant=tabtopo[7];
-			}else {
-				identifiant="";
-			}
 		}
-		String[] tabdemandeur = new String[4];
+
 		DAO<CommentDatabase> demandeur = DAOFactory.getCommentDAO();
 		
 		if(identifiant.equals("")) {
@@ -618,13 +653,18 @@ public class ParcourssController {
 		}
 		else {
 			if(identifiant.equals("")) {identifiant="0";}
-			tabdemandeur = demandeur.recupuser(Integer.parseInt(identifiant));
+			if(tabtopo[0] != null) {
+			   tabdemandeur = demandeur.recupuser(Integer.parseInt(identifiant));
+			}
 		}
 		if(tabdemandeur[0] == null) {
 			for(int i=0;i<tabdemandeur.length;i++) {
 				tabdemandeur[i]=" ";
 			}
 		}
+
+			
+	}
 		//affichage de la jsp
 		ModelAndView mav = new ModelAndView("profil");
 		
@@ -634,10 +674,20 @@ public class ParcourssController {
 		mav.addObject("prenom", tab[2]);
 		mav.addObject("mail", tab[3]);
 		mav.addObject("telephone", tab[4]);
-		mav.addObject("identifiant", tabtopo[7]);
-		mav.addObject("nomdemandeur", tabdemandeur[1]);
-		mav.addObject("prenomdemandeur", tabdemandeur[2]);
-		mav.addObject("maildemandeur", tabdemandeur[3]);
+		if(tabtopo[0] != null) {
+		   mav.addObject("identifiant", tabtopo[7]);
+		   mav.addObject("nomdemandeur", tabdemandeur[1]);
+		   mav.addObject("prenomdemandeur", tabdemandeur[2]);
+		   mav.addObject("maildemandeur", tabdemandeur[3]);
+		}
+		//la personne n a pas de topo
+		else {
+			mav.addObject("identifiant","");
+			mav.addObject("nomdemandeur", "pasdetopo");
+			mav.addObject("prenomdemandeur", " ");
+		    mav.addObject("maildemandeur", " ");
+		}
+
 		
 		return mav;
 	}

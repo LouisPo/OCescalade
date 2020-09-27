@@ -12,6 +12,8 @@ Pour l'application
 
 5eme: run SpringbootcrudapiApplication.java.
 
+6eme: Dans le navigateur, rentrez l'URL http://localhost:8080/homeOcescalade.
+
 Pour la BDD
 
 1er: installer phpmyadmin et mysql.

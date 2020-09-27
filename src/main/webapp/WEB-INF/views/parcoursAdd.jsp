@@ -8,9 +8,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="/css/ocescalade.css"/>
 <title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1>Cr&eacuteez votre parcours</h1>
+	<h1>Cr&eacuteez votre site</h1>
 	<form:form action = "${pageContext.request.contextPath}/saveparcours" modelAttribute="parcours">
 	<table>
 	<tr><td>	Entrer le nom:    </td><td><form:input path="nom"/></td></tr>

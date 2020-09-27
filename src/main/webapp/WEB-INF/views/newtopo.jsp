@@ -7,7 +7,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="/css/ocescalade.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+
 <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-</head>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script></head>
 <body>
 
 	<form:form name="form"
@@ -30,40 +29,11 @@
 				</tr>
 				<tr>
 
-					<th><c:if test="${user_id eq identifiant}">
-							<c:if test="${identifiantpret == 0}">
 								<textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
-							</c:if>
-						</c:if> 
-						<c:if test="${identifiant == 40}">
-								<textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
-						</c:if> 
-					<c:if test="${nomdemandeur eq '' }">	
-					 
-						<c:if test="${user_id ne identifiant}">
-							<c:if test="${identifiantpret != 0}">
-							  <c:if test="${identifiantpret != 100}">
-								   <textarea name="textarea" readonly="readonly" rows="5" cols="40">${textarea}</textarea>
-							</c:if>
-						</c:if>
-					 </c:if> 
-					</c:if> 
-					
-						<c:if test="${user_id ne identifiant}">
-							<c:if test="${identifiant == 0}">
-								<c:if test="${identifiantpret != 100}">
-								   <textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
-								</c:if>
-							</c:if>
-						</c:if> 
-					<c:if test="${identifiant != 40}">
-						<c:if test="${user_id ne identifiant}">
-							<c:if test="${identifiantpret == 0 && identifiant !=0}">
-								<textarea name="textarea" readonly="readonly" rows="5" cols="40">${textarea}</textarea>
-							</c:if>
-						</c:if> 
+
+
 						
-                     </c:if> 
+
 						
 						<input type="hidden" name="user_id" value="${user_id}"> <input
 						type="hidden" name="identifiant" value="${identifiant}">
@@ -104,25 +74,11 @@
 			</c:if>
 <p>
 
-			<c:if test="${user_id ne identifiant}">
-				<c:if test="${identifiant == 0}">
-					<button type="submit">Modifier le topo</button>
-				</c:if>
-			</c:if>
 
-				<c:if test="${identifiant == 40 }">
 					<button type="submit">Modifier le topo</button>
-				</c:if>
 
-				<c:if test="${identifiant == 100 }">
-					<button type="submit">Modifier le topo</button>
-				</c:if>
-			<c:if test="${user_id eq identifiant}">
-				<c:if test="${identifiantpret == 0}">
-					<button type="submit">Modifier votre topo</button>
-				</c:if>
-			</c:if>
-	</form:form>	
+	</form:form>
+
 	<form:form name="form" action="${pageContext.request.contextPath}/openlistTopofromtopo">
 		<c:if test="${user_idtopo ne user_id}">
 			<c:if test="${user_id ne identifiant}">
@@ -162,7 +118,7 @@
 	<form:form name="formulaire2" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openParcoursRechercheView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button class="button" type="submit">Recherche site</button>
+		<button class="button" type="submit">Recherche parcours</button>
 
 	</form:form>
 	<form:form name="formulaire5" modelAttribute="parcours"

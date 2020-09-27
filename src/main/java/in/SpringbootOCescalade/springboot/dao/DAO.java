@@ -397,7 +397,47 @@ public String[] recupuserwithphone(String nom,String  prenom) {
     return tab;
 
 }
+public void insertnewtopo(int user) {
+	//on recupere le nom et le prenom de la personne qui cree les commentairs
+	ResultSet result = null;
+	String name="";
+	String prenom="";
+    try {
+		result = this.connect.createStatement(
+		ResultSet.TYPE_SCROLL_INSENSITIVE,
+		ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM user WHERE user_id = '"+user+"'");
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    try {
+		while(result.next()){ 
+			name = result.getString(2); 
+			prenom = result.getString(3);
+			int row = result.getRow();
+			}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    
+	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
+	java.sql.Statement stmt;
 
+	  CommentDatabase commentaire = new CommentDatabase();   
+	  String nomtopo="topo"+name;
+	  String dispo="OUI";
+	  String textarea="";
+	  int identifiantpret=0;
+	  
+	  try {
+		  stmt = connection.createStatement();
+		  stmt.executeUpdate("insert into topo(nomtopo,user_id,nom,prenom,dispo,textarea,identifiantpret) values ('"+nomtopo+"','"+user+"','"+name+"','"+prenom+"','"+dispo+"','"+textarea+"','"+identifiantpret+"')");
+	  } catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
 
 public void insertcommentaire(String textarea, int user,int parcoursidentifiant,String identite,String date) {
 	//on recupere le nom et le prenom de la personne qui cree les commentairs

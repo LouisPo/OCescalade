@@ -23,6 +23,8 @@ import in.SpringbootOCescalade.springboot.model.CommentDatabase;
 import in.SpringbootOCescalade.springboot.model.Employee;
 import in.SpringbootOCescalade.springboot.model.ParcoursDatabase;
 import in.SpringbootOCescalade.springboot.model.Parcourss;
+import in.SpringbootOCescalade.springboot.model.Topo;
+import in.SpringbootOCescalade.springboot.model.TopoDatabase;
 import in.SpringbootOCescalade.springboot.service.EmployeeService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -58,6 +60,7 @@ public class EmployeeController {
 		mav.addObject("employee", new Employee());
 		return mav;
 	}
+
 	
 	@RequestMapping(value="/openAccueilViewFrom", method=RequestMethod.POST)
 	public ModelAndView openAccueilViewFrom(@RequestParam("user_id") String user_id) {

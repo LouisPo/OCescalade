@@ -8,6 +8,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="/css/ocescalade.css" />
 <title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -19,12 +27,12 @@
 			<td><form:form name="form" modelAttribute="parcours"
 					action="${pageContext.request.contextPath}/openParcoursRechercheView">
 					<input type="hidden" name="user_id" value="${user_id}">
-					<button class="button" type="submit">Recherche parcours</button>
+					<button class="button" type="submit">Recherche site</button>
 				</form:form></td>
 			<td><form:form name="form8" modelAttribute="parcours"
 					action="${pageContext.request.contextPath}/openParcoursView">
 					<input type="hidden" name="user_id" value="${user_id}">
-					<button class="button" type="submit">Cr&eacuteation parcours</button>
+					<button class="button" type="submit">Cr&eacuteation site</button>
 				</form:form></td>
 			<td><form:form name="form" modelAttribute="parcours"
 					action="${pageContext.request.contextPath}/openlistTopo">
