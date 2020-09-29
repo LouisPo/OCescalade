@@ -61,3 +61,9 @@ input[type=submit], input[type=reset] {
  box-shadow:1px 1px 1px #D83F3D;
  cursor:pointer;
  }
+ 
+ @media all and (min-width: 480px){
+ #table{float:none;width:auto;}
+ #td{float:none;width:auto;}
+
+ }
