@@ -18,6 +18,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="col-6 col-md-8 col-lg-12">
+
 	<h1>Rentrez votre identifiant et votre mot de passe </h1>
 	<h1><c:out value="${message}" /></h1>
 	
@@ -34,5 +36,7 @@
 		</table>
 		<button class="button" type = "submit">Connexion</button>
 	</form:form>
+	</div>
+	
 </body>
 </html>

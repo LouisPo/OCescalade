@@ -23,8 +23,9 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
-<body class="body" font-size:90%;>
-
+<body>
+      <div class="col-6 col-md-8 col-lg-12">
+      
 <table border="0">
 		<tr><td><h1><a href="#">Accueil</a></h1></td>
 		<td width=80%></td>
@@ -60,7 +61,7 @@ Cet endroit paradisiaque est &eacute;galement propice &agrave; l'escalade ! Les 
 
 
 
-
+</div>
 
 </body>
 </html>

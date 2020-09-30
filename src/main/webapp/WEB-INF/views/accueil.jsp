@@ -18,7 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<div id="body">
 	<table border="0">
 
 
@@ -65,5 +65,6 @@
 
 		</tr>
 	</table>
+	</div>
 </body>
 </html>
