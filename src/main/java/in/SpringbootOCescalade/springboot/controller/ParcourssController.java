@@ -402,8 +402,8 @@ public class ParcourssController {
 		  //On récupère un objet faisant le lien entre la base et nos objets 
 		  DAO<TopoDatabase> topoDao = DAOFactory.getParcoursDAO();
 		  ModelAndView mav = new ModelAndView("listopofromaccept");
-		  mav.addObject("user_id",identifiant );
-		  mav.addObject("identifiant", user_id);
+		  mav.addObject("user_id",user_id );
+		  mav.addObject("identifiant", identifiant);
 		  List<Topo> list = new ArrayList(30);
           List<Topo> ret=new ArrayList();
 		  //REQUETE SQL on recupere le resultat de la requete 
@@ -459,7 +459,7 @@ public class ParcourssController {
 		
 		//requete sql pour modifier la dispo car il a demande le pret du topo qui devient donc indispo
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
-		commentaireDao.modiftopoDispo(Integer.parseInt(identifiant),Integer.parseInt(user_id));
+		commentaireDao.modiftopoDispo(Integer.parseInt(user_id),Integer.parseInt(identifiant));
 
 		
 		//requete sql pour afficher la liste de tous les topos
@@ -472,8 +472,8 @@ public class ParcourssController {
 		  //On récupère un objet faisant le lien entre la base et nos objets 
 		  DAO<TopoDatabase> topoDao = DAOFactory.getParcoursDAO();
 		  ModelAndView mav = new ModelAndView("listopofromaccept");
-		  mav.addObject("user_id",identifiant );
-		  mav.addObject("identifiant", user_id);
+		  mav.addObject("user_id",user_id );
+		  mav.addObject("identifiant", identifiant);
 		  List<Topo> list = new ArrayList(30);
           List<Topo> ret=new ArrayList();
 		  //REQUETE SQL on recupere le resultat de la requete 
@@ -581,6 +581,50 @@ public class ParcourssController {
 		return mav;
 		
 	}
+
+	@RequestMapping(value="/openTopoViewLink", method=RequestMethod.GET)
+	public ModelAndView openTopoViewLink(HttpServletRequest request,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) throws ServletRequestBindingException {
+   	//recuperation du topo perso de la personne connecte
+		String[] tab = new String[7];
+		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
+		tab = commentaireDao.recuptopo(Integer.parseInt(user_id));
+		
+		if(tab[0] == null) {
+		   identifiant="200";
+			
+		}
+		
+	   	//recuperation du topo de la personne sur laquelle on a clique
+			String[] tablink = new String[7];
+			DAO<CommentDatabase> commentaireDaolink = DAOFactory.getCommentDAO();
+			tablink = commentaireDaolink.recuptopo(Integer.parseInt(identifiant));
+			
+			if(tablink[0] == null) {
+			   identifiant="200";
+				
+			}	
+		
+		//recuperation des topos qui ont ete prete a la personne
+		//On récupère un objet faisant le lien entre la base et nos objets 
+		DAO<TopoDatabase> topoDao = DAOFactory.getParcoursDAO();
+		List<Topo> list = new ArrayList(30);
+        List<Topo> ret=new ArrayList();
+		//REQUETE SQL on recupere le resultat de la requete 
+		ret  = topoDao.listTopPrete(Integer.parseInt(user_id));
+		
+		//affichage de la page jsp
+		ModelAndView mav = new ModelAndView("topo");
+		
+		mav.addObject("identifiant", identifiant);
+		mav.addObject("textarea", tablink[6]);
+		mav.addObject("dispoperso", tablink[5]);
+		mav.addObject("identifiantpret", tablink[7]);
+		mav.addObject("user_idtopo", tab[2]);
+		mav.addObject("user_id", user_id);
+		mav.addObject("ret", ret);
+		return mav;
+	}
+	
 	@RequestMapping(value="/openTopoView", method=RequestMethod.POST)
 	public ModelAndView openTopoView(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
 		//recuperation du topo perso de la personne connecte
@@ -691,6 +735,7 @@ public class ParcourssController {
 		
 		return mav;
 	}
+	
 	@RequestMapping(value="/resultatparcours", method=RequestMethod.POST)
 	public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("localisation") String localisation,@RequestParam("difficulte") String difficulte,@RequestParam("difficultelettre") String difficultelettre,@RequestParam("taille") String taille,@RequestParam("nom") String nom,@RequestParam("user_id") String user_id) {
 		String[] tabdemandeur = new String[4];

@@ -44,6 +44,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="jumbotron text-left">
+
 	<h1>Recherchez votre site</h1>
 
 	<form:form modelAttribute="parcours" name="frm">
@@ -95,5 +97,6 @@
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button class="button" type="submit">Deconnexion</button>
 	</form:form>
+	</div>
 </body>
 </html>

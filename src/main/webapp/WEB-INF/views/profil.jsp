@@ -18,6 +18,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="jumbotron text-left">
+
 	<form:form  name="form" method="POST" action = "${pageContext.request.contextPath}/detail">
 	<h1>Profil</h1>
 	<table border = "1">
@@ -43,7 +45,41 @@
 
 </form:form>
 
-       
+<c:if test="${nomdemandeur ne ' ' }">
+    <c:if test="${nomdemandeur ne 'pasdetopo' }">          
+	<h1>Votre Demande en cours</h1>
+	<table border = "1">
+		<tr>
+			<th>nom</th>
+			<th>prenom</th>
+			<th>mail</th>
+			<th></th>			
+		</tr>
+		
+		<c:if test="${nomdemandeur ne ' ' }">
+			<tr>
+				<td>"${nomdemandeur}"</td>
+				<td>"${prenomdemandeur}"</td>
+				<td>"${maildemandeur}"</td>		
+				<td>   
+				<form:form  name="form" action = "${pageContext.request.contextPath}/acceptPretTopo">
+                 <c:if test = "${user_id ne identifiant}"><button type="submit">accepter</button></c:if> 
+			     <input type ="hidden" name="user_id" value="${user_id}">
+			     <input type ="hidden" name="identifiant" value="${identifiant}">
+                 </form:form>
+                 </td>			
+				<td>   
+				<form:form  name="form" action = "${pageContext.request.contextPath}/topoDispoRefuse">
+                 <c:if test = "${user_id ne identifiant}"><button type="submit">Refuser</button></c:if> 
+			     <input type ="hidden" name="user_id" value="${user_id}">
+			     <input type ="hidden" name="identifiant" value="${identifiant}">
+                 </form:form>
+                 </td>
+			</tr>
+		</c:if>
+	</table>
+</c:if>
+</c:if>       
 <c:if test="${ empty nomdemandeur}">
                		<c:if test="${nomdemandeur ne ' ' }">
                
@@ -55,6 +91,7 @@
 			<th>mail</th>
 			<th></th>			
 		</tr>
+		
 		<c:if test="${nomdemandeur ne ' ' }">
 			<tr>
 				<td>"${nomdemandeur}"</td>
@@ -102,5 +139,6 @@
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button type="submit">Deconnexion</button>
 	</form:form>
+	</div>
 </body>
 </html>

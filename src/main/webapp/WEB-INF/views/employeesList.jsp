@@ -20,6 +20,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="jumbotron text-left">
+
 	<h1>Liste des inscrits</h1>
 	
 	<table border="1">
@@ -62,7 +64,7 @@
 		<input type="hidden" name="user_id" value="${user_id}">
 <button class="button" 
 		onclick="window.location.href='${pageContext.request.contextPath}/ListParcours'">liste
-		des parcours</button>	</form:form>
+		des sites</button>	</form:form>
 
 		
 	
@@ -76,6 +78,6 @@
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button class="button"  type="submit">Deconnexion</button>
 	</form:form>
-
+</div>
 </body>
 </html>

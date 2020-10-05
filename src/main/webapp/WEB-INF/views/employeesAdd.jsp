@@ -18,6 +18,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="jumbotron text-left">
+
 	<h1>Cr&eacuteez votre compte</h1>
 	<form:form action="${pageContext.request.contextPath}/save"
 		modelAttribute="employee">
@@ -43,17 +45,15 @@
 				<td><form:input path="mdp" /></td>
 			</tr>
 		</table>
+		
 		<input type ="hidden" name="user_id" value="${user_id}">
 		<button class="button"  type="submit">Enregistrer</button>
 	</form:form>
-	<form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
-<input type ="hidden" name="user_id" value="${user_id}">
-<button class="button"  type="submit">Accueil</button>
-</form:form>
 	<form:form name="formulaire6" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/DeconnexionView">
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button class="button"  type="submit">Deconnexion</button>
 	</form:form>
+	</div>
 </body>
 </html>

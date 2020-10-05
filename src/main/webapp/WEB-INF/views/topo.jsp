@@ -18,6 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="jumbotron text-left">
 
 	<form:form name="form"
 		action="${pageContext.request.contextPath}/insertTopoView">
@@ -73,11 +74,18 @@
 		<c:if test="${dispoperso eq 'PRETE'}">
 	Le Topo a &eacutet&eacute pr&ecirct&eacute
 	</c:if>
+	
+
+	
+	
+	
+	
 		<p>
-
-
+		<c:forEach items="${ret}" var="e">
+			<c:if test="${e.dispo eq 'PRETE'}">			
 			<c:if test="${e.nomtopo ne ''}">
 			<c:if test="${not empty ret}">
+			
 			<b>Topos qui ont ete prete
 				<table border="1">
 
@@ -88,6 +96,8 @@
 						<th>dispo</th>
 						<th>contenu</th>
 					</tr>
+					
+					
 					<c:forEach items="${ret}" var="e">
 						<tr>
 							<td>${e.nomtopo}</td>
@@ -102,6 +112,9 @@
 				
 			</c:if>	
 			</c:if>
+			</c:if>
+		</c:forEach>
+			
 <p>
 
 			<c:if test="${user_id ne identifiant}">
@@ -175,5 +188,6 @@
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button class="button" type="submit">Deconnexion</button>
 	</form:form>
+	</div>
 </body>
 </html>

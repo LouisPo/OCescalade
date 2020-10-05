@@ -24,7 +24,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
-      <div class="col-6 col-md-8 col-lg-12">
+<div class="jumbotron text-left">
       
 <table border="0">
 		<tr><td><h1><a href="#">Accueil</a></h1></td>

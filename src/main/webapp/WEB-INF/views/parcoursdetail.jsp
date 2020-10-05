@@ -37,6 +37,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="jumbotron text-left">
 
 	<form:form name="form" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/ajoutCommentView">
@@ -174,5 +175,7 @@
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button class="button"  type="submit">Deconnexion</button>
 	</form:form>
+	</p>
+	</div>
 </body>
 </html>

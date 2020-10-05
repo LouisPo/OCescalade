@@ -18,6 +18,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="jumbotron text-left">
+
 	<h1>Cr&eacuteez votre site</h1>
 	<form:form action = "${pageContext.request.contextPath}/saveparcours" modelAttribute="parcours">
 	<table>
@@ -55,5 +57,6 @@
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button class="button"  type="submit">Deconnexion</button>
 	</form:form>
+	</div>
 </body>
 </html>

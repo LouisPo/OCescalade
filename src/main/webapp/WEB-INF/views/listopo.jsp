@@ -18,6 +18,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="jumbotron text-left">
+
 	<form:form  name="form" method="POST" action = "${pageContext.request.contextPath}/detail">
 	<h1>Liste des topos</h1>
 	<table border = "1">
@@ -30,7 +32,9 @@
 		</tr>
 		<c:forEach items="${ret}" var="e">
 			<tr>
-				<td><a href = "${pageContext.request.contextPath}/openProfilHrefView?&identifiant=${user_id}&user_id=${e.user_id}"   onclick="document.getElementById("form").submit();">${e.nom}</a></td>
+				<td><a href = "${pageContext.request.contextPath}/openTopoViewLink?&identifiant=${e.user_id}&user_id=${user_id}"   onclick="document.getElementById("form").submit();">${e.nom}</a></td>
+				
+				
 				<td>${e.prenom}</td>
 				<td>${e.dispo}</td>		
 				<td>${e.textarea}</td>						
@@ -54,5 +58,6 @@
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button class="button"  type="submit">Deconnexion</button>
 	</form:form>
+	</div>
 </body>
 </html>

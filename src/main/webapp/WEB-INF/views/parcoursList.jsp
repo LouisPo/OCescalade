@@ -18,6 +18,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <body>
+<div class="jumbotron text-left">
 
 	<h1>Liste des sites</h1>
 	<table border="1">
@@ -47,13 +48,13 @@
 	<form:form name="formulaire11" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openParcoursView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button class="button" type="submit">Ajouter parcours</button>
+		<button class="button" type="submit">Ajouter site</button>
 	</form:form>
 
 	<form:form name="formulaire10" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openParcoursRechercheView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button class="button" type="submit">Recherche parcours</button>
+		<button class="button" type="submit">Recherche site</button>
 	</form:form>
 
 	<form:form name="formulaire5" modelAttribute="parcours"
@@ -66,5 +67,6 @@
 		<input type="hidden" name="user_id" value="${user_id}">
 		<button class="button" type="submit">Deconnexion</button>
 	</form:form>
+	</div>
 </body>
 </html>
