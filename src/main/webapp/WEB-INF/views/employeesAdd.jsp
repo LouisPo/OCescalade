@@ -42,7 +42,7 @@
 			</tr>
 			<tr>
 				<td>Entrer le mot de passe:</td>
-				<td><form:input path="mdp" /></td>
+				<td><form:input path="mdp" type="password"/></td>
 			</tr>
 		</table>
 		
