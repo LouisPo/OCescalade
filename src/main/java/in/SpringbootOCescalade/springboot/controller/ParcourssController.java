@@ -76,7 +76,7 @@ public class ParcourssController {
 				list.get(j).setlocalisation("");	
 				}
          //remplissage avec resultat de la requete SQL
-		  ret  = parcoursDao.findmultipleNoid("ALL", "",0,"");
+		  ret  = parcoursDao.findmultipleNoid("ALL", "",0,"",0,0);
 		  for(int i=0;i<ret.size();i++) {
 				list.get(i).setnom(ret.get(i).getnom());
 				list.get(i).settaille(ret.get(i).gettaille());
@@ -737,7 +737,8 @@ public class ParcourssController {
 	}
 	
 	@RequestMapping(value="/resultatparcours", method=RequestMethod.POST)
-	public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("localisation") String localisation,@RequestParam("difficulte") String difficulte,@RequestParam("difficultelettre") String difficultelettre,@RequestParam("taille") String taille,@RequestParam("nom") String nom,@RequestParam("user_id") String user_id) {
+	public ModelAndView resultatparcours(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("voie") String voie,@RequestParam("secteur") String secteur,@RequestParam("localisation") String localisation,@RequestParam("difficulte") String difficulte,@RequestParam("difficultelettre") String difficultelettre,@RequestParam("taille") String taille,@RequestParam("nom") String nom,@RequestParam("user_id") String user_id) {
+		
 		String[] tabdemandeur = new String[4];
 		DAO<CommentDatabase> demandeur = DAOFactory.getCommentDAO();
 		tabdemandeur = demandeur.recupuser(Integer.parseInt(user_id));	
@@ -760,20 +761,26 @@ public class ParcourssController {
           difficulte=difficulte+difficultelettre;
 		  //REQUETE SQL on recupere le resultat de la requete 
 	      if(taille.equals("")) {taille="0";}
-		  ret  = parcoursDao.findmultipleNoid(nom, localisation,Integer.parseInt(taille),difficulte);
+	      if(voie.equals("")) {voie="0";}
+	      if(secteur.equals("")) {secteur="0";}
+		  ret  = parcoursDao.findmultipleNoid(nom, localisation,Integer.parseInt(taille),difficulte,Integer.parseInt(voie),Integer.parseInt(secteur));
           //vidage de list
 		  for(int j=0;j<list.size();j++) {
 				list.get(j).setnom("");
 				list.get(j).settaille(0);
 				list.get(j).setdifficulte("");
-				list.get(j).setlocalisation("");	
+				list.get(j).setlocalisation("");
+				list.get(j).setvoie(0);
+				list.get(j).setsecteur(0);
 				}
          //remplissage avec resultat de la requete SQL
 		  for(int i=0;i<ret.size();i++) {
 				list.get(i).setnom(ret.get(i).getnom());
 				list.get(i).settaille(ret.get(i).gettaille());
 				list.get(i).setdifficulte(ret.get(i).getdifficulte());
-				list.get(i).setlocalisation(ret.get(i).getlocalisation());	
+				list.get(i).setlocalisation(ret.get(i).getlocalisation());
+				list.get(i).setvoie(ret.get(i).getvoie());
+				list.get(i).setsecteur(ret.get(i).getsecteur());	
 				}
 		  for(int k=0;k<list.size();k++) {
 			  if(list.get(k).gettaille() ==0)

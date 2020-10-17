@@ -27,7 +27,9 @@
 			<th>nom</th>
 			<th>longueur</th>
 			<th>cotation</th>
-			<th>lieu</th>			
+			<th>lieu</th>	
+		     <th>voie</th>
+			<th>secteur</th>			
 		</tr>
 		<c:forEach items="${list}" var="e">
 			<tr>
@@ -37,7 +39,9 @@
 				<input type ="hidden" name="parcoursidentifiant" value="${e.parcours_id}">
 				<td>${e.taille}</td>
 				<td>${e.difficulte}</td>
-				<td>${e.localisation}</td>				
+				<td>${e.localisation}</td>	
+				<td>${e.voie}</td>
+				<td>${e.secteur}</td>				
 				<td>
 		    <c:if test="${admin eq 'AD'}">
 				<td><a href = "${pageContext.request.contextPath}/deleteparcours/${e.parcours_id}">Supprimer</a>

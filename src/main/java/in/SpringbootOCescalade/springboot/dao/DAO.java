@@ -74,7 +74,7 @@ public abstract class DAO<T> {
 * @param id
 * @return T
 */
-public abstract List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,String difficulte);
+public abstract List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,String difficulte,int voie,int secteur);
 
 public  List<Comment> findcomment(int user,int parcoursidentifiant)
 {

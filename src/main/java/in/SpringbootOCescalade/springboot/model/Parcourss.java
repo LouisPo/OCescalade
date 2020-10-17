@@ -40,7 +40,24 @@ public class Parcourss {
 	private String localisation;
 	@Column
 	private String validation;
+	@Column
+	private Integer voie;
+	@Column
+	private Integer secteur;
 	
+	
+	public Integer getvoie() {
+		return voie;
+	}
+	public void setvoie(Integer voie) {
+		this.voie = voie;
+	}
+	public Integer getsecteur() {
+		return secteur;
+	}
+	public void setsecteur(Integer secteur) {
+		this.secteur = secteur;
+	}
 	public String getValidation() {
 		return validation;
 	}

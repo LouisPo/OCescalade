@@ -86,7 +86,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 					  }
 		      return parcours;
 		}
-	public List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,String difficulte) {
+	public List<Parcourss> findmultipleNoid(String nom,String localisation,int taille,String difficulte,int voie,int secteur) {
 		ParcoursDatabase parcours = new ParcoursDatabase();      
 		ResultSet result = null;  
 		//creation tableau de parcourss et parcourscourant l enregistrement courant
