@@ -114,6 +114,24 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
 			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE nom = '"+nom+"' and voie = '"+voie+"' and difficulte = '"+difficulte+"'");
 				}
+				//recherche par voie secteur et nom(autre champs vides)
+				if( (!(nom.equals(""))&& (taille==0)&& (secteur!=0) && (voie!=0)  && (localisation.equals("")))) {
+		              result = this.connect.createStatement(
+				      ResultSet.TYPE_SCROLL_INSENSITIVE,
+				      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE secteur = '"+secteur+"' and voie = '"+voie+"' and difficulte = '"+difficulte+"'");
+					}
+				//recherche par voie secteur et localisation(autre champs vides)
+				if( ((nom.equals(""))&& (taille==0)&& (secteur!=0) && (voie!=0)  && (!(localisation.equals(""))))) {
+		              result = this.connect.createStatement(
+				      ResultSet.TYPE_SCROLL_INSENSITIVE,
+				      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE secteur = '"+secteur+"' and voie = '"+voie+"' and difficulte = '"+difficulte+"'");
+					}
+				//recherche par voie et secteur(autre champs vides)
+				if( ((nom.equals(""))&& (taille==0)&& (secteur!=0) && (voie!=0)  && (localisation.equals("")))) {
+		              result = this.connect.createStatement(
+				      ResultSet.TYPE_SCROLL_INSENSITIVE,
+				      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE secteur = '"+secteur+"' and voie = '"+voie+"' and difficulte = '"+difficulte+"'");
+					}
 				//recherche par nom localisation et voie (tous les autres champs vides=
 				if( (!(nom.equals(""))&& (taille==0)&& (secteur==0) && (voie!=0)  && (!(localisation.equals(""))))) {
 	              result = this.connect.createStatement(
@@ -173,13 +191,50 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
 			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"' and difficulte = '"+difficulte+"'");
-				}
+	            
+				}//recherche par nom taille  et secteur difficulte et localisation
+					if( (!(nom.equals(""))&& (!(taille==0))&& (secteur!=0) && (voie==0)  && (!(localisation.equals(""))))) {
+			              result = this.connect.createStatement(
+					      ResultSet.TYPE_SCROLL_INSENSITIVE,
+					      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"'and taille = '"+taille+"' and nom = '"+nom+"'and secteur = '"+secteur+"' and difficulte = '"+difficulte+"'");
+						}
+					//recherche par nom taille voie et  difficulte et localisation
+					if( (!(nom.equals(""))&& (!(taille==0))&& (secteur==0) && (voie!=0)  && (!(localisation.equals(""))))) {
+			              result = this.connect.createStatement(
+					      ResultSet.TYPE_SCROLL_INSENSITIVE,
+					      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"'and taille = '"+taille+"' and nom = '"+nom+"' and voie = '"+voie+"' and difficulte = '"+difficulte+"'");
+						}
 				//recherche par nom et taille et difficulte (tous les autres champs vides=
 				if( (localisation.equals(""))&&(secteur==0) && (voie==0)  && (!(taille==0)) && (!(nom.equals("")))) {
 	              result = this.connect.createStatement(
 			      ResultSet.TYPE_SCROLL_INSENSITIVE,
 			      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE taille = '"+taille+"' and nom = '"+nom+"' and difficulte = '"+difficulte+"'");
 				}
+				//recherche par nom taille voie et secteur difficulte et localisation
+				if( (!(nom.equals(""))&& (!(taille==0))&& (secteur!=0) && (voie!=0)  && (!(localisation.equals(""))))) {
+		              result = this.connect.createStatement(
+				      ResultSet.TYPE_SCROLL_INSENSITIVE,
+				      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"'and taille = '"+taille+"' and nom = '"+nom+"'and secteur = '"+secteur+"' and voie = '"+voie+"' and difficulte = '"+difficulte+"'");
+					}
+				//recherche par  taille voie et secteur difficulte et localisation
+				if( ((nom.equals(""))&& (!(taille==0))&& (secteur!=0) && (voie!=0)  && (!(localisation.equals(""))))) {
+		              result = this.connect.createStatement(
+				      ResultSet.TYPE_SCROLL_INSENSITIVE,
+				      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"'and taille = '"+taille+"'and secteur = '"+secteur+"' and voie = '"+voie+"' and difficulte = '"+difficulte+"'");
+					}
+				//recherche par nom  voie et secteur difficulte et localisation
+				if( (!(nom.equals(""))&& ((taille==0))&& (secteur!=0) && (voie!=0)  && (!(localisation.equals(""))))) {
+		              result = this.connect.createStatement(
+				      ResultSet.TYPE_SCROLL_INSENSITIVE,
+				      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE localisation = '"+localisation+"'and nom = '"+nom+"'and secteur = '"+secteur+"' and voie = '"+voie+"' and difficulte = '"+difficulte+"'");
+					}
+				//recherche par nom taille voie et secteur difficulte 
+				if( (!(nom.equals(""))&& (!(taille==0))&& (secteur!=0) && (voie!=0)  && ((localisation.equals(""))))) {
+		              result = this.connect.createStatement(
+				      ResultSet.TYPE_SCROLL_INSENSITIVE,
+				      ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM parcours WHERE taille = '"+taille+"' and nom = '"+nom+"'and secteur = '"+secteur+"' and voie = '"+voie+"' and difficulte = '"+difficulte+"'");
+					}
+				
 				//recherche par nom et taille et difficulte localisation 
 				if(  (!(localisation.equals("")))&&(secteur==0) && (voie==0) && (!(taille==0)) && (!(nom.equals("")))) {
 	              result = this.connect.createStatement(
