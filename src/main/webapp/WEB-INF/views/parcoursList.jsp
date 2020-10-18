@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -27,6 +28,8 @@
 			<th>Longueur</th>
 			<th>Cotation</th>
 			<th>Lieu</th>
+			<th>voie</th>
+			<th>secteur</th>
 
 		</tr>
 		<c:forEach items="${list}" var="e">
@@ -35,6 +38,8 @@
 				<td>${e.taille}</td>
 				<td>${e.difficulte}</td>
 				<td>${e.localisation}</td>
+				<td>${e.voie}</td>
+				<td>${e.secteur}</td>
 				<td><c:if test="${admin eq 'AD'}">
 						<td><a
 							href="${pageContext.request.contextPath}/deleteparcours/${e.parcours_id}">Supprimer</a>

@@ -10,13 +10,11 @@
 <script>
 	function check() {
 
-		alert("toto");
 		document.getElementById("form").action = "${pageContext.request.contextPath}/ajoutCommentView";
 		document.getElementById("form").submit();
 		return true;
 	}
 	function seek() {
-		alert("titi");
 
 		document.getElementById("form").action = "${pageContext.request.contextPath}/ajoutCommentView";
 		document.getElementById("form").submit();
@@ -96,7 +94,7 @@
 		
 		
 		<p>
-		Commentaires autres utilisateurs
+		Commentaires utilisateurs
 		<p>
 		
 		<table border="1">
@@ -144,7 +142,7 @@
 		
 	<p>
 <p>
-	<c:if test = "${passage eq ''}">		
+	<c:if test = "${passage ne'OUI'}">		
 
 			<form:form name="formulaire6" modelAttribute="parcours"
 			action="${pageContext.request.contextPath}/ValiderView">
@@ -159,7 +157,9 @@
 			<button class="button"  type="submit">Valider parcours</button>
 		</form:form>
      </c:if>
-
+<c:if test = "${passage eq'OUI' }">
+Parcours valider
+</c:if>
 	<form:form name="formulaire2" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openParcoursRechercheView">
 		<input type="hidden" name="user_id" value="${user_id}">

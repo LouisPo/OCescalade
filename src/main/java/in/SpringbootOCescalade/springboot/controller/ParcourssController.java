@@ -318,7 +318,6 @@ public class ParcourssController {
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
 		//appel de la requete d insertion d un commentaire
 
-		commentaireDao.deletecomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));
 		commentaireDao.insertcommentaire( textarea,Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant),"identite","date");
 		List<Comment> ret=new ArrayList();
 		ret  = commentaireDao.findcomment(Integer.parseInt(user_id),Integer.parseInt(parcoursidentifiant));

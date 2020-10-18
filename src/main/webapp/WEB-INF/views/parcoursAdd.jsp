@@ -43,6 +43,13 @@
 						<option value="c">c</option>
 				</select></td></tr>
 	<tr><td>	Entrer le lieu: </td><td><form:input path="localisation"/></td></tr>
+	<tr>
+				<td>Entrer le nombre de voie:</td>
+				<td><form:input path="voie" /></td>
+			</tr><tr>
+				<td>Entrer le nombre de secteur:</td>
+				<td><form:input path="secteur" /></td>
+			</tr>
 		</table>
 		<form:hidden path = "parcours_id"/>
 		<input type ="hidden" name="user_id" value="${user_id}">

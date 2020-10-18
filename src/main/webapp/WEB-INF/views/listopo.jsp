@@ -28,7 +28,8 @@
 			<th>nom</th>
 			<th>prenom</th>
 			<th>dispo</th>	
-			<th>textarea</th>					
+			<th>textarea</th>
+			<th>mail</th>					
 		</tr>
 		<c:forEach items="${ret}" var="e">
 			<tr>
@@ -38,7 +39,7 @@
 				<td>${e.prenom}</td>
 				<td>${e.dispo}</td>		
 				<td>${e.textarea}</td>						
-
+				<td></td>
 			</tr>
 			
 		</c:forEach>
