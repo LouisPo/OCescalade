@@ -516,11 +516,11 @@ public class ParcourssController {
 			
 	}
 	@RequestMapping(value="/ajoutTopo", method=RequestMethod.POST)
-	public ModelAndView ajoutTopo(@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
+	public ModelAndView ajoutTopo(@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant,String lieu) {
 
 		//on insere le topo modifie dans la BD
 				DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
-				commentaireDao.insertnewtopo(Integer.parseInt(user_id));
+				commentaireDao.insertnewtopo(Integer.parseInt(user_id),lieu);
 				
 				//recuperation du topo perso de la personne connecte
 				String[] tab = new String[7];
@@ -545,10 +545,10 @@ public class ParcourssController {
 	}
 	//09/06
 	@RequestMapping(value="/insertTopoView", method=RequestMethod.POST)
-	public ModelAndView insertTopoView(@RequestParam("textarea") String textarea,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
+	public ModelAndView insertTopoView(@RequestParam("textarea") String textarea,@RequestParam("lieu") String lieu,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
 		//on insere le topo modifie dans la BD
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
-		commentaireDao.insertopo(textarea,Integer.parseInt(user_id));
+		commentaireDao.insertopo(textarea,Integer.parseInt(user_id),lieu);
 		
 		//recuperation du topo perso de la personne connecte
 		String[] tab = new String[7];
@@ -577,6 +577,7 @@ public class ParcourssController {
 		mav.addObject("identifiantpret", tab[7]);
 		mav.addObject("user_id", user_id);
 		mav.addObject("ret", ret);
+		mav.addObject("lieu", lieu);
 		return mav;
 		
 	}
@@ -627,7 +628,7 @@ public class ParcourssController {
 	@RequestMapping(value="/openTopoView", method=RequestMethod.POST)
 	public ModelAndView openTopoView(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
 		//recuperation du topo perso de la personne connecte
-		String[] tab = new String[7];
+		String[] tab = new String[8];
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
 		tab = commentaireDao.recuptopo(Integer.parseInt(user_id));
 		
@@ -653,6 +654,7 @@ public class ParcourssController {
 		mav.addObject("user_idtopo", tab[2]);
 		mav.addObject("user_id", user_id);
 		mav.addObject("ret", ret);
+		mav.addObject("lieu", tab[9]);
 		return mav;
 	}
 	@RequestMapping(value="/openProfilView", method=RequestMethod.POST)

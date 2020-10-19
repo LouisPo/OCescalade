@@ -34,6 +34,21 @@ public class Topo {
 	private String textarea;
 	@Column
 	private String identifiantpret;
+	public String getDatedecreation() {
+		return datedecreation;
+	}
+	public void setDatedecreation(String datedecreation) {
+		this.datedecreation = datedecreation;
+	}
+	public String getLieu() {
+		return lieu;
+	}
+	public void setLieu(String lieu) {
+		this.lieu = lieu;
+	}
+	private String datedecreation;
+	@Column
+	private String lieu;
 	public String getIdentifiantpret() {
 		return identifiantpret;
 	}

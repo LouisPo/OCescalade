@@ -192,7 +192,7 @@ public void pretertopo(int identifiant, int user) {
 
 
 
-public void insertopo(String textarea, int user) {
+public void insertopo(String textarea, int user,String lieu) {
 	//on recupere le nom et le prenom de la personne qui cree les commentairs
 	ResultSet result = null;
 	String name="";
@@ -226,7 +226,8 @@ public void insertopo(String textarea, int user) {
 
 	  try {
 		  stmt = connection.createStatement();
-		  stmt.executeUpdate("UPDATE  topo SET textarea = '"+textarea+"'"+"WHERE user_id = '"+user+"'");
+		  //stmt.executeUpdate("UPDATE  topo SET textarea = '"+textarea+"'"+"WHERE user_id = '"+user+"'");
+		  stmt.executeUpdate("UPDATE  topo SET textarea = '"+textarea+"'"+",lieu = '"+lieu+"'"+ "WHERE user_id = '"+user+"'");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -306,7 +307,7 @@ public List<Topo> listTopo(int user) {
 	return ret;
 }
 public String[] recuptopo(int user) {
-	String[] tab = new String[8];
+	String[] tab = new String[10];
 	ResultSet result = null;
     try {
 		result = this.connect.createStatement(
@@ -326,6 +327,8 @@ public String[] recuptopo(int user) {
 			tab[5] = result.getString(6);	
 			tab[6] = result.getString(7);
 			tab[7] = result.getString(8);
+			tab[8] = result.getString(9);
+			tab[9] = result.getString(10);
 			int row = result.getRow();
 			}
 	} catch (SQLException e) {
@@ -397,7 +400,7 @@ public String[] recupuserwithphone(String nom,String  prenom) {
     return tab;
 
 }
-public void insertnewtopo(int user) {
+public void insertnewtopo(int user,String lieu) {
 	//on recupere le nom et le prenom de la personne qui cree les commentairs
 	ResultSet result = null;
 	String name="";
@@ -429,10 +432,12 @@ public void insertnewtopo(int user) {
 	  String dispo="OUI";
 	  String textarea="";
 	  int identifiantpret=0;
+	  LocalDateTime currentTime = LocalDateTime.now();
+	  LocalDate dateactuelle = currentTime.toLocalDate();
 	  
 	  try {
 		  stmt = connection.createStatement();
-		  stmt.executeUpdate("insert into topo(nomtopo,user_id,nom,prenom,dispo,textarea,identifiantpret) values ('"+nomtopo+"','"+user+"','"+name+"','"+prenom+"','"+dispo+"','"+textarea+"','"+identifiantpret+"')");
+		  stmt.executeUpdate("insert into topo(nomtopo,user_id,nom,prenom,dispo,textarea,identifiantpret,datedecreation,lieu) values ('"+nomtopo+"','"+user+"','"+name+"','"+prenom+"','"+dispo+"','"+textarea+"','"+identifiantpret+"','"+dateactuelle+"','"+lieu+"')");
 	  } catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

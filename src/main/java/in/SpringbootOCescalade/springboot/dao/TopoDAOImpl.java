@@ -45,11 +45,29 @@ public class TopoDAOImpl implements TopoDAO {
 		currentSession.delete(topoObj);
 	}
 
+	//public void inserttopo(String textarea, Integer user, Integer parcoursidentifiant) {
+		// TODO Auto-generated method stub
+		
+	//}
+
+	@Override
+	public void inserttopo(String textarea, Integer user, Integer parcoursidentifiant, String lieu,
+			String datedecreation) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public void inserttopo(String textarea, Integer user, Integer parcoursidentifiant) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	//@Override
+	//public void inserttopo(String textarea, Integer user, Integer parcoursidentifiant) {
+		// TODO Auto-generated method stub
+		
+//}
 
 
 

@@ -31,7 +31,7 @@
 				<tr>
 
 								<textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
-
+                                <input type="text" name="lieu" size="10" >
 
 						
 

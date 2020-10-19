@@ -12,7 +12,9 @@ public interface TopoDAO {
 	
 	void save(Topo topo);
 	
-	void inserttopo(String  textarea,Integer user,Integer parcoursidentifiant);
+	void inserttopo(String  textarea,Integer user,Integer parcoursidentifiant,String lieu,String datedecreation);
 
 	void delete(int id);
+
+	void inserttopo(String textarea, Integer user, Integer parcoursidentifiant);
 }

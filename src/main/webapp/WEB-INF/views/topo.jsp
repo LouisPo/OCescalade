@@ -34,10 +34,12 @@
 					<th><c:if test="${user_id eq identifiant}">
 							<c:if test="${identifiantpret == 0}">
 								<textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
+								<input type="text" name="lieu" size="10" value="${lieu}">
 							</c:if>
-						</c:if> 
+						</c:if>    
 						<c:if test="${identifiant == 40}">
 								<textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
+								<input type="text" name="lieu" size="10" value="${lieu}">
 						</c:if> 
 					<c:if test="${nomdemandeur eq '' }">	
 					 
@@ -54,6 +56,7 @@
 							<c:if test="${identifiant == 0}">
 								<c:if test="${identifiantpret != 100}">
 								   <textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
+								   <input type="text" name="lieu" size="10" value="${lieu}">
 								</c:if>
 							</c:if>
 						</c:if> 
