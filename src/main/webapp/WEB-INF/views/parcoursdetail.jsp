@@ -105,6 +105,7 @@
 			
 
 		</tr>
+
 		<c:forEach items="${list}" var="e">
 			<tr>
 				<td>${e.date}</td>
@@ -129,10 +130,28 @@
 						<input type="hidden" name="difficulte" value="${difficulte}">
 						<input type="hidden" name="localisation" value="${localisation}">
 						<input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
+						
+						
                       <c:if test="${fn:substring(prenom, 0, 2) eq 'AD'}">
 		                  <button type="submit">Modifiez le </button>
+		              </c:if>	 
+		              </form:form>
+		              
+		              <c:if test="${fn:substring(prenom, 0, 2) eq 'AD'}">
+		                  <form:form name="formulaire46" modelAttribute="parcours" action="${pageContext.request.contextPath}/supprimercomment">
+		                  <input type="hidden" name="textarea" value="">
+		                  <input type="hidden" name="identifiantusermodif" value="${e.user}">
+		                  <input type="hidden" name="user_id" value="${user_id}">
+						  <input type="hidden" name="nom" value="${nom}">
+						  <input type="hidden" name="taille" value="${taille}">
+						  <input type="hidden" name="difficulte" value="${difficulte}">
+						  <input type="hidden" name="localisation" value="${localisation}">
+						  <input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
+		                  <button type="submit">supprimer le </button>
+		                  </form:form>
+		                  
 		               </c:if>		
-	                 </form:form>
+	                 
 	             </td>
 				<td></td>
 

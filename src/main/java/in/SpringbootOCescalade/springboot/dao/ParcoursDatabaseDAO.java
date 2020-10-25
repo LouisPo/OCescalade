@@ -363,7 +363,8 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
         try {
 			result = this.connect.createStatement(
 			ResultSet.TYPE_SCROLL_INSENSITIVE,
-			ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM commentaire WHERE user != '"+user+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
+			//ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM commentaire WHERE user != '"+user+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
+			ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM commentaire WHERE  parcoursidentifiant = '"+parcoursidentifiant+"'");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

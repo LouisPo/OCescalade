@@ -43,6 +43,18 @@
 			</tr>
 			
 		</c:forEach>
+				<c:forEach items="${users}" var="users">
+			<tr>
+				<td></td>
+				
+				
+				<td>${users}</td>
+				<td>b</td>		
+				<td>v</td>						
+				<td></td>
+			</tr>
+			
+		</c:forEach>
 	</table>
 </form:form>
 

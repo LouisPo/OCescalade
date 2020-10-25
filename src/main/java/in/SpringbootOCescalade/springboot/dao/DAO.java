@@ -10,6 +10,9 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -306,6 +309,40 @@ public List<Topo> listTopo(int user) {
 	}
 	return ret;
 }
+public List<Employee> listusers() {
+	TopoDatabase parcours = new TopoDatabase();      
+	ResultSet result = null;  
+	//creation tableau de parcourss et parcourscourant l enregistrement courant
+	List<Employee> ret=new ArrayList();
+    try {
+		result = this.connect.createStatement(
+		ResultSet.TYPE_SCROLL_INSENSITIVE,
+		ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM user");
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    try {
+		while(result.next()){
+			Employee usercourant= new Employee();
+			Integer user_id = result.getInt(1); 
+			String nom = result.getString(2);
+			String prenom = result.getString(3);
+			String mail = result.getString(4);
+			Integer tel = result.getInt(5);
+			String mdp = result.getString(6);
+            int row = result.getRow();
+            usercourant.setId(user_id);usercourant.setnom(nom);usercourant.setprenom(prenom);usercourant.setmail(mail);usercourant.settel(tel);usercourant.setmdp("");
+			//ajout de commentcourant au tableau liste de commentaire
+			
+			ret.add(usercourant);
+			}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return ret;
+}
 public String[] recuptopo(int user) {
 	String[] tab = new String[10];
 	ResultSet result = null;
@@ -339,7 +376,34 @@ public String[] recuptopo(int user) {
 
 }
 
+public String[] recupallusers() {
+	String[] tab = new String[5];
+	
+	ResultSet result = null;
+    try {
+		result = this.connect.createStatement(
+		ResultSet.TYPE_SCROLL_INSENSITIVE,
+		ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM user");
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    try {
+		while(result.next()){ 
+			tab[0] = result.getString(1); 
+			tab[1] = result.getString(2);
+			tab[2] = result.getString(3); 
+			tab[3] = result.getString(4);	
+			tab[4] = result.getString(5);
+			int row = result.getRow();
+			}
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    return tab;
 
+}
 public String[] recupuser(int user) {
 	String[] tab = new String[5];
 	//on recupere le nom et le prenom de la personne qui cree les commentairs
