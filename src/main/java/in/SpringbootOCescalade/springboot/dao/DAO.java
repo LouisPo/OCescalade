@@ -3,7 +3,7 @@ package in.SpringbootOCescalade.springboot.dao;
 import java.sql.Connection;
 import java.util.Date;
 
-//nouveau format de daate sous java 8
+//nouveau format de daate sous javauser8
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -333,7 +333,7 @@ public List<Employee> listusers() {
 			String mdp = result.getString(6);
             int row = result.getRow();
             usercourant.setId(user_id);usercourant.setnom(nom);usercourant.setprenom(prenom);usercourant.setmail(mail);usercourant.settel(tel);usercourant.setmdp("");
-			//ajout de commentcourant au tableau liste de commentaire
+			//ajout de usercourant au tableau liste de users
 			
 			ret.add(usercourant);
 			}
@@ -606,7 +606,7 @@ public void changetoadmin(int identifiant) {
 
 
 
-public void deletecomment(int user, int parcoursidentifiant) {
+public void deletecomment(int user, int parcoursidentifiant,int comment_id) {
 	
 	Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
 	java.sql.Statement stmt;
@@ -619,7 +619,8 @@ public void deletecomment(int user, int parcoursidentifiant) {
 	  try {
 		  stmt = connection.createStatement();
 		    //stmt.executeUpdate("insert into commentaire(textarea,user) values ('"+textarea+"','"+user+"')");
-		  stmt.executeUpdate("DELETE FROM commentaire WHERE user = '"+user+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
+		  //stmt.executeUpdate("DELETE FROM commentaire WHERE user = '"+user+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
+		  stmt.executeUpdate("DELETE FROM commentaire WHERE user = '"+user+"' and comment_id = '"+comment_id+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

@@ -257,7 +257,7 @@ public class ParcourssController {
 		return mav;
 	}
 	@RequestMapping(value="/supprimercomment", method=RequestMethod.POST)
-	public ModelAndView supprimercomment(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("textarea") String textarea,@RequestParam("user_id") String user_id,@RequestParam("identifiantusermodif") String identifiantusermodif,@RequestParam("nom") String nom,@RequestParam("taille") String taille,@RequestParam("difficulte") String difficulte,@RequestParam("localisation") String localisation,@RequestParam("parcoursidentifiant") String parcoursidentifiant) {
+	public ModelAndView supprimercomment(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("comment_id") String comment_id,@RequestParam("textarea") String textarea,@RequestParam("user_id") String user_id,@RequestParam("identifiantusermodif") String identifiantusermodif,@RequestParam("nom") String nom,@RequestParam("taille") String taille,@RequestParam("difficulte") String difficulte,@RequestParam("localisation") String localisation,@RequestParam("parcoursidentifiant") String parcoursidentifiant) {
 
 		//page affichéetextareaaaaa
 		ModelAndView mav = new ModelAndView("parcoursdetail");
@@ -271,7 +271,7 @@ public class ParcourssController {
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
 		//appel de la requete d insertion d un commentaire
 
-		commentaireDao.deletecomment(Integer.parseInt(identifiantusermodif),Integer.parseInt(parcoursidentifiant));
+		commentaireDao.deletecomment(Integer.parseInt(identifiantusermodif),Integer.parseInt(parcoursidentifiant),Integer.parseInt(comment_id));
 		//commentaireDao.insertcommentaire( textarea,Integer.parseInt(identifiantusermodif),Integer.parseInt(parcoursidentifiant),"identite","date");
 		
 		List<Comment> ret=new ArrayList();
@@ -303,7 +303,7 @@ public class ParcourssController {
 		return mav;
 	}
 	@RequestMapping(value="/modifiezcomment", method=RequestMethod.POST)
-	public ModelAndView modifiezcomment(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("textarea") String textarea,@RequestParam("user_id") String user_id,@RequestParam("identifiantusermodif") String identifiantusermodif,@RequestParam("nom") String nom,@RequestParam("taille") String taille,@RequestParam("difficulte") String difficulte,@RequestParam("localisation") String localisation,@RequestParam("parcoursidentifiant") String parcoursidentifiant) {
+	public ModelAndView modifiezcomment(@ModelAttribute("parcours") Parcourss parcoursObj,@RequestParam("comment_id") String comment_id,@RequestParam("textarea") String textarea,@RequestParam("user_id") String user_id,@RequestParam("identifiantusermodif") String identifiantusermodif,@RequestParam("nom") String nom,@RequestParam("taille") String taille,@RequestParam("difficulte") String difficulte,@RequestParam("localisation") String localisation,@RequestParam("parcoursidentifiant") String parcoursidentifiant) {
 
 		//page affichéetextareaaaaa
 		ModelAndView mav = new ModelAndView("parcoursdetail");
@@ -317,7 +317,7 @@ public class ParcourssController {
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
 		//appel de la requete d insertion d un commentaire
 
-		commentaireDao.deletecomment(Integer.parseInt(identifiantusermodif),Integer.parseInt(parcoursidentifiant));
+		commentaireDao.deletecomment(Integer.parseInt(identifiantusermodif),Integer.parseInt(parcoursidentifiant),Integer.parseInt(comment_id));
 		commentaireDao.insertcommentaire( textarea,Integer.parseInt(identifiantusermodif),Integer.parseInt(parcoursidentifiant),"identite","date");
 		
 		List<Comment> ret=new ArrayList();
@@ -556,15 +556,17 @@ public class ParcourssController {
 		  ret  = topoDao.listTopo(Integer.parseInt(user_id));
 
 		  //REQUETE SQL on recupere tous les users
-			String[] users = new String[4];
-			DAO<CommentDatabase> commentaireDao5 = DAOFactory.getCommentDAO();
-			users = commentaireDao5.recupallusers();
-		  
+			//String[] users = new String[4];
+			//DAO<CommentDatabase> commentaireDao5 = DAOFactory.getCommentDAO();
+			//users = commentaireDao5.recupallusers();
+		  List<Employee> listemployee = new ArrayList(30);
+		  DAO<CommentDatabase> commentaireDao5 = DAOFactory.getCommentDAO();
+		  listemployee = commentaireDao5.listusers();
 		  
 	    org.hibernate.jpa.HibernatePersistenceProvider entityManagerFactory =new  org.hibernate.jpa.HibernatePersistenceProvider();
 	    entityManagerFactory.createEntityManagerFactory("Parcourss", System.getProperties());
 	    mav.addObject("ret", ret);
-	    mav.addObject("users", users);
+	    mav.addObject("listemployee", listemployee);
             //mav.addObject("list", ret);
 			return mav;
 			

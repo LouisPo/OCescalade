@@ -39,22 +39,16 @@
 				<td>${e.prenom}</td>
 				<td>${e.dispo}</td>		
 				<td>${e.textarea}</td>						
-				<td></td>
+				<td><c:forEach items="${listemployee}" var="listemployee">
+				        <c:if test = "${listemployee.user_id eq e.user_id}">	
+				            ${listemployee.mail}
+				        </c:if>
+				    </c:forEach>
+				</td>
 			</tr>
 			
 		</c:forEach>
-				<c:forEach items="${users}" var="users">
-			<tr>
-				<td></td>
-				
-				
-				<td>${users}</td>
-				<td>b</td>		
-				<td>v</td>						
-				<td></td>
-			</tr>
-			
-		</c:forEach>
+
 	</table>
 </form:form>
 

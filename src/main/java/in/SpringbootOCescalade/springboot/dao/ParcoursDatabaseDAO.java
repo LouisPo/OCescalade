@@ -301,7 +301,7 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		
 	}
 	@Override
-	public void deletecomment(int user, int parcoursidentifiant) {
+	public void deletecomment(int user, int parcoursidentifiant,int comment_id) {
 		
 		Connection 	connection= in.SpringbootOCescalade.springboot.dao.SdzConnection.getInstance();
 		java.sql.Statement stmt;
@@ -312,7 +312,8 @@ import in.SpringbootOCescalade.springboot.dao.SdzConnection;
 		  try {
 			  stmt = connection.createStatement();
 			    //stmt.executeUpdate("insert into commentaire(textarea,user) values ('"+textarea+"','"+user+"')");
-			  stmt.executeUpdate("DELETE  FROM commentaire WHERE user = '"+user+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
+			  //stmt.executeUpdate("DELETE  FROM commentaire WHERE user = '"+user+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
+			  stmt.executeUpdate("DELETE FROM commentaire WHERE user = '"+user+"' and comment_id = '"+comment_id+"' and parcoursidentifiant = '"+parcoursidentifiant+"'");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

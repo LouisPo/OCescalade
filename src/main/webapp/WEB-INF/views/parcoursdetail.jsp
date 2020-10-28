@@ -45,7 +45,7 @@
 	<p>
 		
 		
-		<table border="1">
+		<table border="1" cellspacing=4>
 			<tr>
 				<th>nom</th>
 				<th>longueur</th>
@@ -80,7 +80,7 @@
 				<th>Votre commentaire</th>
 			</tr>
 			<tr>
-				<th><textarea name="textarea" rows="5" cols="33">${textarea}</textarea></th>
+				<th><textarea name="textarea" rows="5" cols="33"></textarea></th>
                 <input type="hidden" name="textareaNomodif" value="">
 	
 		
@@ -93,7 +93,7 @@
 		</form:form>
 		
 		
-		<p>
+		<p><p><p>
 		Commentaires utilisateurs
 		<p>
 		
@@ -130,7 +130,7 @@
 						<input type="hidden" name="difficulte" value="${difficulte}">
 						<input type="hidden" name="localisation" value="${localisation}">
 						<input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
-						
+						<input type="hidden" name="comment_id" value="${e.comment_id}">
 						
                       <c:if test="${fn:substring(prenom, 0, 2) eq 'AD'}">
 		                  <button type="submit">Modifiez le </button>
@@ -147,6 +147,7 @@
 						  <input type="hidden" name="difficulte" value="${difficulte}">
 						  <input type="hidden" name="localisation" value="${localisation}">
 						  <input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
+						  <input type="hidden" name="comment_id" value="${e.comment_id}">
 		                  <button type="submit">supprimer le </button>
 		                  </form:form>
 		                  
