@@ -35,11 +35,30 @@
 							<c:if test="${identifiantpret == 0}">
 								<textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
 								<input type="text" name="lieu" size="10" value="${lieu}">
+																<select name="choixdispo">
+														<option value="OUI">Oui</option>
+														<option value="REFUS">Non</option>
+														<c:if test="${dispoperso eq 'REFUS'}">
+														   <option value="REFUS" selected>Non</option>
+														</c:if>
+														<c:if test="${dispoperso ne 'REFUS'}">
+														   <option value="REFUS">Non</option>
+														</c:if>
+												</select>
 							</c:if>
 						</c:if>    
 						<c:if test="${identifiant == 40}">
 								<textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
 								<input type="text" name="lieu" size="10" value="${lieu}">
+																<select name="choixdispo">
+														<option value="OUI">Oui</option>
+														<c:if test="${dispoperso eq 'REFUS'}">
+														   <option value="REFUS" selected>Non</option>
+														</c:if>
+														<c:if test="${dispoperso ne 'REFUS'}">
+														   <option value="REFUS">Non</option>
+														</c:if>
+												</select>
 						</c:if> 
 					<c:if test="${nomdemandeur eq '' }">	
 					 
@@ -57,6 +76,15 @@
 								<c:if test="${identifiantpret != 100}">
 								   <textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
 								   <input type="text" name="lieu" size="10" value="${lieu}">
+								   								<select name="choixdispo">
+														<option value="OUI">Oui</option>
+														<c:if test="${dispoperso eq 'REFUS'}">
+														   <option value="REFUS" selected>Non</option>
+														</c:if>
+														<c:if test="${dispoperso ne 'REFUS'}">
+														   <option value="REFUS">Non</option>
+														</c:if>
+												</select>
 								</c:if>
 							</c:if>
 						</c:if> 
@@ -139,6 +167,21 @@
 				</c:if>
 			</c:if>
 	</form:form>	
+	
+	
+		<form:form name="form48" action="${pageContext.request.contextPath}/parution">
+				<c:if test="${dateparution eq ''}">
+						<button type="submit">Parution</button>
+				
+				<input type="hidden" name="user_id" value="${user_id}">
+				<input type="hidden" name="identifiant" value="${identifiant}">
+				<input type="hidden" name="textarea" value="">
+				<input type="hidden" name="choixdispo" value="">
+				<input type="hidden" name="lieu" value="">
+				</c:if>
+	   </form:form>
+	
+	
 	<form:form name="form" action="${pageContext.request.contextPath}/openlistTopofromtopo">
 		<c:if test="${user_idtopo ne user_id}">
 			<c:if test="${user_id ne identifiant}">
@@ -162,10 +205,13 @@
 		<input type="hidden" name="identifiant" value="${identifiant}">
 	</form:form>
 	
+
+	
 	<form:form name="form" action="${pageContext.request.contextPath}/ajoutTopo">
 		<button type="submit">Ajout de Topo</button>
 		<input type="hidden" name="user_id" value="${user_id}">
 		<input type="hidden" name="identifiant" value="${identifiant}">
+		<input type="hidden" name="choixdispo" value="${dispoperso}">
 	</form:form>
 
 	<form:form name="form"
@@ -173,6 +219,7 @@
 
 		<input type="hidden" name="user_id" value="${user_id}">
 		<input type="hidden" name="identifiant" value="${identifiant}">
+		<input type="hidden" name="choixdispo" value="${dispoperso}">
 	</form:form>
 
 	<form:form name="formulaire2" modelAttribute="parcours"

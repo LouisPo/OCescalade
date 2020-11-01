@@ -572,11 +572,11 @@ public class ParcourssController {
 			
 	}
 	@RequestMapping(value="/ajoutTopo", method=RequestMethod.POST)
-	public ModelAndView ajoutTopo(@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant,String lieu) {
+	public ModelAndView ajoutTopo(@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant,@RequestParam("choixdispo") String choixdispo,String lieu) {
 
 		//on insere le topo modifie dans la BD
 				DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
-				commentaireDao.insertnewtopo(Integer.parseInt(user_id),lieu);
+				commentaireDao.insertnewtopo(Integer.parseInt(user_id),lieu,choixdispo);
 				
 				//recuperation du topo perso de la personne connecte
 				String[] tab = new String[7];
@@ -597,14 +597,15 @@ public class ParcourssController {
 				mav.addObject("identifiantpret", tab[7]);
 				mav.addObject("user_id", user_id);
 				mav.addObject("ret", ret);
+				mav.addObject("dispoperso", tab[5]);
+				
 				return mav;
 	}
-	//09/06
-	@RequestMapping(value="/insertTopoView", method=RequestMethod.POST)
-	public ModelAndView insertTopoView(@RequestParam("textarea") String textarea,@RequestParam("lieu") String lieu,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
+	@RequestMapping(value="/parution", method=RequestMethod.POST)
+	public ModelAndView parution(@RequestParam("textarea") String textarea,@RequestParam("choixdispo") String choixdispo,@RequestParam("lieu") String lieu,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
 		//on insere le topo modifie dans la BD
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
-		commentaireDao.insertopo(textarea,Integer.parseInt(user_id),lieu);
+		commentaireDao.insertopoparution(textarea,Integer.parseInt(user_id),lieu,choixdispo);
 		
 		//recuperation du topo perso de la personne connecte
 		String[] tab = new String[7];
@@ -634,12 +635,55 @@ public class ParcourssController {
 		mav.addObject("user_id", user_id);
 		mav.addObject("ret", ret);
 		mav.addObject("lieu", lieu);
+		mav.addObject("dispoperso", choixdispo);
+		mav.addObject("dateparution", tab[8]);
+		return mav;
+		
+	}
+	
+	//09/06
+	@RequestMapping(value="/insertTopoView", method=RequestMethod.POST)
+	public ModelAndView insertTopoView(@RequestParam("textarea") String textarea,@RequestParam("choixdispo") String choixdispo,@RequestParam("lieu") String lieu,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) {
+		//on insere le topo modifie dans la BD
+		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
+		commentaireDao.insertopo(textarea,Integer.parseInt(user_id),lieu,choixdispo);
+		
+		//recuperation du topo perso de la personne connecte
+		String[] tab = new String[7];
+		DAO<CommentDatabase> commentaireDaoBis = DAOFactory.getCommentDAO();
+		tab = commentaireDaoBis.recuptopo(Integer.parseInt(user_id));
+		
+		if(tab[0] == null) {
+			   identifiant="200";
+				
+		}
+		if(tab[0] != null) {
+			   identifiant="40";
+				
+		}
+		//recuperation des topos qui ont ete prete a la personne
+		//On récupère un objet faisant le lien entre la base et nos objets 
+		DAO<TopoDatabase> topoDao = DAOFactory.getParcoursDAO();
+		List<Topo> list = new ArrayList(30);
+        List<Topo> ret=new ArrayList();
+		//REQUETE SQL on recupere le resultat de la requete 
+		ret  = topoDao.listTopPrete(Integer.parseInt(user_id));
+		
+		ModelAndView mav = new ModelAndView("topo");
+		mav.addObject("identifiant", identifiant);
+		mav.addObject("textarea", tab[6]);
+		mav.addObject("identifiantpret", tab[7]);
+		mav.addObject("user_id", user_id);
+		mav.addObject("ret", ret);
+		mav.addObject("lieu", lieu);
+		mav.addObject("dispoperso", choixdispo);
+		mav.addObject("dateparution", tab[8]);
 		return mav;
 		
 	}
 
 	@RequestMapping(value="/openTopoViewLink", method=RequestMethod.GET)
-	public ModelAndView openTopoViewLink(HttpServletRequest request,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant) throws ServletRequestBindingException {
+	public ModelAndView openTopoViewLink(HttpServletRequest request,@RequestParam("user_id") String user_id,@RequestParam("identifiant") String identifiant,@RequestParam("choixdispo") String choixdispo) throws ServletRequestBindingException {
    	//recuperation du topo perso de la personne connecte
 		String[] tab = new String[7];
 		DAO<CommentDatabase> commentaireDao = DAOFactory.getCommentDAO();
@@ -711,6 +755,7 @@ public class ParcourssController {
 		mav.addObject("user_id", user_id);
 		mav.addObject("ret", ret);
 		mav.addObject("lieu", tab[9]);
+		mav.addObject("dateparution", tab[8]);
 		return mav;
 	}
 	@RequestMapping(value="/openProfilView", method=RequestMethod.POST)
