@@ -32,15 +32,15 @@
 
 								<textarea name="textarea" rows="5" cols="40">${textarea}</textarea>
                                 <input type="text" name="lieu" size="10" >
-								<select name="difficultelettre">
+								<select name="choixdispo">
 														<option value="OUI">Oui</option>
 														<option value="REFUS">Non</option>
-												</select>
 						
 
 						
 						<input type="hidden" name="user_id" value="${user_id}"> <input
 						type="hidden" name="identifiant" value="${identifiant}">
+						</select>
 				</tr>
 			</table>
 		</c:if>
@@ -110,6 +110,7 @@
 		<button type="submit">Ajout de Topo</button>
 		<input type="hidden" name="user_id" value="${user_id}">
 		<input type="hidden" name="identifiant" value="${identifiant}">
+		<input type="hidden" name="choixdispo" value="${dispoperso}">
 	</form:form>
 
 	<form:form name="form"
@@ -117,6 +118,7 @@
 
 		<input type="hidden" name="user_id" value="${user_id}">
 		<input type="hidden" name="identifiant" value="${identifiant}">
+		<input type="hidden" name="choixdispo" value="${dispoperso}">
 	</form:form>
 
 	<form:form name="formulaire2" modelAttribute="parcours"

@@ -3,7 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -174,7 +173,7 @@
 			<input type="hidden" name="localisation" value="${localisation}">
 			<input type="hidden" name="parcoursidentifiant" value="${parcoursidentifiant}">
 			<input type="hidden" name="user_id" value="${user_id}">	
-			<button class="button"  type="submit">Valider parcours</button>
+			<button class="button"  type="submit">Valider site</button>
 		</form:form>
      </c:if>
 <c:if test = "${passage eq'OUI' }">
@@ -183,7 +182,7 @@ Parcours valider
 	<form:form name="formulaire2" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openParcoursRechercheView">
 		<input type="hidden" name="user_id" value="${user_id}">
-		<button class="button"  type="submit">Recherche parcours</button>
+		<button class="button"  type="submit">Recherche site</button>
 	</form:form>
 	<form:form name="formulaire5" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openAccueilViewFrom">

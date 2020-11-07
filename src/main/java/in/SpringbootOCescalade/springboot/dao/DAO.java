@@ -226,8 +226,9 @@ public void insertopoparution(String textarea, int user,String lieu,String choix
 		  stmt = connection.createStatement();
 		  //stmt.executeUpdate("UPDATE  topo SET textarea = '"+textarea+"'"+"WHERE user_id = '"+user+"'");
 		 // stmt.executeUpdate("UPDATE  topo SET textarea = '"+textarea+"'"+",lieu = '"+lieu+"'"+ "WHERE user_id = '"+user+"'");
-		  stmt.executeUpdate("UPDATE  topo SET textarea = '"+textarea+"'"+",lieu = '"+lieu+"'"+",datedecreation = '"+dateactuelle+"'"+",dispo = '"+choixdispo+"'"+ "WHERE user_id = '"+user+"'");
-	} catch (SQLException e) {
+		 // stmt.executeUpdate("UPDATE  topo SET textarea = '"+textarea+"'"+",lieu = '"+lieu+"'"+",datedecreation = '"+dateactuelle+"'"+",dispo = '"+choixdispo+"'"+ "WHERE user_id = '"+user+"'");
+		  stmt.executeUpdate("UPDATE  topo SET datedecreation = '"+dateactuelle+"'"+ "WHERE user_id = '"+user+"'");
+	  } catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -337,8 +338,10 @@ public List<Topo> listTopo(int user) {
 			String dispo = result.getString(6);
 			String textarea = result.getString(7); 
 			String identifiantpret = result.getString(8);
+			String datedecreation = result.getString(9);
+			String lieu = result.getString(10);
             int row = result.getRow();
-			topocourant.setTopo_id(topo_id);topocourant.setNomtopo(nomtopo);topocourant.setUser_id(user_id);topocourant.setIdentifiantpret(identifiantpret);topocourant.setNom(nom);topocourant.setPrenom(prenom);topocourant.setDispo(dispo);topocourant.setTextarea(textarea);
+            topocourant.setDatedecreation(datedecreation);topocourant.setLieu(lieu);topocourant.setTopo_id(topo_id);topocourant.setNomtopo(nomtopo);topocourant.setUser_id(user_id);topocourant.setIdentifiantpret(identifiantpret);topocourant.setNom(nom);topocourant.setPrenom(prenom);topocourant.setDispo(dispo);topocourant.setTextarea(textarea);
 			//ajout de commentcourant au tableau liste de commentaire
 			
 			ret.add(topocourant);

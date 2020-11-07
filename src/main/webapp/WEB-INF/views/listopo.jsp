@@ -32,10 +32,9 @@
 			<th>mail</th>					
 		</tr>
 		<c:forEach items="${ret}" var="e">
+			<c:if test = "${e.datedecreation ne ''}">
 			<tr>
-				<td><a href = "${pageContext.request.contextPath}/openTopoViewLink?&identifiant=${e.user_id}&user_id=${user_id}"   onclick="document.getElementById("form").submit();">${e.nom}</a></td>
-				
-				
+				<td><a href = "${pageContext.request.contextPath}/openTopoViewLink?&identifiant=${e.user_id}&user_id=${user_id}"   onclick="document.getElementById("form").submit();">${e.nom}</a></td>	
 				<td>${e.prenom}</td>
 				<td>${e.dispo}</td>		
 				<td>${e.textarea}</td>						
@@ -46,6 +45,10 @@
 				    </c:forEach>
 				</td>
 			</tr>
+			</c:if>
+			
+
+			
 			
 		</c:forEach>
 
@@ -54,7 +57,7 @@
 
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openParcoursRechercheView">
 <input type ="hidden" name="user_id" value="${user_id}">
-<button class="button"  type="submit">Recherche parcours</button>
+<button class="button"  type="submit">Recherche site</button>
 </form:form>
 <form:form  name="formulaire" modelAttribute="parcours" action = "${pageContext.request.contextPath}/openAccueilViewFrom">
 <input type ="hidden" name="user_id" value="${user_id}">
