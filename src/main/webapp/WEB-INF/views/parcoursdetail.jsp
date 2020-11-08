@@ -38,9 +38,8 @@
 
 	<form:form name="form" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/ajoutCommentView">
-		<h1>D&eacutetail du parcours</h1>
+		<h1>D&eacutetail du site</h1>
 		
-			Parcours actuel
 	<p>
 		
 		
@@ -177,7 +176,7 @@
 		</form:form>
      </c:if>
 <c:if test = "${passage eq'OUI' }">
-Parcours valider
+site valider
 </c:if>
 	<form:form name="formulaire2" modelAttribute="parcours"
 		action="${pageContext.request.contextPath}/openParcoursRechercheView">
